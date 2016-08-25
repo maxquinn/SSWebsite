@@ -1,0 +1,176 @@
+@font-face {
+    font-family: LAMEBRAINS;
+    src: url(../fonts/LAMEBRAINS.ttf);
+}
+
+@font-face {
+    font-family: BebasNeue;
+    src: url(../fonts/BebasNeue.otf);
+}
+
+
+body {
+    /*background-color: black;*/
+    background-image: url("../images/backgrounds/BACKGROUND-IMAGE.jpg");
+    repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.topshit {
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+@media (max-width: 440px) {
+    .topshit>a>img {
+        padding-right: 5%;
+        width: 100%;
+    }
+}
+
+.navigation {
+    height: 100px;
+}
+
+.navbar {
+    width: 100%;
+}
+
+.container {
+    padding-left: 20px;
+    padding-top: 20px;
+    width: 100%;
+}
+
+.navbar-custom {
+    font-family: LAMEBRAINS;
+    text-align: left;
+    width: 100%;
+}
+
+.nav>li {
+    width: 12.5%;
+}
+
+.nav>li>a {
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+    color: white;
+    font-size: 200%;
+    white-space: nowrap;
+}
+
+.navbar-nav>li>a:hover, .navbar-nav>li>a:focus {
+    background-color:rgba(0,0,0,0);
+    color: #4662AA;
+    font-size: 400%;
+}
+
+.top-content-block {
+    /*background-color: orange;*/
+    height: 100vh;
+    width: 100%;
+}
+
+.content-block-1 {
+    width: 100%;
+    height: 70vh;
+}
+
+.main-headers {
+    font-family: LAMEBRAINS;
+    text-align: center;
+    color: white;
+    font-size: 1000%;
+    text-shadow: -2px 2px 0px rgb(68, 68, 68);
+    padding-bottom: 50px;
+}
+
+.content-block-1>.inner-content-container {
+    width: 100%;
+    padding-left: 100px;
+    padding-right: 100px;
+    overflow: hidden;
+}
+
+@media (max-width: 700px) {
+
+    .content-block-1>.inner-content-container {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .main-headers {
+        font-size: 750%;
+    }
+    
+    .inner-content-container>iframe {
+        width: 100%;
+    }
+}
+
+.inner-content-container>iframe {
+    float: left;
+}
+
+.inner-content-container>p {
+    /*padding-top: 100px;*/
+    font-size: 55px;
+    line-height: 75%;
+    float: left;
+    display: inline-block;
+    color: white;
+    font-family: BebasNeue;
+}
+
+.media-footer {
+    width: 100%;
+    height: 100px;
+    float: right;
+}
+
+.media-footer>a {
+    font-family: BebasNeue;
+    color: white;
+    padding-right: 20px;
+    font-size: 42px;
+    float: right;
+}
+
+.shop-block {
+    clear: both;
+    width: 100%;
+    height: 100vh;
+    background-image: url("../images/backgrounds/SHOP-BACKGROUND-IMAGE.jpg");
+    repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+}
+
+.shop-block>a {
+    text-decoration: none;
+    display: inline-block;
+    line-height: 100vh;
+    color: white;
+    font-family: LAMEBRAINS;
+    font-size: 1000%;
+    text-shadow: -2px 2px 0px rgb(0, 0, 0);
+}
+
+.shop-block>a:hover {
+    color: #4662AA;
+    font-size: 1500%;
+}
+
+.crew-block {
+    clear: both;
+    width: 100%;
+    height: 100vh;
+}
+
+.crew-block>h1 {
+
+}
+

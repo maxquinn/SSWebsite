@@ -1,0 +1,12 @@
+{
+  "name": "Stay-Savage",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node Server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "ejs": "^2.5.1",
+    "express": "latest"
+  }
+}

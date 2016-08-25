@@ -1,0 +1,8 @@
+$(document).ready(function(){
+    $('.ultimate').jscroll(
+        {
+            autoTrigger: true,
+            nextSelector: "a.jscroll-next:last"
+        }
+    );
+});
