@@ -36,22 +36,14 @@ app.get('/', function (req, res) {
     return res.render('index.html');
 });
 
-app.get('/feature', function (req, res) {
-    return res.render('feature.html');
-});
-
-app.get('/shop', function (req, res) {
-    return res.render('shop.html');
-});
-
-app.get('/crew', function (req, res) {
-    return res.render('crew.html');
-});
-
 app.get('/submitdata', function (req, res) {
+    return res.render('submitdata.html');
+});
+
+app.get('/media', function (req, res) {
     db.collection('data').find().toArray(function(err, result) {
         if (err) return console.log(err);
-        return res.render('submitdata.ejs', {data: result});
+        return res.render('media.ejs', {data: result});
     });
 });
 

@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +14,6 @@
     <link rel="stylesheet" type="text/css" href="../public/styles/SStyle.css">
     <link rel="icon" href="../public/images/icons/SSfaviconAltBlack.ico">
 </head>
-<body>
 <div class="ultimate">
     <div class="topshit">
         <a href="/">
@@ -38,37 +38,22 @@
         </nav>
     </div> <!--Navigation bar-->
 
-    <div class="top-content-block">
-
-    </div> <!--This is the first content block under the nav bar-->
-
-    <div id="media" class="content-block-1">
-        <h1 class="main-headers">Neck of the Woods</h1>
-        <div class="inner-content-container">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/p9uSzrPQ2Pw?dark" frameborder="0"
-                    allowfullscreen></iframe>
-
-            <p>
-                Neck of the Woods <br>
-                Performed by KVKA and STUSS <br>
-                Produced & Directed by STUSS <br>
-                Stay Savage 2016 <br>
-            </p>
-
-        </div>
-        <div class="media-footer">
-            <a href="/media">More Media</a>
-        </div>
-    </div> <!--Feature.html-->
-
-    <div id="shop" class="shop-block">
-        <a href="http://www.stay-savage.com/products">SHOP</a>
-
-    </div> <!--Shop.html-->
-
-    <div class="crew-block">
-        <h1 class="main-headers">SQUAD</h1>
-    </div> <!--Crew.html-->
-</div> <!--Page Container Div-->
+<body>
+    <ul class="data">
+    <% for(var i = data.length - 1; i >= 0; i--) {%>
+        <li class="datafiles">
+            <span class="main-headers" id="media-title"><%= data[i].title %></span> <br>
+            <span id="media-dateTime"><%= data[i].dateTime %></span>
+            <div class="inner-content-container">
+                <iframe width="560" height="315" src='<%= data[i].video %>' frameborder="0" allowfullscreen></iframe>
+                <p>
+                    <%= data[i].vidDesc %>
+                </p>
+            </div>
+             <br>
+        </li>
+    <% } %>
+    </ul>
 </body>
+
 </html>
