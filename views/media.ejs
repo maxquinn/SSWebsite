@@ -19,7 +19,8 @@
         <a href="/">
             <img src=../public/images/SSSTIy.png alt="Stay Savage Logo">
         </a>
-    </div>  <!--Top logo bar-->
+    </div>
+    <!--Top logo bar-->
 
     <div class="navigation">
         <nav class="navbar pull-left">
@@ -36,24 +37,27 @@
                 </ul>
             </div>
         </nav>
-    </div> <!--Navigation bar-->
+    </div>
+    <!--Navigation bar-->
 
-<body>
-    <ul class="data">
-    <% for(var i = data.length - 1; i >= 0; i--) {%>
-        <li class="datafiles">
-            <span class="main-headers" id="media-title"><%= data[i].title %></span> <br>
-            <span id="media-dateTime"><%= data[i].dateTime %></span>
-            <div class="inner-content-container">
-                <iframe width="560" height="315" src='<%= data[i].video %>' frameborder="0" allowfullscreen></iframe>
-                <p>
-                    <%= data[i].vidDesc %>
-                </p>
-            </div>
-             <br>
-        </li>
-    <% } %>
-    </ul>
-</body>
+    <body>
+        <ul class="data">
+            <% for(var i = data.length - 1; i >= 0; i--) {%>
+                <div class="datacontainer">
+                    <li class="datafiles">
+                        <span class="main-headers" id="media-title"><%= data[i].title %></span> <br>
+                        <span id="media-dateTime"><%= data[i].dateTime %></span>
+                        <div class="inner-content-container">
+                            <iframe width="560" height="315" src='<%= data[i].video %>' frameborder="0" allowfullscreen></iframe>
+                            <p>
+                                <%= data[i].vidDesc %>
+                            </p>
+                        </div>
+                        <br>
+                    </li>
+                </div>
+                <% } %>
+        </ul>
+    </body>
 
 </html>
