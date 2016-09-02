@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="ultimate">
-    <div class="topshit">
+    <div class="topshit js-current-panel">
         <a href="/">
             <img src=../public/images/SSSTIy.png alt="Stay Savage Logo">
         </a>
@@ -40,15 +40,15 @@
     </div> <!--Navigation bar-->
 
     <div class="anchor-navigation">
-        <div class="ion-chevron-up"></div>
-        <div class="ion-chevron-down"></div>
+        <a class="ion-chevron-up js-prev js-scroll-to" href="#"></a>
+        <a class="ion-chevron-down js-next" href="#"></a>
     </div> <!--Jump to anchor controls-->
 
     <div class="top-content-block">
 
     </div> <!--This is the first content block under the nav bar-->
 
-    <div id="media" class="content-block-1">
+    <div id="media" class="content-block-1 js-list-item">
         <h1 class="main-headers">Neck of the Woods</h1>
         <div class="inner-content-container">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/p9uSzrPQ2Pw?dark" frameborder="0"
@@ -67,12 +67,12 @@
         </div>
     </div> <!--Feature.html-->
 
-    <div id="shop" class="shop-block">
+    <div id="shop" class="shop-block js-list-item">
         <a href="http://www.stay-savage.com/products">SHOP</a>
 
     </div> <!--Shop.html-->
 
-    <div class="crew-block">
+    <div class="crew-block js-list-item">
         <h1 class="main-headers">SQUAD</h1>
     </div> <!--Crew.html-->
 </div> <!--Page Container Div-->
