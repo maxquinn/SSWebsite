@@ -42,13 +42,38 @@ body {
     border: none;
 }
 
-.navbar-default .navbar-nav > .active > a, 
-.navbar-default .navbar-nav > .active > a:hover, 
+.navbar > button {
+    left: 20px;
+}
+
+.navbar > button:hover {
+    background: none;
+}
+
+.navbar-default .navbar-nav > .active > a,  
 .navbar-default .navbar-nav > .active > a:focus {
     color: white;
     text-decoration: none;
     background: none;
     border: none;
+}
+
+.navbar-default .navbar-collapse {
+    border: none;
+    box-shadow: none;
+}
+
+.navbar-default .navbar-toggle {
+    border: none;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background: none;
+}
+
+.navbar-default .navbar-toggle:hover .icon-bar {
+    background-color: #4662AA;
 }
 
 .container {
@@ -76,7 +101,9 @@ body {
     white-space: nowrap;
 }
 
-.navbar-default .navbar-nav>li>a:hover, .navbar-nav>li>a:focus {
+.navbar-default .navbar-nav>li>a:hover, 
+.navbar-nav>li>a:focus,
+.navbar-default .navbar-nav > .active > a:hover {
     background-color:rgba(0,0,0,0);
     color: #4662AA;
     font-size: 400%;
