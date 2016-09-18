@@ -16,27 +16,18 @@ $(document).ready(function() {
     //     return false;
     // });
 
-
-
-$('.js-scroll-to').click(function(e) {
-
-	target = $($(this).attr('href'));
-
-	if (target.offset()) {
-		$('html, body').animate({scrollTop: target.offset().top + 'px'}, 500);
-	}
-
-	e.preventDefault();
-});
-
-
-
 $('.js-next').click(function(e) {
 
   var selected = $(".js-list-item.js-current-panel");
   var anchors = $(".js-list-item");
-
+  
   var pos = anchors.index(selected);
+
+  if(pos == anchors.length - 1) {
+    e.preventDefault();
+    return;
+  }
+
   var next = anchors.get(pos+1);
   var prev = anchors.get(pos-1);
   
@@ -44,13 +35,13 @@ $('.js-next').click(function(e) {
   
   $(selected).removeClass("js-current-panel");
   $(next).addClass("js-current-panel");
-  
+
 	if (target.offset()) {
-		$('html, body').animate({scrollTop: target.offset().top + 'px'}, 600);
+		$('html, body').animate({scrollTop: target.offset().top + 'px'}, 400);
 	}
- 
 
 	e.preventDefault();
+  
 });
 
 
@@ -60,6 +51,12 @@ $('.js-prev').click(function(e) {
   var anchors = $(".js-list-item");
 
   var pos = anchors.index(selected);
+
+  if(pos == 0) {
+    e.preventDefault();
+    return;
+  }
+
   var next = anchors.get(pos+1);
   var prev = anchors.get(pos-1);
   
@@ -69,7 +66,7 @@ $('.js-prev').click(function(e) {
   $(prev).addClass("js-current-panel");
   
   if (target.offset()) {
-		$('html, body').animate({scrollTop: target.offset().top + 'px'}, 600);
+		$('html, body').animate({scrollTop: target.offset().top + 'px'}, 400);
 	}
   
   
