@@ -2,7 +2,15 @@
  * Created by Max on 14-Aug-16.
  */
 
-/*TODO 02-Sep-16: Fix this whole thing*/
+/*TODO 18-Sep-16: 
+- Fix navbar anchor scrolling - change selected var 
+to reflect position after anchor click
+- Add cookie that stores page position??
+- Fix address bar when using navigation arrows
+*/
+var selected;
+var anchors;
+
 $(document).ready(function() {
 
     // var $root = $('html, body');
@@ -16,10 +24,16 @@ $(document).ready(function() {
     //     return false;
     // });
 
+
+$('.nav-link-a').click(function() {
+  var href = $.attr(this, 'href');
+  $('html, body').animate({scrollTop: $(href).offset().top + 'px'}, 500);
+});
+
 $('.js-next').click(function(e) {
 
-  var selected = $(".js-list-item.js-current-panel");
-  var anchors = $(".js-list-item");
+  selected = $(".js-list-item.js-current-panel");
+  anchors = $(".js-list-item");
   
   var pos = anchors.index(selected);
 
@@ -47,8 +61,8 @@ $('.js-next').click(function(e) {
 
 $('.js-prev').click(function(e) {
 
-  var selected = $(".js-list-item.js-current-panel");
-  var anchors = $(".js-list-item");
+  selected = $(".js-list-item.js-current-panel");
+  anchors = $(".js-list-item");
 
   var pos = anchors.index(selected);
 
