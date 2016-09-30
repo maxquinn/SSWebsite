@@ -2,12 +2,26 @@
  * Created by Max on 14-Aug-16.
  */
 
-/*TODO 18-Sep-16: 
-- Fix navbar anchor scrolling - change selected var 
-to reflect position after anchor click
-- Add cookie that stores page position??
-- Fix address bar when using navigation arrows
+/*TODO 28-sept
+-Almost got scroll position tracking working ugggh
 */
+
+$(function(){
+    $(window).bind('scroll', function() {
+        $('.js-list-item').each(function() {
+            var post = $(this);
+            var topPosition = post.position().top - $(window).scrollTop();
+            var botPosition = topPosition + post.outerHeight(true);
+            if (topPosition <= 0 && botPosition >= 0) {
+              post.addClass('js-current-panel');
+            }
+            else {
+              post.removeClass('js-current-panel');
+            }
+            });
+     });
+});
+
 var selected;
 var anchors;
 
@@ -24,10 +38,11 @@ $(document).ready(function() {
     //     return false;
     // });
 
-
-$('.nav-link-a').click(function() {
+$('.nav-link-a').click(function(e) {
   var href = $.attr(this, 'href');
   $('html, body').animate({scrollTop: $(href).offset().top + 'px'}, 500);
+
+  e.preventDefault();
 });
 
 $('.js-next').click(function(e) {
