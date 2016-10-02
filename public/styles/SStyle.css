@@ -296,3 +296,8 @@ width percentage to fill*/
 .ion-chevron-down:focus {
     color: darkgray;
 }
+
+.topshit-plus-kvka1 {
+    background: url("../images/backgrounds/KVKA-top.jpg") left top/100% no-repeat fixed;
+}
+

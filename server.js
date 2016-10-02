@@ -36,6 +36,15 @@ app.get('/', function (req, res) {
     return res.render('index.html');
 });
 
+app.get('/shop', function (req, res) {
+    return res.render('index.html');
+    //simulate click event on shop button
+});
+
+app.get('/kvka', function (req, res) {
+    return res.render('kvka.html');
+});
+
 app.get('/submitdata', function (req, res) {
     return res.render('submitdata.html');
 });
