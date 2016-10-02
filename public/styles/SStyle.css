@@ -301,3 +301,18 @@ width percentage to fill*/
     background: url("../images/backgrounds/KVKA-top.jpg") left top/100% no-repeat fixed;
 }
 
+.kvka-logo {
+    visibility: hidden;
+    width: 100%;
+}
+
+.logo-fadein {
+    -webkit-animation: animat_show 2s;
+    animation: animat_show 2s;
+    visibility: visible !important;
+}
+
+@-webkit-keyframes animat_show{
+    0%{opacity:0}
+    100%{opacity:1}
+}
