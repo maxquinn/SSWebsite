@@ -316,3 +316,20 @@ width percentage to fill*/
     0%{opacity:0}
     100%{opacity:1}
 }
+
+#kvka-writeup-block {
+    padding-top: 40px;
+    background: url("../images/backgrounds/KVKAflowers.jpg") left top/100% no-repeat;
+}
+
+#kvka-media-block {
+    background: url("../images/backgrounds/KVKA-top2.jpg") left top/100% no-repeat fixed;
+}
+
+.kvka-text {
+    color: white;
+    text-shadow: -3px 2px 2px rgba(0, 0, 0, 1);
+    font-family: BebasNeue;
+    font-size: 36px;
+    height: 500px;
+}
