@@ -312,6 +312,11 @@ width percentage to fill*/
     visibility: visible !important;
 }
 
+@keyframes animat_show{
+    0%{opacity:0}
+    100%{opacity:1}
+}
+
 @-webkit-keyframes animat_show{
     0%{opacity:0}
     100%{opacity:1}
@@ -323,6 +328,7 @@ width percentage to fill*/
 }
 
 #kvka-media-block {
+    padding-top: 40px;
     background: url("../images/backgrounds/KVKA-top2.jpg") left top/100% no-repeat fixed;
 }
 
@@ -332,4 +338,48 @@ width percentage to fill*/
     font-family: BebasNeue;
     font-size: 36px;
     height: 500px;
+}
+
+#social-links {
+    padding-top: 200px;
+}
+
+#social-links>div {
+    margin-bottom: 100px;
+}
+
+#social-links>div>span>img {
+    width: 72px;
+    height: 72px;
+}
+
+#social-links>div>span>a {
+    padding-left: 15px;
+    font-size: 36px;
+    font-family: BebasNeue;
+    color: white;
+    text-decoration: underline;
+    letter-spacing: 5px;
+}
+
+.hvr-sink {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+.hvr-sink:hover, .hvr-sink:focus, .hvr-sink:active {
+  -webkit-transform: translateY(8px);
+  transform: translateY(8px);
 }
