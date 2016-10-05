@@ -1,3 +1,7 @@
+	$(window).load(function() {
+		$(".se-pre-con").fadeOut("slow");;
+	});
+
 function logoFadeIn(el) {
     var windowHeight = $(window).height();
     $(el).each(function(){

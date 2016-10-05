@@ -16,6 +16,17 @@ body {
     background-size: cover;
 }
 
+.no-js #loader { display: none;  }
+.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+.se-pre-con {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: black url("../images/SSSTIy.png") center no-repeat;
+}
 
 .topshit {
     padding-top: 20px;
@@ -212,9 +223,7 @@ width percentage to fill*/
     clear: both;
     width: 100%;
     height: 100vh;
-    background-image: url("../images/backgrounds/SHOP-BACKGROUND-IMAGE.jpg");
-    repeat: no-repeat;
-    background-size: cover;
+    background: url("../images/backgrounds/SHOP-BACKGROUND-IMAGE.jpg") left/cover no-repeat fixed;
     text-align: center;
 }
 
@@ -298,7 +307,7 @@ width percentage to fill*/
 }
 
 .topshit-plus-kvka1 {
-    background: url("../images/backgrounds/KVKA-top.jpg") left top/100% no-repeat fixed;
+    background: url("../images/backgrounds/KVKA-top.jpg") left top/cover no-repeat fixed;
 }
 
 .kvka-logo {
@@ -324,12 +333,12 @@ width percentage to fill*/
 
 #kvka-writeup-block {
     padding-top: 40px;
-    background: url("../images/backgrounds/KVKAflowers.jpg") left top/100% no-repeat;
+    background: url("../images/backgrounds/KVKAflowers.jpg") left top/cover no-repeat;
 }
 
 #kvka-media-block {
     padding-top: 40px;
-    background: url("../images/backgrounds/KVKA-top2.jpg") left top/100% no-repeat fixed;
+    background: url("../images/backgrounds/KVKA-top2.jpg") left top/cover no-repeat fixed;
 }
 
 .kvka-text {

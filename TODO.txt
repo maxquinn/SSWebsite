@@ -1,0 +1,2 @@
+* Loading gif for artist profiles that take a while to load (improves user experience).
+* Integrate instagram API to artist profile.
