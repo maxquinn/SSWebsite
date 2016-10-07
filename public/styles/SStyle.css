@@ -25,7 +25,7 @@ body {
 	width: 100%;
 	height: 100%;
 	z-index: 9999;
-	background: black url("../images/SSSTIy.png") center no-repeat;
+	background: url("../images/SS-loading3.gif") center no-repeat #000000;
 }
 
 .topshit {
@@ -349,6 +349,12 @@ width percentage to fill*/
     height: 500px;
 }
 
+@media (max-width: 700px) {
+    .kvka-text {
+        font-size: 200%;
+    }
+}
+
 #social-links {
     padding-top: 200px;
 }
@@ -391,4 +397,8 @@ width percentage to fill*/
 .hvr-sink:hover, .hvr-sink:focus, .hvr-sink:active {
   -webkit-transform: translateY(8px);
   transform: translateY(8px);
+}
+
+h1 {
+    text-align: center;
 }
