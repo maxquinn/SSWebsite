@@ -8,11 +8,8 @@
     src: url(../fonts/BebasNeue.otf);
 }
 
-
 body {
-    /*background-color: black;*/
-    background-image: url("../images/backgrounds/BACKGROUND-IMAGE.jpg");
-    repeat: no-repeat;
+    background: #000000 url("../images/backgrounds/BACKGROUND-IMAGE.jpg") top center no-repeat fixed;
     background-size: cover;
 }
 
@@ -140,77 +137,33 @@ body {
     padding-bottom: 50px;
 }
 
-.content-block-1>.inner-content-container {
+#media-feature {
+    margin-left: 100px;
+}
+
+@media (max-width: 992px) {
+    #media-feature {
+        margin-left: 0px;
+    }
+}
+
+#media-feature-vid {
     width: 100%;
-    padding-left: 100px;
-    padding-right: 100px;
-    overflow: hidden;
 }
 
-/*media query for smaller screens adjusts p text size by 
-percentage. Once it hits mobile width text is based on 
-width percentage to fill*/
-@media (max-width: 1350px) {
-
-    .inner-content-container {
-        padding-right: 0px !important;
-    }
-}
-
-@media (max-width: 1111px) {
-    .inner-content-container>iframe {
-        width: 75vh!important;
-    }
-}
-
-@media (max-width: 700px) {
-
-    .content-block-1>.inner-content-container {
-        padding-left: 5%;
-        padding-right: 5%;
-    }
-
-    .main-headers {
-        font-size: 750%;
-    }
-    
-    .inner-content-container>iframe {
-        width: 90%!important;
-    }
-
-}
-
-@media (max-width: 550px) {
-    .inner-content-container>iframe {
-        width: 456px!important;
-    }
-}
-
-
-
-
-.inner-content-container>iframe {
-    float: left;
-    width: 50%;
-}
-
-.inner-content-container>p {
-    /*padding-top: 100px;*/
+#media-writeup>p {
     line-height: 75%;
-    float: left;
     display: inline-block;
     color: white;
     font-family: BebasNeue;
     font-size: 50px !important;
 }
 
-.media-footer {
-    width: 100%;
-    height: 100px;
+#media-footer {
     float: right;
 }
 
-.media-footer>a {
+#media-footer>a {
     font-family: BebasNeue;
     color: white;
     padding-right: 20px;
@@ -221,10 +174,24 @@ width percentage to fill*/
 .shop-block {
     clear: both;
     width: 100%;
-    height: 100vh;
-    background: url("../images/backgrounds/SHOP-BACKGROUND-IMAGE.jpg") left/cover no-repeat fixed;
+    height: 100vh!important;
+    background: url("../images/backgrounds/SHOP-BACKGROUND-IMAGE.jpg") no-repeat center center fixed;
+    background-size: cover;
     text-align: center;
+    overflow: hidden;
 }
+
+/*@media only screen and (max-width: 480px) {
+    .shop-block {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -moz-background-size: auto;
+        -webkit-background-size: auto;
+	    background-attachment: scroll;
+	    background-position: top;
+        background-size: auto;
+    }
+}*/
 
 .shop-block>a {
     text-decoration: none;
@@ -266,14 +233,12 @@ width percentage to fill*/
 
 .anchor-navigation {
     position: fixed;
+    z-index: 999999;
     top: 50%;
     bottom: 50%;
     right: 0px;
     height: 100px;
     width: 40px;
-    /*background-color: darkslateblue;
-    opacity: 0.5;*/
-    /*padding-left: 5px;*/
 }
 
 .ion-chevron-up {
@@ -354,6 +319,12 @@ width percentage to fill*/
     }
 }
 
+@media (max-width: 450px) {
+    .kvka-text {
+        font-size: 170%;
+    }
+}
+
 #social-links {
     padding-top: 200px;
 }
@@ -401,3 +372,39 @@ width percentage to fill*/
 h1 {
     text-align: center;
 }
+
+.sam-gallery {
+    background: url("../public/images/SAM GAT WEB IMAGE/SAM CV.png");
+}
+
+.gallery-item {
+    margin-bottom: 25px;
+}
+
+.modal {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) { 
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+ .modal-header {
+  border-bottom: none;
+  background-color: black;
+  }
+
+  .modal-content {
+      background-color: black;
+  }

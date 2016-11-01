@@ -1,7 +1,6 @@
-* Loading gif for artist profiles that take a while to load (improves user experience)
 * Integrate instagram API to artist profile
-* Refactoring for more efficient performance (different style sheets etc)
+* Refactoring for more efficient performance
 * Reduce some image file sizes
 * learn jade
-* Reorganise index.html with bootstrap grid
+* Reorganise kvka.html with bootstrap grid
 * look into browserify and require bootstrap packages with npm

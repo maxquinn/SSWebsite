@@ -45,6 +45,10 @@ app.get('/kvka', function (req, res) {
     return res.render('kvka.html');
 });
 
+app.get('/samgat', function (req, res) {
+    return res.render('samgat.html');
+});
+
 app.get('/submitdata', function (req, res) {
     return res.render('submitdata.html');
 });
