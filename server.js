@@ -1,12 +1,14 @@
+/*jshint esversion: 6 */
+
 var express = require("express");
 var path = require('path');
 var app = express();
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 
 var port = process.env.port || 3000;
-const MongoClient = require('mongodb').MongoClient
+const MongoClient = require('mongodb').MongoClient;
 
-var db
+var db;
 //Set up and connect to mongo database
 
 MongoClient.connect('mongodb://dimethyltryptamine:Dmtmakeamandream1@ds021691.mlab.com:21691/staysavage-media-content', function (err, database) {
@@ -20,7 +22,7 @@ MongoClient.connect('mongodb://dimethyltryptamine:Dmtmakeamandream1@ds021691.mla
 
 // Setup Views & View Engine
 app.set('views', path.join(__dirname, 'views'));
-app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'pug');
 app.set('view engine', 'html');
 
 // Define ./public as static
@@ -54,15 +56,15 @@ app.get('/submitdata', function (req, res) {
 });
 
 app.get('/media', function (req, res) {
-    db.collection('data').find().toArray(function(err, result) {
+    db.collection('data').find().toArray(function (err, result) {
         if (err) return console.log(err);
-        return res.render('media.ejs', {data: result});
+        return res.render('media.pug', { data: result });
     });
 });
 
 //post handlers
 app.post('/submitpost', function (req, res) {
-    db.collection('data').save(req.body, function(err, result) {
+    db.collection('data').save(req.body, function (err, result) {
         if (err) return console.leg(err);
 
         console.log('saved to database');
