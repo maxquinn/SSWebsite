@@ -26,7 +26,6 @@ var selected;
 var anchors;
 
 $(document).ready(function() {
-
     // var $root = $('html, body');
     // $('a').click(function() {
     //     var href = $.attr(this, 'href');

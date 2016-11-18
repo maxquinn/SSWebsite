@@ -216,8 +216,6 @@ body {
 
 .data {
     width: 50%;
-    float: left;
-    margin-left: 40px;
     margin-top: 100px;
     margin-bottom: 100px;
 }
@@ -229,6 +227,14 @@ body {
 .datacontainer {
     margin-bottom: 100px;
     display: inline-block;
+}
+
+.datafiles {
+    text-align: center;
+}
+
+.media-dateTime {
+    float: left;
 }
 
 .anchor-navigation {
@@ -410,4 +416,14 @@ h1 {
 
   .modal-content {
       background-color: black;
+  }
+
+  .media-paragraph-block>span {
+      text-align: left;
+      float: left;
+  }
+
+  .media-paragraph-block>a {
+      text-align: left;
+      float: left;
   }

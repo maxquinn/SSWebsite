@@ -1,41 +1,31 @@
-doctype html
-html
+extends pagetopper.pug
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Stay Savage</title>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="../public/lib/fades.js"></script>
-	<script src="../public/lib/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../public/styles/SStyle.css">
-	<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-	<link rel="icon" href="../public/images/icons/SSfaviconAltBlack.ico">
-</head>
+block pageContent
+	.fluid-container
+		.row
+			.col-md-3
+			.col-md-6
+				ul.data
+					- for (var i = data.length - 1; i >= 0; i--)
+						.datacontainer.row
+							li.datafiles.kvka-logo
+								span.main-headers#media-title= data[i].title
+								br
+								span.media-dateTime= data[i].dateTime
+								br
+								.inner-content-container
+									iframe(width="560", height="315", frameborder='0', src= data[i].video)
+									p.media-paragraph-block 
+										- var trimmedDesc = data[i].vidDesc.substr(0, 80);
+										- var endIndex = Math.min(trimmedDesc.length, trimmedDesc.lastIndexOf(" "));
+										- var moreOrLess = "More";
+										- window.onload = function pp() {
+											-var x = document.getElementByClassName(collapse);
 
-    body
-        .se-pre-con
-        .ultimate
-            .topshit
-                <a href="/">
-				<img src=../public/images/SSSTIy.png alt="Stay Savage Logo">
-			    </a>
-
-			    <div class="navigation">
-				    <nav class="navbar navbar-default pull-left">
-					    <button type="button" class="navbar-toggle collapsed pull-left" data-toggle="collapse" data-target="#nav-names"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-					    <div class="collapse navbar-collapse container" id="nav-names">
-						    <ul class="nav navbar-nav navbar-custom">
-							    <li><a class="nav-link-a nav-media" href="#media">Media</a></li>
-							    <li><a class="nav-link-a nav-shop" href="/shop">Shop</a></li>
-							    <li><a href="/kvka">KVKA</a></li>
-							    <li><a href="#">Bobby</a></li>
-							    <li><a href="#">Stuss</a></li>
-							    <li><a href="#">Denz1</a></li>
-							    <li><a href="#">Sam Gat</a></li>
-							    <li><a href="#">D Argue</a></li>
-						    </ul>
-					    </div>
-				    </nav>
-			    </div>
+										-}
+										span= data[i].vidDesc.substr(0, endIndex)
+										span.collapse(id="long-vid-desc"+i)= data[i].vidDesc.substr(endIndex)
+										br
+										a(data-toggle="collapse", data-target="#long-vid-desc" + i) ... Read #{moreOrLess}
+			.col-md-3
+			//- var ele1 = document.getElementById("long-vid-desc2");

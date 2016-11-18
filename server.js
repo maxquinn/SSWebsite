@@ -23,7 +23,6 @@ MongoClient.connect('mongodb://dimethyltryptamine:Dmtmakeamandream1@ds021691.mla
 // Setup Views & View Engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-app.set('view engine', 'html');
 
 // Define ./public as static
 app.use('/public', express.static(__dirname + '/public'));
@@ -35,24 +34,24 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 //get handlers
 app.get('/', function (req, res) {
-    return res.render('index.html');
+    return res.sendFile(__dirname + '/views/index.html');
 });
 
 app.get('/shop', function (req, res) {
-    return res.render('index.html');
+    return res.sendFile(__dirname + '/views/index.html');
     //simulate click event on shop button
 });
 
 app.get('/kvka', function (req, res) {
-    return res.render('kvka.html');
+    return res.sendFile(__dirname + '/views/kvka.html');
 });
 
 app.get('/samgat', function (req, res) {
-    return res.render('samgat.html');
+    return res.sendFile(__dirname + '/views/samgat.html');
 });
 
 app.get('/submitdata', function (req, res) {
-    return res.render('submitdata.html');
+    return res.sendFile(__dirname + '/views/submitdata.html');
 });
 
 app.get('/media', function (req, res) {
