@@ -214,17 +214,18 @@ body {
     height: 100vh;
 }
 
-.data {
+/*.data {
     width: 50%;
     margin-top: 100px;
     margin-bottom: 100px;
-}
+}*/
 
 #media-title {
     font-size: 500%;
 }
 
 .datacontainer {
+    width: 100%;
     margin-bottom: 100px;
     display: inline-block;
 }
@@ -420,10 +421,35 @@ h1 {
 
   .media-paragraph-block>span {
       text-align: left;
-      float: left;
   }
 
-  .media-paragraph-block>a {
+  .media-paragraph-block {
       text-align: left;
-      float: left;
+      font-family: BebasNeue;
+      letter-spacing: 2px;
+      font-size: 26px;
+      color: lightgray;
+  }
+
+  .collapse.in {
+      display: inline;
+  }
+
+  .post-block {
+      width: 100%;
+  }
+  
+  .inner-content-container {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 61%;
+  }
+
+  .inner-content-container>iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
   }

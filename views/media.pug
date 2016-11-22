@@ -1,31 +1,36 @@
 extends pagetopper.pug
 
 block pageContent
+	br
+	br
+	br
+	br
+	br
 	.fluid-container
 		.row
 			.col-md-3
-			.col-md-6
+			.col-md-6#midColMedia
 				ul.data
 					- for (var i = data.length - 1; i >= 0; i--)
-						.datacontainer.row
-							li.datafiles.kvka-logo
-								span.main-headers#media-title= data[i].title
-								br
-								span.media-dateTime= data[i].dateTime
-								br
-								.inner-content-container
-									iframe(width="560", height="315", frameborder='0', src= data[i].video)
-									p.media-paragraph-block 
-										- var trimmedDesc = data[i].vidDesc.substr(0, 80);
-										- var endIndex = Math.min(trimmedDesc.length, trimmedDesc.lastIndexOf(" "));
-										- var moreOrLess = "More";
-										- window.onload = function pp() {
-											-var x = document.getElementByClassName(collapse);
-
-										-}
-										span= data[i].vidDesc.substr(0, endIndex)
-										span.collapse(id="long-vid-desc"+i)= data[i].vidDesc.substr(endIndex)
-										br
-										a(data-toggle="collapse", data-target="#long-vid-desc" + i) ... Read #{moreOrLess}
+						.post-block
+							.datacontainer.row
+								li.datafiles.kvka-logo
+									span.main-headers#media-title= data[i].title
+									br
+									span.media-dateTime= data[i].dateTime
+									br
+									.inner-content-container
+										iframe(width="560", height="315", frameborder='0', src= data[i].video)
+									- var trimmedDesc = data[i].vidDesc.substr(0, 150);
+									- var endIndex = Math.min(trimmedDesc.length, trimmedDesc.lastIndexOf(" "));
+									- var moreOrLess = "More";
+									- if (endIndex > 130)
+										p.media-paragraph-block 
+											span= data[i].vidDesc.substr(0, endIndex)
+											span.collapse(id="long-vid-desc"+i)= data[i].vidDesc.substr(endIndex)
+											br
+											a(data-toggle="collapse", data-target="#long-vid-desc" + i) ... Read #{moreOrLess}
+									- else
+										p.media-paragraph-block= data[i].vidDesc
 			.col-md-3
 			//- var ele1 = document.getElementById("long-vid-desc2");
