@@ -57,7 +57,7 @@ app.get('/submitdata', function (req, res) {
 app.get('/media', function (req, res) {
     db.collection('data').find().toArray(function (err, result) {
         if (err) return console.log(err);
-        return res.render('media.pug', { data: result });
+        return res.render('media.pug', { json_data: JSON.stringify(result) });
     });
 });
 

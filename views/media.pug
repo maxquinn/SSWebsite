@@ -1,6 +1,9 @@
 extends pagetopper.pug
 
 block pageContent
+	script(type='text/javascript').
+		var clientData = !{json_data}
+
 	br
 	br
 	br
@@ -8,29 +11,48 @@ block pageContent
 	br
 	.fluid-container
 		.row
-			.col-md-3
-			.col-md-6#midColMedia
+			.col-sm-2
+			.col-sm-8#midColMedia
 				ul.data
-					- for (var i = data.length - 1; i >= 0; i--)
-						.post-block
-							.datacontainer.row
-								li.datafiles.kvka-logo
-									span.main-headers#media-title= data[i].title
-									br
-									span.media-dateTime= data[i].dateTime
-									br
-									.inner-content-container
-										iframe(width="560", height="315", frameborder='0', src= data[i].video)
-									- var trimmedDesc = data[i].vidDesc.substr(0, 150);
-									- var endIndex = Math.min(trimmedDesc.length, trimmedDesc.lastIndexOf(" "));
-									- var moreOrLess = "More";
-									- if (endIndex > 130)
-										p.media-paragraph-block 
-											span= data[i].vidDesc.substr(0, endIndex)
-											span.collapse(id="long-vid-desc"+i)= data[i].vidDesc.substr(endIndex)
-											br
-											a(data-toggle="collapse", data-target="#long-vid-desc" + i) ... Read #{moreOrLess}
-									- else
-										p.media-paragraph-block= data[i].vidDesc
-			.col-md-3
-			//- var ele1 = document.getElementById("long-vid-desc2");
+					- var beginAt = clientData.length - 1
+					- var endAt = Math.max(beginAt - 5, 0)
+					- function renderData() {
+						- for (var i = beginAt; i >= endAt; i--)
+							.post-block
+								.datacontainer.row
+									li.datafiles.kvka-logo
+										span.main-headers#media-title= clientData[i].title
+										br
+										span.media-dateTime= clientData[i].dateTime
+										br
+										.inner-content-container
+											iframe(width="560", height="315", frameborder='0', src= clientData[i].video)
+										- var trimmedDesc = clientData[i].vidDesc.substr(0, 150);
+										- var endIndex = Math.min(trimmedDesc.length, trimmedDesc.lastIndexOf(" "));
+										- if (endIndex > 130)
+											p.media-paragraph-block 
+												span= clientData[i].vidDesc.substr(0, endIndex)
+												span.collapse(id="long-vid-desc"+i)= clientData[i].vidDesc.substr(endIndex)
+												br
+												a(id="more-or-less" data-toggle="collapse", data-target="#long-vid-desc" + i) ... Read More
+										- else
+											p.media-paragraph-block= clientData[i].vidDesc
+						- beginAt = endAt
+						- endAt = beginAt - 5
+					- }
+					- renderData()
+					
+					- function infiniteScroll() { 
+						alert('Penis!')
+						while endAt >= 0
+							- renderData()
+					- }
+					//call infinateScroll() on page bottom out
+
+			.col-sm-2
+	//- script.
+		//- $(window).scroll(function() {
+		//- 	if($(window).scrollTop() + $(window).height() == $(document).height()) {
+		//- 		;
+		//- 		}
+		//- });
