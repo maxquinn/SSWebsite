@@ -1,58 +1,60 @@
 extends pagetopper.pug
 
 block pageContent
-	script(type='text/javascript').
-		var clientData = !{json_data}
-
-	br
-	br
-	br
-	br
-	br
+	.fivebreaks
+		br
+		br
+		br
+		br
+		br
 	.fluid-container
 		.row
 			.col-sm-2
 			.col-sm-8#midColMedia
 				ul.data
-					- var beginAt = clientData.length - 1
-					- var endAt = Math.max(beginAt - 5, 0)
-					- function renderData() {
-						- for (var i = beginAt; i >= endAt; i--)
-							.post-block
-								.datacontainer.row
-									li.datafiles.kvka-logo
-										span.main-headers#media-title= clientData[i].title
-										br
-										span.media-dateTime= clientData[i].dateTime
-										br
-										.inner-content-container
-											iframe(width="560", height="315", frameborder='0', src= clientData[i].video)
-										- var trimmedDesc = clientData[i].vidDesc.substr(0, 150);
-										- var endIndex = Math.min(trimmedDesc.length, trimmedDesc.lastIndexOf(" "));
-										- if (endIndex > 130)
-											p.media-paragraph-block 
-												span= clientData[i].vidDesc.substr(0, endIndex)
-												span.collapse(id="long-vid-desc"+i)= clientData[i].vidDesc.substr(endIndex)
-												br
-												a(id="more-or-less" data-toggle="collapse", data-target="#long-vid-desc" + i) ... Read More
-										- else
-											p.media-paragraph-block= clientData[i].vidDesc
-						- beginAt = endAt
-						- endAt = beginAt - 5
-					- }
-					- renderData()
-					
-					- function infiniteScroll() { 
-						alert('Penis!')
-						while endAt >= 0
-							- renderData()
-					- }
-					//call infinateScroll() on page bottom out
+					.post-block(ng-controller="MediaController")
+						.datacontainer.row.kvka-logo(ng-repeat="post in mediaPostsArr | orderBy: '-'")
+							li.datafiles
+								span.main-headers#media-title {{post.title}}
+								br
+								span.media-dateTime Posted {{post.dateTime | date:'dd/MM/yyyy - hh:mma'}}
+								br
+								.inner-content-container
+									iframe(ng-src="{{post.video | trustUrl}}", width="560", height="315", frameborder='0')
+								p(class="post-description" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{ post.vidDesc }}")
 
-			.col-sm-2
-	//- script.
-		//- $(window).scroll(function() {
-		//- 	if($(window).scrollTop() + $(window).height() == $(document).height()) {
-		//- 		;
-		//- 		}
-		//- });
+//---------------
+//-- Scripts ----
+//---------------
+block body
+
+	script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js")
+	script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js")
+	
+	
+	script.
+		var myApp = angular.module('app', []);
+
+		// Services
+		myApp.factory('MediaPost', ['$http', function($http){
+			return $http.get('/posts');
+		}]);
+
+		// controllers
+		myApp.controller('MediaController', ['$scope', '$sce', 'MediaPost', function ($scope, $sce, MediaPost) {
+			MediaPost.success(function(data){
+				$scope.mediaPostsArr = data;
+			}).error(function(data, status){
+				console.log(data, status);
+				$scope.mediaPostsArr = [];
+			});
+		}]);
+
+		// Filters
+		myApp.filter("trustUrl", ['$sce', function ($sce) {
+			return function (recordingUrl) {
+				return $sce.trustAsResourceUrl(recordingUrl);
+			};
+		}]);
+
+	script(src="../public/lib/directives.js")

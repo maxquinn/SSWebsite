@@ -1,0 +1,20 @@
+{
+  "name": "Stay-Savage",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "Max <max.t.quinn@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/maxquinn/SSWebsite",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}

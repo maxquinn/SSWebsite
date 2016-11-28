@@ -1,44 +1,46 @@
 doctype html
-head
-  meta(charset='UTF-8')
-  meta(name='viewport', content='width=device-width, initial-scale=1')
-  title Stay Savage
-  link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
-  link(rel='stylesheet', type='text/css', href='../public/styles/SStyle.css')
-  link(rel='stylesheet', href='http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')
-  link(rel='icon', href='../public/images/icons/SSfaviconAltBlack.ico')
-  script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
-  script(src='../public/lib/contentscript.js')
-  script(src='../public/lib/fades.js')
-  script(src='../public/lib/bootstrap.min.js')
-.ultimate
-  .topshit.js-list-item.js-current-panel
-    a(href='/')
-      img(src='../public/images/SSSTIy.png', alt='Stay Savage Logo')
-    .navigation
-      nav.navbar.navbar-default.pull-left
-        button.navbar-toggle.collapsed.pull-left(type='button', data-toggle='collapse', data-target='#nav-names')
-          span.sr-only Toggle navigation
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        #nav-names.collapse.navbar-collapse.container
-          ul.nav.navbar-nav.navbar-custom
-            li.active
-              a.nav-link-a.nav-media(href='#media') Media
-            li
-              a#shopID.nav-link-a.nav-shop(href='#shop') Shop
-            li
-              a(href='/kvka') KVKA
-            li
-              a(href='#') Bobby
-            li
-              a(href='#') Stuss
-            li
-              a(href='#') Denz1
-            li
-              a(href='/samgat') S Gatara
-            li
-              a(href='#') D Argue
+html(ng-app="app")
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Stay Savage
+    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
+    link(rel='stylesheet', type='text/css', href='../public/styles/SStyle.css')
+    link(rel='icon', href='../public/images/icons/SSfaviconAltBlack.ico')
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+    script(src='../public/lib/contentscript.js')
+    script(src='../public/lib/fades.js')
+    script(src='../public/lib/bootstrap.min.js')
+  body
+    .ultimate
+      .topshit.js-list-item.js-current-panel
+        a(href='/')
+          img(src='../public/images/SSSTIy.png', alt='Stay Savage Logo')
+        .navigation
+          nav.navbar.navbar-default.pull-left
+            button.navbar-toggle.collapsed.pull-left(type='button', data-toggle='collapse', data-target='#nav-names')
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            #nav-names.collapse.navbar-collapse.container
+              ul.nav.navbar-nav.navbar-custom
+                li.active
+                  a.nav-link-a.nav-media(href='#media') Media
+                li
+                  a#shopID.nav-link-a.nav-shop(href='#shop') Shop
+                li
+                  a(href='/kvka') KVKA
+                li
+                  a(href='#') Bobby
+                li
+                  a(href='#') Stuss
+                li
+                  a(href='#') Denz1
+                li
+                  a(href='/samgat') S Gatara
+                li
+                  a(href='#') D Argue
 
-  block pageContent
+      block pageContent
+  block body

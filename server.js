@@ -6,19 +6,25 @@ var app = express();
 var bodyParser = require('body-parser');
 
 var port = process.env.port || 3000;
-const MongoClient = require('mongodb').MongoClient;
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
-var db;
+var mediaroute = require('./routes/mediapage.js');
+var getDBPosts = require('./routes/mediaposts.js');
+var renderAdmin = require('./routes/adminRoute.js');
+
 //Set up and connect to mongo database
 
-MongoClient.connect('mongodb://dimethyltryptamine:Dmtmakeamandream1@ds021691.mlab.com:21691/staysavage-media-content', function (err, database) {
+mongoose.connect('mongodb://dimethyltryptamine:Dmtmakeamandream1@ds021691.mlab.com:21691/staysavage-media-content', function (err) {
     if (err) return console.log(err);
-    db = database;
+    else {
+        console.log('Connection Succesful');
+    }
     //connect to server
     app.listen(port, function () {
         console.log('listening on port ' + port);
     });
-})
+});
 
 // Setup Views & View Engine
 app.set('views', path.join(__dirname, 'views'));
@@ -26,6 +32,7 @@ app.set('view engine', 'pug');
 
 // Define ./public as static
 app.use('/public', express.static(__dirname + '/public'));
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
@@ -54,12 +61,9 @@ app.get('/submitdata', function (req, res) {
     return res.sendFile(__dirname + '/views/submitdata.html');
 });
 
-app.get('/media', function (req, res) {
-    db.collection('data').find().toArray(function (err, result) {
-        if (err) return console.log(err);
-        return res.render('media.pug', { json_data: JSON.stringify(result) });
-    });
-});
+app.use('/media', mediaroute);
+app.use('/posts', getDBPosts);
+app.use('/admin', renderAdmin);
 
 //post handlers
 app.post('/submitpost', function (req, res) {
@@ -70,3 +74,5 @@ app.post('/submitpost', function (req, res) {
         res.redirect('/');
     });
 });
+
+module.exports = app;

@@ -110,8 +110,3 @@ $('.js-prev').click(function(e) {
 
 });
 
-//infinate scroller for media page
-function infinateScroller(dataArray) {
-    
-};
-

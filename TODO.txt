@@ -1,6 +1,4 @@
 * Integrate instagram API to artist profile
 * Refactoring for more efficient performance
 * Reduce some image file sizes
-* learn jade
-* Reorganise kvka.html with bootstrap grid
-* look into browserify and require bootstrap packages with npm
+* Possibly remove bower if we dont end up using it for anything

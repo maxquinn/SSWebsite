@@ -219,6 +219,7 @@ body {
 
 .media-dateTime {
     float: left;
+    color: lightgray;
 }
 
 .anchor-navigation {
@@ -402,11 +403,7 @@ h1 {
       background-color: black;
   }
 
-  .media-paragraph-block>span {
-      text-align: left;
-  }
-
-  .media-paragraph-block {
+  .post-description {
       text-align: left;
       font-family: BebasNeue;
       letter-spacing: 2px;
@@ -437,6 +434,21 @@ h1 {
       top: 0;
   }
 
-  #more-or-less {
+  .collapse-text-toggle {
       color: #4662AA;
   }
+
+  .collapse-text-toggle:hover {
+      text-decoration: underline;
+      cursor: pointer;
+  }
+
+@media (max-width: 700px) {
+    #media-title {
+        font-size: 40px;
+    }
+
+    .fivebreaks {
+        display: none;
+    }
+}

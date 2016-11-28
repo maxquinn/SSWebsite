@@ -1,0 +1,25 @@
+doctype html
+html(ng-app="adminApp" ng-controller="PageViewController")
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        title Stay Savage {{title}}
+        link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
+        link(rel='stylesheet', type='text/css', href='../public/styles/SStyle.css')
+        link(rel='icon', href='../public/images/icons/SSfaviconAltBlack.ico')
+        script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+        script(src='../public/lib/contentscript.js')
+        script(src='../public/lib/fades.js')
+        script(src='../public/lib/bootstrap.min.js')
+    body
+        .ultimate
+
+        script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js")
+        script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js")
+        
+        script.
+            var myApp = angular.module('adminApp', []);
+
+            myApp.controller('PageViewController', ['$scope', function($scope) {
+                $scope.title = 'Admin Home';
+            }]);
