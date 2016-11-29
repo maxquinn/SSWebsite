@@ -3,9 +3,10 @@ html(ng-app="adminApp" ng-controller="PageViewController")
     head
         meta(charset='UTF-8')
         meta(name='viewport', content='width=device-width, initial-scale=1')
-        title Stay Savage {{title}}
+        title Stay Savage - Admin Portal
         link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
         link(rel='stylesheet', type='text/css', href='../public/styles/SStyle.css')
+        link(rel='stylesheet', type='text/css', href='../public/styles/AdminStyle.css')
         link(rel='icon', href='../public/images/icons/SSfaviconAltBlack.ico')
         script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
         script(src='../public/lib/contentscript.js')
@@ -13,13 +14,43 @@ html(ng-app="adminApp" ng-controller="PageViewController")
         script(src='../public/lib/bootstrap.min.js')
     body
         .ultimate
+            .topshit.js-list-item.js-current-panel
+                a(href='/')
+                    img(src='../public/images/SSSTIy.png', alt='Stay Savage Logo')
+                .navigation
+                    nav.navbar.navbar-default.pull-left
+                        button.navbar-toggle.collapsed.pull-left(type='button', data-toggle='collapse', data-target='#nav-names')
+                            span.sr-only Toggle navigation
+                            span.icon-bar
+                            span.icon-bar
+                            span.icon-bar
+                        #nav-names.collapse.navbar-collapse.container.navbar-pills
+                            ul.nav.navbar-nav.navbar-custom
+                                li
+                                    a(href='#/') Admin Home
+                                li
+                                    a(href='#managemedia') Manage Media
+                                li
+                                    a(href='#shopadmin') Shop Admin
+            div(ng-view)
 
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js")
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js")
-        
-        script.
-            var myApp = angular.module('adminApp', []);
 
-            myApp.controller('PageViewController', ['$scope', function($scope) {
+        script.
+            var app = angular.module('adminApp', ['ngRoute']);
+
+            app.config(['$routeProvider', function($routeProvider) {
+                $routeProvider
+                    .when('/', {
+                        templateUrl : "partials/index.html",
+                        controller : "PageViewController"
+                    })
+                    .when('/managemedia', {
+                        templateUrl : "partials/managemedia.html",
+                    })
+            }]);
+
+            app.controller('PageViewController', ['$scope', function($scope) {
                 $scope.title = 'Admin Home';
             }]);

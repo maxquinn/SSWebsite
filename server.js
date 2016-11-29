@@ -2,13 +2,14 @@
 
 var express = require("express");
 var path = require('path');
-var app = express();
+var app = module.exports = express();
 var bodyParser = require('body-parser');
 
 var port = process.env.port || 3000;
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
+var routes = require('./routes');
 var mediaroute = require('./routes/mediapage.js');
 var getDBPosts = require('./routes/mediaposts.js');
 var renderAdmin = require('./routes/adminRoute.js');
@@ -33,6 +34,7 @@ app.set('view engine', 'pug');
 // Define ./public as static
 app.use('/public', express.static(__dirname + '/public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+app.use('/partials', express.static(__dirname + '/views/partials'));
 
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
@@ -64,6 +66,9 @@ app.get('/submitdata', function (req, res) {
 app.use('/media', mediaroute);
 app.use('/posts', getDBPosts);
 app.use('/admin', renderAdmin);
+
+app.get('/', routes.index);
+app.get('/partials/:name', routes.partials);
 
 //post handlers
 app.post('/submitpost', function (req, res) {
