@@ -20,7 +20,7 @@ block pageContent
 								span.media-dateTime Posted {{post.dateTime | date:'dd/MM/yyyy - hh:mma'}}
 								br
 								.inner-content-container
-									iframe(ng-src="{{post.video | trustUrl}}", width="560", height="315", frameborder='0')
+									iframe(ng-src="{{post.video | trustUrl}}", width="560", height="315", frameborder='0' allowfullscreen)
 								p(class="post-description" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{ post.vidDesc }}")
 			.col-sm-2
 
@@ -69,7 +69,6 @@ block body
 					if (!this.finished) {
 						this.busy = false;
 					}
-					else console.log("finished")
 				}.bind(this));
 			};
 

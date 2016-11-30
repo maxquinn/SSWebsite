@@ -2,13 +2,3 @@
 * Refactoring for more efficient performance
 * Reduce some image file sizes
 * Possibly remove bower if we dont end up using it for anything
-
-
-
-var dbGet = $http.get('/posts', config);
-			dbGet.success(function(data){
-				MediaPost.items = data.docs;
-			}).error(function(data, status){
-				console.log(data, status);
-				MediaPost.items = [];
-			});

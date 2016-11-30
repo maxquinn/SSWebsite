@@ -4,7 +4,6 @@ var router = express.Router();
 var mediaPosts = require('../models/media.js');
 
 router.get('/', function(req, res, next) {
-  console.log(req.query.pageToLoad);
   var pageNum = parseInt(req.query.pageToLoad);
   var limitNum = parseInt(req.query.perPage);
   mediaPosts.paginate({}, {sort : {dateTime: -1}, page: pageNum, limit: limitNum}, function (err, posts) {

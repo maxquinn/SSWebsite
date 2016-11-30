@@ -66,11 +66,17 @@ html(ng-app="adminApp" ng-controller="PageViewController")
             //Post Controller
             app.controller('SubmitController', function($scope, $http) {
                 $scope.submit = function() {
+                    var id = $scope.formData.video.split('v=')[1];
+                    $scope.formData.video = 'https://www.youtube.com/embed/' + id;
                     $http.post('/submitpost', $scope.formData).
                     success(function(data) {
                         console.log("Posted Successfully");
+                        $scope.formData = {};
+                        $scope.postForm.$setPristine();
+                        $scope.postForm.$setUntouched();
                     }).error(function(data) {
                         console.error("Error in posting");
                     })
                 }
             });
+            
