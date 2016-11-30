@@ -24,7 +24,7 @@ html(ng-app="adminApp" ng-controller="PageViewController")
                             span.icon-bar
                             span.icon-bar
                             span.icon-bar
-                        #nav-names.collapse.navbar-collapse.container.navbar-pills
+                        #nav-names.collapse.navbar-collapse.container
                             ul.nav.navbar-nav.navbar-custom
                                 li
                                     a(href='#/') Admin Home
@@ -32,7 +32,10 @@ html(ng-app="adminApp" ng-controller="PageViewController")
                                     a(href='#managemedia') Manage Media
                                 li
                                     a(href='#shopadmin') Shop Admin
-            div(ng-view)
+            .row
+                .col-sm-2
+                .col-sm-8(ng-view)
+                .col-sm-2
 
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js")
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js")
@@ -40,6 +43,7 @@ html(ng-app="adminApp" ng-controller="PageViewController")
         script.
             var app = angular.module('adminApp', ['ngRoute']);
 
+            //SPA Routing
             app.config(['$routeProvider', function($routeProvider) {
                 $routeProvider
                     .when('/', {
@@ -47,10 +51,26 @@ html(ng-app="adminApp" ng-controller="PageViewController")
                         controller : "PageViewController"
                     })
                     .when('/managemedia', {
-                        templateUrl : "partials/managemedia.html",
+                        templateUrl : "partials/managemedia.html"
+                    })
+                    .when('/shopadmin', {
+                        templateUrl : "partials/shopadmin.html"
                     })
             }]);
 
+            //SPA Controllers
             app.controller('PageViewController', ['$scope', function($scope) {
                 $scope.title = 'Admin Home';
             }]);
+
+            //Post Controller
+            app.controller('SubmitController', function($scope, $http) {
+                $scope.submit = function() {
+                    $http.post('/submitpost', $scope.formData).
+                    success(function(data) {
+                        console.log("Posted Successfully");
+                    }).error(function(data) {
+                        console.error("Error in posting");
+                    })
+                }
+            });

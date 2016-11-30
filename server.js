@@ -13,6 +13,7 @@ var routes = require('./routes');
 var mediaroute = require('./routes/mediapage.js');
 var getDBPosts = require('./routes/mediaposts.js');
 var renderAdmin = require('./routes/adminRoute.js');
+var mediaPost = require('./models/media.js');
 
 //Set up and connect to mongo database
 
@@ -33,7 +34,7 @@ app.set('view engine', 'pug');
 
 // Define ./public as static
 app.use('/public', express.static(__dirname + '/public'));
-app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+app.use('/node_modules',  express.static(__dirname + '/node_modules'));
 app.use('/partials', express.static(__dirname + '/views/partials'));
 
 app.use(bodyParser.json());       // to support JSON-encoded bodies
@@ -63,6 +64,10 @@ app.get('/submitdata', function (req, res) {
     return res.sendFile(__dirname + '/views/submitdata.html');
 });
 
+app.get('/submitdata', function (req, res) {
+    return res.sendFile(__dirname + '/views/submitdata.html');
+});
+
 app.use('/media', mediaroute);
 app.use('/posts', getDBPosts);
 app.use('/admin', renderAdmin);
@@ -72,11 +77,15 @@ app.get('/partials/:name', routes.partials);
 
 //post handlers
 app.post('/submitpost', function (req, res) {
-    db.collection('data').save(req.body, function (err, result) {
-        if (err) return console.leg(err);
+    var post = new mediaPost();
+    post.title = req.body.title;
+    post.video = req.body.video;
+    post.vidDesc = req.body.vidDesc;
 
-        console.log('saved to database');
-        res.redirect('/');
+    post.save(function(err) {
+        if (err)
+            res.send(err);
+        res.json({message: 'Post Created'});
     });
 });
 

@@ -10,10 +10,10 @@ block pageContent
 	.fluid-container
 		.row
 			.col-sm-2
-			.col-sm-8#midColMedia
-				ul.data
-					.post-block(ng-controller="MediaController")
-						.datacontainer.row.kvka-logo(ng-repeat="post in mediaPostsArr | orderBy: '-'")
+			.col-sm-8#midColMedia(ng-controller="MediaController")
+				ul.data#scroller(infinite-scroll="mediaPostsArr.loadMore()" infinite-scroll-disabled="mediaPostsArr.busy")
+					.post-block
+						.datacontainer.row.kvka-logo(ng-repeat="post in mediaPostsArr.items")
 							li.datafiles
 								span.main-headers#media-title {{post.title}}
 								br
@@ -22,32 +22,63 @@ block pageContent
 								.inner-content-container
 									iframe(ng-src="{{post.video | trustUrl}}", width="560", height="315", frameborder='0')
 								p(class="post-description" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{ post.vidDesc }}")
+			.col-sm-2
 
 //---------------
 //-- Scripts ----
 //---------------
 block body
 
-	script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js")
+	script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js")
 	script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js")
-	
+	script(src="../node_modules/ng-infinite-scroll/build/ng-infinite-scroll.min.js")
 	
 	script.
-		var myApp = angular.module('app', []);
+		var myApp = angular.module('app', ['infinite-scroll']);
 
 		// Services
 		myApp.factory('MediaPost', ['$http', function($http){
-			return $http.get('/posts');
+			var MediaPost = function() {
+				this.items = [];
+				this.busy = false;
+				this.pageNum = 1;
+				this.postsPerPage = 4;
+				this.finished = false;
+			};
+
+
+			MediaPost.prototype.loadMore = function() {
+				if (this.busy) return;
+				this.busy = true;
+				var config = {
+					params: {
+						pageToLoad : this.pageNum,
+						perPage : this.postsPerPage
+					}
+			};
+
+				$http.get('/posts', config).success(function(data) {
+					var item = data.docs;
+					if (this.pageNum*this.postsPerPage > this.items.length+this.postsPerPage) {
+						this.finished = true;
+					}
+					for (var i = 0; i < item.length; i++) {
+						this.items.push(item[i]);
+					}
+					this.pageNum++;
+					if (!this.finished) {
+						this.busy = false;
+					}
+					else console.log("finished")
+				}.bind(this));
+			};
+
+			return MediaPost;
 		}]);
 
 		// controllers
 		myApp.controller('MediaController', ['$scope', '$sce', 'MediaPost', function ($scope, $sce, MediaPost) {
-			MediaPost.success(function(data){
-				$scope.mediaPostsArr = data;
-			}).error(function(data, status){
-				console.log(data, status);
-				$scope.mediaPostsArr = [];
-			});
+			$scope.mediaPostsArr = new MediaPost();
 		}]);
 
 		// Filters

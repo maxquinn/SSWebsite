@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate');
 
 var mediaPostSchema = new mongoose.Schema({
     title: String,
@@ -8,5 +9,7 @@ var mediaPostSchema = new mongoose.Schema({
     //dateTime: String,
 },
     {collection : 'data'});
+
+mediaPostSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('MediaPost', mediaPostSchema);

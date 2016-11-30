@@ -1,3 +1,10 @@
+<h1>Add a Post:</h1>
 <div>
-    <h1>{{title}}</h1>
+    <form ng-controller="SubmitController" ng-submit="submit()" id="postform">
+      Enter the things:<br/>
+      <input type="text" ng-model="formData.title" name="title" placeholder="Title" /><br/>
+      <input type="url" ng-model="formData.video" name="video" placeholder="Video Link" /><br/>
+      <textarea form="postform" ng-model="formData.vidDesc" name="vidDesc" placeholder="Video Description" /><br/>
+      <input type="submit" id="submit" value="Submit" />
+   </form>
 </div>
