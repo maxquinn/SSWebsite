@@ -1,10 +1,40 @@
-<h1>Add a Post:</h1>
-<div>
-    <form ng-controller="SubmitController" ng-submit="submit()" id="postform" name="postForm">
-      Enter the things:<br/>
-      <input type="text" ng-model="formData.title" name="title" placeholder="Title" /><br/>
-      <input type="url" ng-model="formData.video" name="video" placeholder="Video Link" /><br/>
-      <textarea form="postform" ng-model="formData.vidDesc" name="vidDesc" placeholder="Video Description" /><br/>
-      <input type="submit" id="submit" value="Submit" />
-   </form>
+<div id="manage-media" ng-controller="SubmitController">
+  <h1><u>ADD A POST</u></h1>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-6">
+      <h2>POST FORM</h2>
+      <form ng-submit="submit()" id="postform" name="postForm">
+        <input type="text" ng-model="formData.title" name="title" placeholder="Title" autocomplete="off" />
+        <br>
+        <br>
+        <input type="url" id="linkinput" ng-model="formData.video" name="video" placeholder="Video Link" autocomplete="off" ng-click="clickedInput()" ng-blur="blurInput()"/>
+        <br>
+        <br>
+        <textarea form="postform" ng-model="formData.vidDesc" name="vidDesc" placeholder="Video Description" autocomplete="off" />
+        <br>
+        <input type="submit" id="submit" value="Submit" />
+      </form>
+    </div>
+    <div class="col-sm-6">
+      <h2>POST PREVIEW</h2>
+      <div class="datafiles">
+        <span class="main-headers" id="media-title">{{formData.title}}</span>
+        <br>
+        <div class="inner-content-container">
+          <iframe id="vidframe" ng-src="{{formData.video | trustUrl}}", width="560", height="315", frameborder='0' allowfullscreen></iframe>
+        </div>
+        <p class="post-description">{{formData.vidDesc}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="row"><h1>{{successOrFailure}}</h1></div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-12">
+      <h1><u>CURRENT POSTS</u></h1>
+    </div>
+  </div>
 </div>

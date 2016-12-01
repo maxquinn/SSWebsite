@@ -65,18 +65,40 @@ html(ng-app="adminApp" ng-controller="PageViewController")
 
             //Post Controller
             app.controller('SubmitController', function($scope, $http) {
+                $scope.clickedInput = function() {
+                    document.getElementById("vidframe").style.visibility = "hidden";
+                    document.getElementById("linkinput").src = " ";
+                }
+
+                $scope.blurInput = function() {
+                    document.getElementById("vidframe").style.visibility = "visible";
+                    if($scope.formData.video.indexOf('watch?v=') > -1) {
+                        $scope.formData.video = $scope.formData.video.replace("watch?v=", "embed/");
+                    }
+                    if($scope.formData.video.indexOf('&t=') > -1) {
+                        $scope.formData.video = $scope.formData.video.replace("&t=", "?start=");
+                    }
+                    document.getElementById("linkinput").src = "{{formData.video | trustUrl}}";
+                }
+
                 $scope.submit = function() {
-                    var id = $scope.formData.video.split('v=')[1];
-                    $scope.formData.video = 'https://www.youtube.com/embed/' + id;
+                    document.getElementById("vidframe").style.visibility = "hidden";
                     $http.post('/submitpost', $scope.formData).
                     success(function(data) {
-                        console.log("Posted Successfully");
+                        $scope.successOrFailure = "Posted Successfully";
                         $scope.formData = {};
                         $scope.postForm.$setPristine();
                         $scope.postForm.$setUntouched();
                     }).error(function(data) {
-                        console.error("Error in posting");
+                        $scope.successOrFailure = "Failed to post";
                     })
                 }
             });
+
+            //Filter
+            app.filter("trustUrl", ['$sce', function ($sce) {
+                return function (recordingUrl) {
+                    return $sce.trustAsResourceUrl(recordingUrl);
+                };
+            }]);
             
