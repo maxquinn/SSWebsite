@@ -501,3 +501,51 @@ h1 {
 #manage-media>div>div>h2 {
     text-align: center;
 }
+
+.post-container {
+    height: 70px;
+    margin-bottom: 10px;
+    color: white;
+    background-color: grey;
+    border-radius: 4px;
+    transition: all .2s ease-in-out;
+}
+
+.post-container:hover {
+    transform: scaleX(1.05);
+}
+
+.post-panel:hover {
+    color: #4662AA;
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+.post-panel {
+    border-radius: 4px;
+    float: left;
+    height: 100%;
+    padding-left: 50px;
+    display: table;
+    width: 90%;
+}
+
+.post-panel>h3,
+.post-panel>h4 {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.post-container>button {
+    float: right;
+    border-radius: 4px;
+    width: 10%!important;
+    height: 100%;
+    background-color: #cd3432;
+    border: none;
+    font-size: 20px;
+}
+
+.post-container>button:hover {
+    background-color: #d65a57;
+}

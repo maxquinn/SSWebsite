@@ -1,5 +1,7 @@
 <div id="manage-media" ng-controller="SubmitController">
-  <h1><u>ADD A POST</u></h1>
+  <h1>
+    <u>ADD A POST</u>
+  </h1>
   <br>
   <br>
   <div class="row">
@@ -9,7 +11,8 @@
         <input type="text" ng-model="formData.title" name="title" placeholder="Title" autocomplete="off" />
         <br>
         <br>
-        <input type="url" id="linkinput" ng-model="formData.video" name="video" placeholder="Video Link" autocomplete="off" ng-click="clickedInput()" ng-blur="blurInput()"/>
+        <input type="url" id="linkinput" ng-model="formData.video" name="video" placeholder="Video Link" autocomplete="off" ng-click="clickedInput()"
+          ng-blur="blurInput()" />
         <br>
         <br>
         <textarea form="postform" ng-model="formData.vidDesc" name="vidDesc" placeholder="Video Description" autocomplete="off" />
@@ -23,18 +26,55 @@
         <span class="main-headers" id="media-title">{{formData.title}}</span>
         <br>
         <div class="inner-content-container">
-          <iframe id="vidframe" ng-src="{{formData.video | trustUrl}}", width="560", height="315", frameborder='0' allowfullscreen></iframe>
+          <iframe id="vidframe" ng-src="{{formData.video | trustUrl}}" , width="560" , height="315" , frameborder='0' allowfullscreen></iframe>
         </div>
         <p class="post-description">{{formData.vidDesc}}</p>
       </div>
     </div>
   </div>
-  <div class="row"><h1>{{successOrFailure}}</h1></div>
+  <div class="row">
+    <h1>{{successOrFailure}}</h1>
+  </div>
   <br>
   <br>
   <div class="row">
     <div class="col-sm-12">
-      <h1><u>CURRENT POSTS</u></h1>
+      <h1>
+        <u>CURRENT POSTS</u>
+      </h1>
+      <div ng-controller="MediaController">
+        <div infinite-scroll="mediaPostsArr.loadMore()" infinite-scroll-disabled="mediaPostsArr.busy">
+          <div ng-repeat="post in mediaPostsArr.items">
+
+            <div class="post-container">
+              <div class="post-panel" data-toggle="modal" data-target="#postModal{{post._id}}">
+                <h3>{{post.title | uppercase}}</h3>
+              </div>
+              <button ng-click="deletepost(post)">Delete</button>
+            </div>
+
+            <div class="modal fade" id="postModal{{post._id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{post.title | uppercase}}</h4>
+                  </div>
+                  <div id="loadContent" class="modal-body">
+                    <span class="media-dateTime">Posted {{post.dateTime | date:'dd/MM/yyyy - hh:mma'}}</span>
+                    <iframe id="vidframe" ng-src="{{post.video | trustUrl}}" , width="560" , height="315" , frameborder='0' allowfullscreen></iframe>
+                    <p class="post-description">{{post.vidDesc}}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

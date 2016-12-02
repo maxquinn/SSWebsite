@@ -89,4 +89,14 @@ app.post('/submitpost', function (req, res) {
     });
 });
 
+//delete handlers
+app.delete('/delete/:id', function(req, res) {
+    mediaPost.remove({
+        _id: req.params.id
+    }, function(err, post) {
+        if (err) res.send(err);
+        res.json({message: 'Successfully deleted'});
+    });
+});
+
 module.exports = app;

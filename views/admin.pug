@@ -39,9 +39,10 @@ html(ng-app="adminApp" ng-controller="PageViewController")
 
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js")
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js")
+        script(src="../node_modules/ng-infinite-scroll/build/ng-infinite-scroll.min.js")
 
         script.
-            var app = angular.module('adminApp', ['ngRoute']);
+            var app = angular.module('adminApp', ['ngRoute', 'infinite-scroll']);
 
             //SPA Routing
             app.config(['$routeProvider', function($routeProvider) {
@@ -93,6 +94,17 @@ html(ng-app="adminApp" ng-controller="PageViewController")
                         $scope.successOrFailure = "Failed to post";
                     })
                 }
+
+                $scope.deletepost = function(post) {
+                    $http.delete('/delete/' + post._id)
+                    .success(function(response) {
+                        //- var index = $scope.mediaPostsArr.items.indexOf(post);
+                        //- console.log(index);
+                        //Remove delted post from dom
+                    }).error(function(response) {
+                        console.log(response);
+                    })
+                }
             });
 
             //Filter
@@ -102,3 +114,4 @@ html(ng-app="adminApp" ng-controller="PageViewController")
                 };
             }]);
             
+        script(src="../public/lib/controllers/admincontrollers.js")
