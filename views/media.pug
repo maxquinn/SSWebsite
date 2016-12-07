@@ -15,7 +15,7 @@ block pageContent
 					.post-block
 						.datacontainer.row.kvka-logo(ng-repeat="post in mediaPostsArr.items")
 							li.datafiles
-								span.main-headers#media-title {{post.title}}
+								span.main-headers#media-title {{post.title | uppercase}}
 								br
 								span.media-dateTime Posted {{post.dateTime | date:'dd/MM/yyyy - hh:mma'}}
 								br

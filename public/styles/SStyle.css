@@ -209,8 +209,9 @@ body {
 }
 
 #media-title {
-    font-family: BebasNeue;
-    font-size: 500%;
+    font-family: TrumpGothicEastBoldItalic;
+    font-size: 400%;
+    letter-spacing: 2px;
 }
 
 .datacontainer {
