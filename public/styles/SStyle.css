@@ -42,6 +42,10 @@ body {
     }
 }
 
+#adminNav>li {
+    width: 33%;
+}
+
 .navigation {
     height: 100px;
 }
@@ -124,8 +128,9 @@ body {
 }
 
 .top-content-block {
-    height: 70vh;
+    height: auto;
     width: 100%;
+    margin-bottom: 30px;
 }
 
 .content-block-1 {
@@ -138,31 +143,27 @@ body {
     font-family: LAMEBRAINS;
     text-align: center;
     color: white;
-    font-size: 1000%;
+    font-size: 900%;
     text-shadow: -2px 2px 0px rgb(68, 68, 68);
     padding-bottom: 50px;
 }
 
-#media-feature {
-    margin-left: 100px;
-}
+@media (max-width: 700px) {
+    .main-headers {
+        font-size: 500%;
+    }
 
-@media (max-width: 992px) {
-    #media-feature {
-        margin-left: 0px;
+    #media-writeup>p {
+        font-size: 5vw!important;
     }
 }
 
-#media-feature-vid {
-    width: 100%;
-}
-
 #media-writeup>p {
-    line-height: 75%;
+    line-height: 85%;
     display: inline-block;
     color: white;
     font-family: BebasNeue;
-    font-size: 50px !important;
+    font-size: 50px;
 }
 
 #media-footer {
@@ -549,4 +550,51 @@ h1 {
 
 .post-container>button:hover {
     background-color: #d65a57;
+}
+
+.imagecontainer {
+    cursor: pointer;
+}
+
+.feature-container>.imagecontainer>img {
+    width: 100%;
+    vertical-align: top;
+}
+
+.feature-container>iframe {
+    width: 100%; 
+    height: 400px;
+}
+
+.imgoverlay {
+    opacity: 0;
+    height: auto;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    box-sizing: border-box;
+    color: white;
+    text-align: center;
+    transition: all 0.8s ease-in-out;
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .8s ease;
+    -ms-transition: all .8s ease;
+    -o-transition: all .8s ease;
+    transition: all .8s ease;
+}
+
+.imagecontainer {
+    position: relative;
+}
+
+.imagecontainer:hover .imgoverlay {
+    opacity: 1;
+}
+
+.textoverlay {
+    font-family: TrumpGothicEastBoldItalic;
+    font-size: 26px;
 }

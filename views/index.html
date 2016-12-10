@@ -12,9 +12,11 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="../public/lib/contentscript.js"></script>
     <script src="../public/lib/bootstrap.min.js"></script>
+    <script src="../public/lib/fades.js"></script>
 </head>
 
 <body>
+    <div class="se-pre-con"></div>
     <div class="ultimate">
         <div class="topshit js-list-item js-current-panel">
             <a href="/">
@@ -47,19 +49,44 @@
                 <a class="ion-chevron-down js-next" href="#"></a>
             </div>
             <!--Jump to anchor controls-->
+        </div>
 
-            <div class="top-content-block">
-
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="top-content-block container">
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    <div class="feature-container">
+                        <div class="imagecontainer">
+                            <img src="../public/images/outlierz.jpg" alt="Outliers Album Cover">
+                            <div class="imgoverlay">
+                                <div class="textoverlay">
+                                    Outliers EP Out Now
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <iframe src="https://embed.spotify.com/?uri=spotify%3Aalbum%3A1MuKD09XIgsn2ZHFIgRgth" frameborder="0" allowtransparency="true"></iframe>
+                    </div>
+                </div>
+                <div class="col-sm-3"></div>
             </div>
         </div>
         <!--This is the first content block under the nav bar-->
 
         <div id="media" class="content-block-1 js-list-item">
-            <h1 class="main-headers">Bad Angel</h1>
-            <div id="media-feature" class="fluid-container">
+            <div id="media-feature" class="container">
+                <h1 class="main-headers">Bad Angel</h1>
                 <div class="row">
                     <div class="col-sm-6">
-                        <iframe id="media-feature-vid" width="560" height="315" src="https://www.youtube.com/embed/fsunK9O1Eeg?dark" frameborder="0" allowfullscreen></iframe>
+                        <div class="inner-content-container">
+                            <iframe src="https://www.youtube.com/embed/fsunK9O1Eeg?dark" frameborder="0" allowfullscreen></iframe>
+                        </div>
                     </div>
                     <div id="media-writeup" class="col-sm-6">
                         <p>

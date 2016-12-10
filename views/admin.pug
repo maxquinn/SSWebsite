@@ -6,7 +6,6 @@ html(ng-app="adminApp" ng-controller="PageViewController")
         title Stay Savage - Admin Portal
         link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
         link(rel='stylesheet', type='text/css', href='../public/styles/SStyle.css')
-        link(rel='stylesheet', type='text/css', href='../public/styles/AdminStyle.css')
         link(rel='icon', href='../public/images/icons/SSfaviconAltBlack.ico')
         script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
         script(src='../public/lib/contentscript.js')
@@ -25,7 +24,7 @@ html(ng-app="adminApp" ng-controller="PageViewController")
                             span.icon-bar
                             span.icon-bar
                         #nav-names.collapse.navbar-collapse.container
-                            ul.nav.navbar-nav.navbar-custom
+                            ul.nav.navbar-nav.navbar-custom#adminNav
                                 li
                                     a(href='#/') Admin Home
                                 li

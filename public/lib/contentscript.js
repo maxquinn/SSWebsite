@@ -89,13 +89,5 @@ $(document).ready(function() {
 
       e.preventDefault();
   });
-
-  //More or less text changer
-  $('#more-or-less').click(function() { //you can give id or class name here for $('button')
-      $(this).text(function(i, old) {
-          return old == '... Read More' ? '... Read Less' : '... Read More';
-      });
-  });
-
 });
 
