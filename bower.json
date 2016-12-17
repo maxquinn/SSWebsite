@@ -16,5 +16,6 @@
     "tests"
   ],
   "dependencies": {
+    "angular-scroll-animate": "^0.9.9"
   }
 }

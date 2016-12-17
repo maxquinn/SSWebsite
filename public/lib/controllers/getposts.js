@@ -40,4 +40,14 @@ angular.module('app').factory('MediaPost', ['$http', function ($http) {
 // controllers
 angular.module('app').controller('MediaController', ['$scope', '$sce', 'MediaPost', function ($scope, $sce, MediaPost) {
     $scope.mediaPostsArr = new MediaPost();
+
+    $scope.animateElementIn = function ($el) {
+        $el.removeClass('not-visible');
+        $el.addClass('animated fadeInRight');
+    };
+
+    $scope.animateElementOut = function ($el) {
+        $el.addClass('not-visible');
+        $el.removeClass('animated fadeInRight');
+    };
 }]);

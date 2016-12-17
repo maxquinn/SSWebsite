@@ -4,6 +4,8 @@ var express = require("express");
 var path = require('path');
 var app = module.exports = express();
 var bodyParser = require('body-parser');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 var port = process.env.port || 3000;
 const mongoose = require('mongoose');
@@ -34,13 +36,24 @@ app.set('view engine', 'pug');
 
 // Define ./public as static
 app.use('/public', express.static(__dirname + '/public'));
-app.use('/node_modules',  express.static(__dirname + '/node_modules'));
+app.use('/node_modules', express.static(__dirname + '/node_modules'));
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
 app.use('/partials', express.static(__dirname + '/views/partials'));
 
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
+
+//Passport engine
+app.use(passport.initialize());
+app.use(passport.session());
+
+//passport config
+var Account = require('./models/account.js');
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
 
 //get handlers
 app.get('/', function (req, res) {
@@ -68,6 +81,30 @@ app.get('/submitdata', function (req, res) {
     return res.sendFile(__dirname + '/views/submitdata.html');
 });
 
+app.get('/login', function (req, res) {
+    res.render('./login', { user: req.user });
+});
+
+app.post('/login', passport.authenticate('local'), function (req, res) {
+    res.redirect('/admin');
+});
+
+app.get('/register', function(req, res) {
+    res.render('./register', { });
+});
+
+app.post('/register', function (req, res) {
+    Account.register(new Account({ username: req.body.username }), req.body.password, function (err, account) {
+        if (err) {
+            return res.render('./register', { account: account });
+        }
+
+        passport.authenticate('local')(req, res, function () {
+            res.redirect('/');
+        });
+    });
+});
+
 app.use('/media', mediaroute);
 app.use('/posts', getDBPosts);
 app.use('/admin', renderAdmin);
@@ -82,20 +119,20 @@ app.post('/submitpost', function (req, res) {
     post.video = req.body.video;
     post.vidDesc = req.body.vidDesc;
 
-    post.save(function(err) {
+    post.save(function (err) {
         if (err)
             res.send(err);
-        res.json({message: 'Post Created'});
+        res.json({ message: 'Post Created' });
     });
 });
 
 //delete handlers
-app.delete('/delete/:id', function(req, res) {
+app.delete('/delete/:id', function (req, res) {
     mediaPost.remove({
         _id: req.params.id
-    }, function(err, post) {
+    }, function (err, post) {
         if (err) res.send(err);
-        res.json({message: 'Successfully deleted'});
+        res.json({ message: 'Successfully deleted' });
     });
 });
 
