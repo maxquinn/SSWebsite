@@ -85,9 +85,10 @@ app.get('/login', function (req, res) {
     res.render('./login', { user: req.user });
 });
 
-app.post('/login', passport.authenticate('local'), function (req, res) {
-    res.redirect('/admin');
-});
+app.post('/login', passport.authenticate('local', {
+    successRedirect: '/admin', // redirect to the secure profile section
+    failureRedirect: '/', // redirect back to the signup page if there is an error
+}));
 
 app.get('/register', function(req, res) {
     res.render('./register', { });
