@@ -2,14 +2,18 @@ extends layout
 
 block content
   .container
-    h1 Login Page
-    p.lead Say something worthwhile here.
+    h1.main-headers Admin login
     br
-    form(role='form', action="/login",method="post", style='max-width: 300px;')
-      .form-group
-          input.form-control(type='text', name="username", placeholder='Enter Username')
-      .form-group
-        input.form-control(type='password', name="password", placeholder='Password')
-      button.btn.btn-default(type='submit') Submit
-      a(href='/')
-        button.btn.btn-primary(type="button") Cancel
+    .row
+      .col-sm-4
+      .col-sm-4
+        form(role='form', action="/login",method="post", style='max-width: 300px;')
+          .form-group
+              input.form-control(type='text', name="username", placeholder='Admin Username')
+          .form-group
+            input.form-control(type='password', name="password", placeholder='Password')
+            p #{message}
+          button.btn.btn-default(type='submit') Submit
+          a(href='/')
+            button.btn.btn-primary(type="button") Cancel
+      .col-sm-4

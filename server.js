@@ -3,6 +3,9 @@
 var express = require("express");
 var path = require('path');
 var app = module.exports = express();
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+var flash = require('connect-flash');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -45,6 +48,14 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
 
+app.use(cookieParser());
+app.use(require('express-session')({
+    secret: 'staysavagesecret',
+    resave: false,
+    saveUninitialized: false,
+}));
+app.use(flash());
+
 //Passport engine
 app.use(passport.initialize());
 app.use(passport.session());
@@ -82,12 +93,13 @@ app.get('/submitdata', function (req, res) {
 });
 
 app.get('/login', function (req, res) {
-    res.render('./login', { user: req.user });
+    res.render('./login', { message: req.flash('message') });
 });
 
 app.post('/login', passport.authenticate('local', {
-    successRedirect: '/admin', // redirect to the secure profile section
-    failureRedirect: '/', // redirect back to the signup page if there is an error
+    successRedirect: '/admin',
+    failureRedirect: '/login',
+    failureFlash: 'Invalid username or password.'
 }));
 
 app.get('/register', function(req, res) {

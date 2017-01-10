@@ -7,11 +7,8 @@ router.get('/', verifyAuth, function (req, res) {
 
 function verifyAuth(req, res, next) {
   if (req.isAuthenticated()) {
-    console.log("you're in");
     return next();
   }
-  console.log('here we arew');
-  res.redirect('/');
 }
 
 module.exports = router;
