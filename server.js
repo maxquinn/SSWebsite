@@ -93,13 +93,13 @@ app.get('/submitdata', function (req, res) {
 });
 
 app.get('/login', function (req, res) {
-    res.render('./login', { message: req.flash('message') });
+    res.render('./login', { message: req.flash('error') });
 });
 
 app.post('/login', passport.authenticate('local', {
     successRedirect: '/admin',
     failureRedirect: '/login',
-    failureFlash: 'Invalid username or password.'
+    failureFlash: '*Invalid username or password.'
 }));
 
 app.get('/register', function(req, res) {

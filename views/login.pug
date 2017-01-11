@@ -7,12 +7,12 @@ block content
     .row
       .col-sm-4
       .col-sm-4
-        form(role='form', action="/login",method="post", style='max-width: 300px;')
+        form.adminform(role='form', action="/login",method="post")
           .form-group
               input.form-control(type='text', name="username", placeholder='Admin Username')
           .form-group
             input.form-control(type='password', name="password", placeholder='Password')
-            p #{message}
+            p(style='color: white') #{message}
           button.btn.btn-default(type='submit') Submit
           a(href='/')
             button.btn.btn-primary(type="button") Cancel

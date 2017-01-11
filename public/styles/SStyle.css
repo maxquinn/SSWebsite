@@ -18,6 +18,12 @@ body {
     background-size: cover;
 }
 
+#sam-ultimate {
+    background: #000000 url("../images/backgrounds/BACKGROUND-IMAGE.jpg") top center no-repeat fixed;
+    background-size: cover;
+    transition: background 3s linear;
+}
+
 .no-js #loader { display: none;  }
 .js #loader { display: block; position: absolute; left: 100px; top: 0; }
 .se-pre-con {
@@ -373,10 +379,6 @@ h1 {
     text-align: center;
 }
 
-.sam-gallery {
-    background: url("../public/images/SAM GAT WEB IMAGE/SAM CV.png");
-}
-
 .gallery-item {
     margin-bottom: 25px;
     display: inline-block;
@@ -602,4 +604,10 @@ h1 {
 
 .not-visible {
   visibility: hidden;
+}
+
+.adminform {
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
 }
