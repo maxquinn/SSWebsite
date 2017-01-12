@@ -18,12 +18,6 @@ body {
     background-size: cover;
 }
 
-#sam-ultimate {
-    background: #000000 url("../images/backgrounds/BACKGROUND-IMAGE.jpg") top center no-repeat fixed;
-    background-size: cover;
-    transition: background 3s linear;
-}
-
 .no-js #loader { display: none;  }
 .js #loader { display: block; position: absolute; left: 100px; top: 0; }
 .se-pre-con {
@@ -610,4 +604,60 @@ h1 {
     width: 100%;
     padding-left: 10%;
     padding-right: 10%;
+}
+
+#faded {
+    background: black;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: none;
+    background-attachment: fixed;
+    background-size: 100%;
+    background-position: center;
+}
+
+#fadeImage {
+    height: 100%;
+    width: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+.sam-cover {
+    color: white;
+    font-size: 20px;
+    opacity: 1;
+    position: relative;
+    z-index: 99999;
+    overflow: hidden;
+}
+
+.pleft {
+    font-family: TrumpGothicEastBoldItalic;
+    letter-spacing: 1px;
+    font-size: 24px;
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 70%;
+    margin-bottom: 1000px;
+    margin-top: 300px;
+    text-align: left;
+}
+
+.pright {
+    width: 100%;
+    padding-left: 70%;
+    padding-right: 10%;
+    margin-bottom: 1000px;
+    margin-top: 300px;
+    text-align: right;
+}
+
+#sam-top-bar {
+    position: relative;
+    z-index: 99999;
 }
