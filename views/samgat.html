@@ -6,7 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Stay Savage</title>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="../public/lib/fades.js"></script>
 	<script src="../public/lib/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../public/styles/SStyle.css">
@@ -14,8 +13,7 @@
 	<link rel="icon" href="../public/images/icons/SSfaviconAltBlack.ico">
 </head>
 
-<body>
-	<div class="se-pre-con"></div>
+<body id="fadeScroller">
 	<div class="ultimate">
 		<div class="topshit" id="sam-top-bar">
 			<a href="/">
@@ -86,9 +84,20 @@
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et tellus risus. Integer at hendrerit magna. Aenean vulputate
 			</p>
 		</div>
+		<div class="centerwrapper">
+			<a class="pagetopbtn hvr-bob" href="#">
+				<div>
+					<span class="ion-chevron-up"></span>
+					<br>
+					BACK TO TOP
+				</div>
+			</a>
+		</div>
 		<div id="faded"><img id="fadeImage"></div>
 
 
+
+		<script src="../public/lib/fades.js"></script>
 </body>
 
 </html>
