@@ -126,7 +126,7 @@ function backGroundSelector() {
         $('#faded').stop().fadeIn(300);
     }
     else {
-        $('#faded').stop().fadeOut('fast');
+        $('#faded').stop().fadeOut(50);
     }
 }
 
