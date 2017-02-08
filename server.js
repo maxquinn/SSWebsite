@@ -14,9 +14,7 @@ var port = process.env.port || 3000;
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-var routes = require('./routes');
-var mediaroute = require('./routes/mediapage.js');
-var getDBPosts = require('./routes/mediaposts.js');
+var mediaroute = require('./routes/media.js');
 var renderAdmin = require('./routes/adminRoute.js');
 var mediaPost = require('./models/media.js');
 
@@ -88,10 +86,6 @@ app.get('/submitdata', function (req, res) {
     return res.sendFile(__dirname + '/views/submitdata.html');
 });
 
-app.get('/submitdata', function (req, res) {
-    return res.sendFile(__dirname + '/views/submitdata.html');
-});
-
 app.get('/login', function (req, res) {
     res.render('./login', { message: req.flash('error') });
 });
@@ -119,11 +113,7 @@ app.post('/register', function (req, res) {
 });
 
 app.use('/media', mediaroute);
-app.use('/posts', getDBPosts);
 app.use('/admin', renderAdmin);
-
-app.get('/', routes.index);
-app.get('/partials/:name', routes.partials);
 
 //post handlers
 app.post('/submitpost', function (req, res) {

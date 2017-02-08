@@ -98,9 +98,6 @@ html(ng-app="adminApp" ng-controller="PageViewController")
                     $http.delete('/delete/' + post._id)
                     .success(function(response) {
                         console.log(response);
-                        //- var index = $scope.mediaPostsArr.items.indexOf(post);
-                        //- console.log(index);
-                        //Remove delted post from dom
                     }).error(function(response) {
                         console.log(response);
                     })

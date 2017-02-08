@@ -19,7 +19,7 @@ angular.module('adminApp').factory('MediaPost', ['$http', function ($http) {
             }
         };
 
-        $http.get('/posts', config).success(function (data) {
+        $http.get('/media/posts', config).success(function (data) {
             var item = data.docs;
             if (this.pageNum * this.postsPerPage > this.items.length + this.postsPerPage) {
                 this.finished = true;
