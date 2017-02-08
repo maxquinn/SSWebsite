@@ -14,9 +14,9 @@ var port = process.env.port || 3000;
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-var mediaroute = require('./routes/media.js');
-var renderAdmin = require('./routes/adminRoute.js');
-var mediaPost = require('./models/media.js');
+var indexRoute = require('./routes/index.js');
+var mediaRoute = require('./routes/media.js');
+var adminRoute = require('./routes/admin.js');
 
 //Set up and connect to mongo database
 
@@ -64,79 +64,9 @@ passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
-//get handlers
-app.get('/', function (req, res) {
-    return res.sendFile(__dirname + '/views/index.html');
-});
-
-app.get('/shop', function (req, res) {
-    return res.sendFile(__dirname + '/views/index.html');
-    //simulate click event on shop button
-});
-
-app.get('/kvka', function (req, res) {
-    return res.sendFile(__dirname + '/views/kvka.html');
-});
-
-app.get('/samgat', function (req, res) {
-    return res.sendFile(__dirname + '/views/samgat.html');
-});
-
-app.get('/submitdata', function (req, res) {
-    return res.sendFile(__dirname + '/views/submitdata.html');
-});
-
-app.get('/login', function (req, res) {
-    res.render('./login', { message: req.flash('error') });
-});
-
-app.post('/login', passport.authenticate('local', {
-    successRedirect: '/admin',
-    failureRedirect: '/login',
-    failureFlash: '*Invalid username or password.'
-}));
-
-app.get('/register', function(req, res) {
-    res.render('./register', { });
-});
-
-app.post('/register', function (req, res) {
-    Account.register(new Account({ username: req.body.username }), req.body.password, function (err, account) {
-        if (err) {
-            return res.render('./register', { account: account });
-        }
-
-        passport.authenticate('local')(req, res, function () {
-            res.redirect('/');
-        });
-    });
-});
-
-app.use('/media', mediaroute);
-app.use('/admin', renderAdmin);
-
-//post handlers
-app.post('/submitpost', function (req, res) {
-    var post = new mediaPost();
-    post.title = req.body.title;
-    post.video = req.body.video;
-    post.vidDesc = req.body.vidDesc;
-
-    post.save(function (err) {
-        if (err)
-            res.send(err);
-        res.json({ message: 'Post Created' });
-    });
-});
-
-//delete handlers
-app.delete('/delete/:id', function (req, res) {
-    mediaPost.remove({
-        _id: req.params.id
-    }, function (err, post) {
-        if (err) res.send(err);
-        res.json({ message: 'Successfully deleted' });
-    });
-});
+//Get routes requests
+app.use('/', indexRoute);
+app.use('/media', mediaRoute);
+app.use('/admin', adminRoute);
 
 module.exports = app;

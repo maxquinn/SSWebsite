@@ -1,8 +1,50 @@
-// exports.partials = function (req, res) {
-//   var name = req.params.name;
-//   res.render("/partials/" + name);
-// };
+var express = require('express');
+var router = express.Router();
+var path = require('path');
+var passport = require('passport');
 
-// exports.index = function (req, res) {
-//   res.render('index');
-// };
+router.get('/', function (req, res) {
+    return res.sendFile(path.join(__dirname, '../views', 'index.html'));
+});
+
+router.get('/shop', function (req, res) {
+    return res.sendFile(path.join(__dirname, '../views', 'index.html'));
+    //simulate click event on shop button
+});
+
+router.get('/kvka', function (req, res) {
+    return res.sendFile(path.join(__dirname, '../views', 'kvka.html'));
+});
+
+router.get('/samgat', function (req, res) {
+    return res.sendFile(path.join(__dirname, '../views', 'samgat.html'));
+});
+
+router.get('/login', function (req, res) {
+    res.render('./login', { message: req.flash('error') });
+});
+
+router.post('/login', passport.authenticate('local', {
+    successRedirect: '/admin',
+    failureRedirect: '/login',
+    failureFlash: '*Invalid username or password.'
+}));
+
+router.get('/register', function(req, res) {
+    res.render('./register', { });
+});
+
+router.post('/register', function (req, res) {
+    Account.register(new Account({ username: req.body.username }), req.body.password, function (err, account) {
+        if (err) {
+            return res.render('./register', { account: account });
+        }
+
+        passport.authenticate('local')(req, res, function () {
+            res.redirect('/');
+        });
+    });
+});
+
+
+module.exports = router;

@@ -83,7 +83,7 @@ html(ng-app="adminApp" ng-controller="PageViewController")
 
                 $scope.submit = function() {
                     document.getElementById("vidframe").style.visibility = "hidden";
-                    $http.post('/submitpost', $scope.formData).
+                    $http.post('/admin/submitpost', $scope.formData).
                     success(function(data) {
                         $scope.successOrFailure = "Posted Successfully";
                         $scope.formData = {};
@@ -95,7 +95,7 @@ html(ng-app="adminApp" ng-controller="PageViewController")
                 }
 
                 $scope.deletepost = function(post) {
-                    $http.delete('/delete/' + post._id)
+                    $http.delete('/admin/delete/' + post._id)
                     .success(function(response) {
                         console.log(response);
                     }).error(function(response) {
