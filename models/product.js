@@ -18,6 +18,7 @@ var productSchema = new Schema({
     },
 
     hasVariation: Boolean,
+    stock: Number,
     variations: [{ type: Schema.Types.ObjectId, ref: 'Variation' }]
 },
     { collection: 'products' });
