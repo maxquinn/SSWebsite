@@ -2,10 +2,11 @@ var mongoose = require('mongoose');
 Schema = mongoose.Schema;
 
 var productSchema = new Schema({
+    _id: Number,
     title: String,
     description: String,
     category: String,
-    
+
     image: {
         data: Buffer,
         contentType: String
@@ -13,20 +14,22 @@ var productSchema = new Schema({
 
     pricing: {
         price: Number,
-        discountPercentage: {type: Number, default: 0}
+        discountPercentage: { type: Number, default: 0 }
     },
 
-    variation: {
-        sizes: {
-            size: String,
-            stock: Number
-        },
-        colors: {
-            color: String,
-            stock: Number
-        }
-    }
+    hasVariation: Boolean,
+    variations: [{ type: Schema.Types.ObjectId, ref: 'Variation' }]
 },
-    {collection : 'products'});
+    { collection: 'products' });
 
-module.exports = mongoose.model('products', productSchema);
+
+var productVariationSchema = new Schema({
+    _creator: { type: Number, ref: 'Products' },
+    color: String,
+    size: String,
+    stock: Number
+},
+    { collection: 'variations' });
+
+module.exports = mongoose.model('Products', productSchema);
+module.exports = mongoose.model('Variation', productVariationSchema);
