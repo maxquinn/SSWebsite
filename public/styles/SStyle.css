@@ -18,6 +18,31 @@ body {
     background-size: cover;
 }
 
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 7px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: rgba(70, 98, 170,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(70, 98, 170,0.4); 
+}
+
 .no-js #loader { display: none;  }
 .js #loader { display: block; position: absolute; left: 100px; top: 0; }
 .se-pre-con {
@@ -26,13 +51,14 @@ body {
 	top: 0px;
 	width: 100%;
 	height: 100%;
-	z-index: 9999;
+	z-index: 999999;
 	background: url("../images/SS-loading3.gif") center no-repeat #000000;
 }
 
 .topshit {
     padding-top: 20px;
     padding-left: 20px;
+    position: relative!important;
 }
 
 @media (max-width: 440px) {
@@ -233,7 +259,7 @@ body {
 
 .anchor-navigation {
     position: fixed;
-    z-index: 999999;
+    z-index: 999;
     top: 50%;
     bottom: 50%;
     right: 0px;
@@ -270,13 +296,49 @@ body {
     color: darkgray;
 }
 
-.topshit-plus-kvka1 {
-    background: url("../images/backgrounds/KVKA-top.jpg") left top/cover no-repeat fixed;
+#html-kvka {
+    font-size: 62.5%;
 }
 
-.kvka-logo {
-    visibility: hidden;
+@media (max-width: 500px) {
+    .topshit-plus-kvka1 {
+        height: 150vh!important;
+    }
+
+    .kvka-logo {
+        width: 50%!important;
+        padding-top: 30vh!important;
+    }
+
+    .background-img-tag {
+        width: 200vw!important;
+        height: 110vh!important;
+    }
+}
+.topshit-plus-kvka1 {
+    position: relative;
+    height: 100%;
+    overflow: hidden!important;
+    background-image: linear-gradient(
+        rgba(0,0,0,0) 50%, rgba(0,0,0,.8)
+    );
+}
+
+.background-img-tag {
+    pointer-events: none;
+    position: fixed;
     width: 100%;
+    height: 100%;
+    z-index: -1;
+    object-fit: cover;
+    size: cover;
+}
+
+
+
+.kvka-logo {
+    width: 100%;
+    padding-top: 500px; 
 }
 
 .logo-fadein {
@@ -300,11 +362,6 @@ body {
     background: url("../images/backgrounds/KVKAflowers.jpg") left top/cover no-repeat;
 }
 
-#kvka-media-block {
-    padding-top: 40px;
-    background: url("../images/backgrounds/KVKA-top2.jpg") left top/cover no-repeat fixed;
-}
-
 .kvka-text {
     color: white;
     text-shadow: -3px 2px 2px rgba(0, 0, 0, 1);
@@ -323,28 +380,6 @@ body {
     .kvka-text {
         font-size: 170%;
     }
-}
-
-#social-links {
-    padding-top: 200px;
-}
-
-#social-links>div {
-    margin-bottom: 100px;
-}
-
-#social-links>div>span>img {
-    width: 72px;
-    height: 72px;
-}
-
-#social-links>div>span>a {
-    padding-left: 15px;
-    font-size: 36px;
-    font-family: BebasNeue;
-    color: white;
-    text-decoration: underline;
-    letter-spacing: 5px;
 }
 
 .hvr-sink {
@@ -377,7 +412,6 @@ h1 {
     margin-bottom: 25px;
     display: inline-block;
     vertical-align: middle;
-    float: none;
 }
 
 .modal {
@@ -756,4 +790,258 @@ h1 {
   animation-fill-mode: forwards;
   -webkit-animation-direction: normal, alternate;
   animation-direction: normal, alternate;
+}
+
+#artist-social-module {
+    margin-top: 70px;
+    animation-name: socialFadeIn;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+}
+
+@media only screen and (max-width: 500px) {
+    #artist-social-module {
+        margin-top: 10px;
+    }
+}
+
+#artist-social-module-clone {
+    visibility: hidden;
+    margin-top: 70px;
+}
+
+#artist-social-module.fixed {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    height: 100%;
+    margin-top: 0;
+    width: auto;
+    background-image: linear-gradient(
+        to right, rgba(0,0,0,1) 10%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0)
+    );
+}
+
+#social-module-background.fixed {
+    margin: auto 10px auto 10px;
+    top: 0;
+    width: 100%;
+    height: auto;
+    align-self: center;
+}
+
+#artist-social-module.mobile-fixed {
+    position: fixed;
+    z-index: 999;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    margin-top: 0;
+    background-image: linear-gradient(
+        rgba(0,0,0,1) 15%, rgba(0,0,0,0)
+    );
+}
+
+#social-module-background.mobile-fixed {
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto; 
+    top: 0;
+    width: 100%;
+    height: 55px;
+}
+
+#artist-social-module.fadeOut {
+    animation-name: socialFadeOut;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+}
+
+@keyframes socialFadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@keyframes socialFadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+.svg-icon {
+  fill: currentColor;
+  color: inherit;
+  width: auto;
+  height: auto;
+}
+
+.svg-icon {
+  width: 4rem;
+  color: ghostwhite;
+  display: block;
+  margin: auto;
+}
+
+.horizontal-social {
+    list-style: none;
+    display: table;
+    width: 100%;
+    padding: 0 0 0 0;
+}
+
+.social-li {
+    display: table-cell;
+}
+
+.social-li.fixed {
+    margin-top: 10px; 
+    margin-left: 0px;
+    display: list-item;
+}
+
+.svg-icon:hover .circle-path{
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: dash 400ms ease-in forwards;
+  stroke: #4662AA;
+}
+
+.svg-icon:hover .arrow-path{
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    animation: dash 400ms linear forwards;
+    animation-delay: 300ms;
+    stroke: #4662AA;
+}
+
+.svg-icon:hover{
+    animation: colorwash 450ms linear forwards;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes colorwash {
+  to {
+      color: #4662AA;
+  }
+}
+
+.showcase-body {
+    background-color: rgba(0,0,0,.8);
+    padding-top: 200px;
+}
+
+.showcase-item {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.showcase-body>.container-fluid {
+    margin: 0 16%;
+}
+
+.showcase-video {
+    position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+}
+
+.showcase-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.showcase-text {
+    width: 100%;
+    font-family: 'Roboto';
+    font-weight: 300;
+    color: white;
+}
+
+.showcase-text-title {
+    font-family: BebasNeue;
+}
+
+.showcase-text-body {
+    letter-spacing: 2px;
+    font-size: 1.8rem;
+}
+
+.showcase-photo img {
+    margin-left: auto;
+	margin-right: auto;
+	display: block;
+    max-width: 100%;
+}
+
+.showcase-photo {
+    position: relative;
+}
+
+#kvka-sc-2 {
+    top: 50px;
+}
+
+#kvka-sc-3 {
+    top: 20px;
+    z-index: 6;
+}
+
+.dblphoto1 {
+    margin-right: -10%;
+}
+
+.dblphoto2 {
+    margin-left: -10%;
+}
+
+
+@media only screen and (max-width: 500px) {
+    .showcase-body>.container-fluid {
+        margin: 0 3%;
+    }
+
+    .showcase-text-body {
+        font-size: 1.2rem;
+    }
+
+    .showcase-body > .container-fluid > .row {
+        margin-top: 20px;
+        margin-bottom: 70px;
+    }
+
+}
+
+@media only screen and (max-width: 768px) { 
+    .showcase-item {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .dblphoto1 {
+        margin-right: 0;
+        margin-bottom: 70px;
+    }
+
+    .dblphoto2 {
+        margin-left: 0;
+    }
+
+    #kvka-sc-1 {
+        top: 0;
+    }
+
+    #kvka-sc-2 {
+        top: 0;
+    }
 }

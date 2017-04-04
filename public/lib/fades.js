@@ -2,6 +2,10 @@ $(window).load(function () {
     $(".se-pre-con").fadeOut("slow");
 });
 
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 function logoFadeIn(el) {
     var windowHeight = $(window).height();
     $(el).each(function () {
@@ -13,25 +17,6 @@ function logoFadeIn(el) {
         }
     });
 }
-
-$(document).ready(function () {
-    logoFadeIn('.kvka-logo');
-});
-
-$(window).scroll(function () {
-    logoFadeIn('.kvka-logo');
-});
-
-var imgSrcs = [
-    "../public/images/SAM GAT WEB IMAGE/1.jpg",
-    "../public/images/SAM GAT WEB IMAGE/2.jpg",
-    "../public/images/SAM GAT WEB IMAGE/3.jpg",
-];
-
-var row1;
-$(document).ready(function () {
-    row1 = document.getElementById("row1");
-});
 
 function isInViewport(element) {
     var rect = element.getBoundingClientRect();
@@ -136,3 +121,114 @@ $('.pagetopbtn').on('click', function (e) {
         opacity: 1
     }, 800);
 });
+
+function adjustDoublePhotos(photo1, photo2) {
+    if (!isMobile()) {
+        //min height photo1 + photo 2 - needs to adjust on resize
+        $('.double-photo').css('min-height', photo1.height() + photo2.height());
+
+
+        photo1.offset();
+    }
+}
+
+//artist page specific JS
+if ($(".artist-page").length > 0) {
+
+    //sticky social module
+    if (!isMobile()) {
+        $(window).load(function () {
+            var sticky = $('#artist-social-module'),
+                stickyBackground = $('#social-module-background'),
+                stickyListItem = $('.social-li'),
+                stickyClone,
+                stickyTop = sticky.offset().top,
+                scrolled = false,
+                offset = $('#artist-social-module').offset(),
+                $window = $(window);
+
+            $window.on('scroll', function (e) {
+                scrolled = true;
+            });
+
+            var timeout = setInterval(function () {
+                if (scrolled) {
+                    scrolled = false;
+                    if ($window.scrollTop() >= (stickyTop + sticky.height()) && !stickyClone) {
+                        if (sticky.css("position") !== "fixed") {
+                            stickyClone = sticky.clone().prop('id', sticky.prop('id') + '-clone');
+                            stickyClone.insertBefore(sticky);
+                            sticky.remove();
+                            sticky.addClass('fixed');
+                            stickyListItem.addClass('fixed');
+                            stickyBackground.addClass('fixed');
+                            stickyClone.after(sticky);
+
+                        }
+                    } else if ($window.scrollTop() < stickyTop && stickyClone) {
+                        if (sticky.css("position") === "fixed") {
+                            sticky.addClass('fadeOut');
+                            sticky.on('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd',
+                                function () {
+                                    sticky.removeClass('fixed fadeOut');
+                                    stickyListItem.removeClass('fixed');
+                                    stickyBackground.removeClass('fixed');
+                                    sticky.css({
+                                        width: 'auto',
+                                    });
+                                    $('#artist-social-module-clone').remove();
+                                    sticky.animate({ 'opacity': '1' });
+                                });
+                            stickyClone = null;
+                        }
+                    }
+                }
+            }, 100);
+        });
+    }
+    else if (isMobile()) { //mobile js sticky
+        $(window).load(function () {
+            var sticky = $('#artist-social-module'),
+                stickyBackground = $('#social-module-background'),
+                stickyClone,
+                stickyTop = sticky.offset().top,
+                scrolled = false,
+                $window = $(window);
+
+            $window.on('scroll', function (e) {
+                scrolled = true;
+            });
+
+            var timeout = setInterval(function () {
+                if (scrolled) {
+                    scrolled = false;
+                    if ($window.scrollTop() >= (stickyTop - 10) && !stickyClone) {
+                        if (sticky.css("position") !== "fixed") {
+                            stickyClone = sticky.clone().prop('id', sticky.prop('id') + '-clone');
+                            stickyClone = stickyClone.insertBefore(sticky);
+                            stickyBackground.css({
+                                width: sticky.width(),
+                            });
+                            stickyBackground.addClass('mobile-fixed');
+                            sticky.addClass('mobile-fixed');
+                        }
+                    } else if ($window.scrollTop() < stickyTop && stickyClone) {
+                        if (sticky.css("position") === "fixed") {
+                            stickyClone.remove();
+                            stickyClone = null;
+                            stickyBackground.removeClass('mobile-fixed');
+                            sticky.removeClass('mobile-fixed');
+                        }
+                    }
+                }
+            }, 100);
+        });
+    }
+    //sticky social module END ------------------------------------------
+}
+
+
+// if ($("#kvka").length > 0) {
+// //artist showcase photo container adjustment (desktop only)
+//     adjustDoublePhotos($('.dblphoto1'), $('.dblphoto2'));
+// }
