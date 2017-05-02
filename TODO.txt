@@ -1,4 +1,4 @@
 * Integrate instagram API to artist profile
 * Refactoring for more efficient performance
-* Reduce some image file sizes
 * Possibly remove bower if we dont end up using it for anything
+* Remove unused CSS rules and group relevent media queries

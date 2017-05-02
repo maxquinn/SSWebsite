@@ -1,3 +1,109 @@
-<div>
-    <h1> PlaceHolder </h1>
+<div id="manage-media" ng-controller="ShowHideController">
+    <div class="shop-add-section" ng-controller="addInventoryItemFormController">
+        <a class="" ng-click="itemForm = !itemForm" ng-class="{ active: itemForm }">
+            <h1>
+                <u>ADD AN ITEM TO THE SHOP</u>
+            </h1>
+        </a>
+        <form id="inventory-form form-horizontal" ng-show="itemForm">
+
+            <div class="form-group">
+                <label for="generalInfo">General Information</label>
+                <input class="form-control" ng-model="productObj.prodTitle" type="text" name="productTitle" placeholder="Product Title" autocomplete="off"
+                />
+                <input class="form-control" ng-model="productObj.prodCategory" type="text" name="productCategory" placeholder="Product Category"
+                    autocomplete="on" />
+                <textarea class="form-control" ng-model="productObj.prodDescription" rows="5" form="inventory-form" name="productDescription"
+                    placeholder="Product Description (Max 500 char.)" maxlength="500" autocomplete="off" />
+                <br>
+                <input class="form-control" ng-model="productObj.secretID" type="text" name="productTitle" placeholder="Secret ID (Leave blank normally)" autocomplete="off"
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="pricingInfo">Pricing Information</label>
+                <div class="input-group col-sm-2">
+                    <span class="input-group-addon">$</span>
+                    <input class="form-control" ng-model="productObj.prodPricing.basePrice" type="number" name="productBasePrice" placeholder="Base Price"
+                        autocomplete="off" />
+                </div>
+                <div class="input-group col-sm-2">
+                    <span class="input-group-addon">%</span>
+                    <input class="form-control" ng-model="productObj.prodPricing.discountPercentage" type="number" name="productDiscountPrice"
+                        placeholder="Discount Percentage" autocomplete="off" />
+                </div>
+            </div>
+
+            <div class="form-group" ng-init="productObj.prodHasVariations=false">
+                <label for="noVariations"><input  id="noVariations" ng-model="productObj.prodHasVariations" ng-value="false" type="radio" name="itemVariations" autocomplete="off">No Variations</label>
+                <br>
+                <label for="variations"><input id="variations" ng-model="productObj.prodHasVariations" ng-value="true" type="radio" name="itemVariations" autocomplete="off" >Item has variations</label>
+            </div>
+
+            <div class="form-group" ng-show="productObj.prodHasVariations == false">
+                <label>Add a product image</label>
+                <input type="file" ng-model="productObj.filename" hidden accept="image/x-png,image/gif,image/jpeg" custom-file-input></label>
+            </div>
+
+            <div class="form-group" ng-show="productObj.prodHasVariations == false">
+                <div class="input-group col-sm-2">
+                    <label>Initial stock level</label>
+                    <input class="form-control" ng-model="productObj.stock" type="number" min="0" step="1" name="individualStock" placeholder="Stock level"
+                        autocomplete="off" />
+                </div>
+            </div>
+
+            <p style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; size: 25">
+                <!--{{ variationObj | json }}-->
+                {{ productObj | json }}
+            </p>
+
+            <!--Variations form-->
+
+            <div class="form-group" ng-show="productObj.prodHasVariations == true">
+                <label>Add some variations</label>
+                <div ng-repeat="variation in variationObj.variations">
+                    <input class="form-control" ng-model="variation.color" type="text" name="variationColor" placeholder="Variation Colour" autocomplete="off"
+                    />
+                    <br>
+                    <label>Variation Image</label>
+                    <br>
+                    <label><input type="file" ng-model="variation.filename" hidden accept="image/x-png,image/gif,image/jpeg" custom-file-input></label>
+                    <br>
+                    <br>
+                    <label>Stock Information</label>
+                    <div id="stock-array">
+                        <table>
+                            <tr>
+                                <th><label>Size (eg. M)</label></th>
+                                <th><label>Stock Level for Size</label></th>
+                            </tr>
+                            <tr ng-repeat="item in variation.subVariationsObj">
+                                <td><input class="form-control" ng-model="item.varSize" type="text" maxlength="3" name="varSize"
+                                        placeholder="Size" autocomplete="off" /></td>
+                                <td><input class="form-control" ng-model="item.varStockLevel" type="number" min="0" step="1"
+                                        name="varStock" placeholder="Stock level" autocomplete="off" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <button ng-click="addSize($index)">Add another size</button>
+                    <button ng-click="removeSize($index)">Remove</button>
+                    <hr>
+                </div>
+                <button ng-click="addVar()">Add variation</button>
+                <button ng-click="removeVar()">Remove last variation</button>
+            </div>
+            <p style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; size: 25">
+                <!--{{ variationObj | json }}-->
+                {{ variationObj.variations}}
+            </p>
+            <br>
+            <br>
+            <input type="submit" id="submit" value="Submit" ng-click="submitProduct()" />
+        </form>
+    </div>
+
+    <h1>
+        <u>CURRENT SHOP OVERVIEW</u>
+    </h1>
 </div>

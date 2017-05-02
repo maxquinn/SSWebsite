@@ -4,7 +4,8 @@ html(ng-app="adminApp" ng-controller="PageViewController")
         meta(charset='UTF-8')
         meta(name='viewport', content='width=device-width, initial-scale=1')
         title Stay Savage - Admin Portal
-        link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
+        link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+        link(rel='stylesheet', type='text/css', href='../public/styles/animate.css')
         link(rel='stylesheet', type='text/css', href='../public/styles/SStyle.css')
         link(rel='icon', href='../public/images/icons/SSfaviconAltBlack.ico')
         script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
@@ -31,17 +32,19 @@ html(ng-app="adminApp" ng-controller="PageViewController")
                                     a(href='#managemedia') Manage Media
                                 li
                                     a(href='#shopadmin') Shop Admin
-            .row
-                .col-sm-2
-                .col-sm-8(ng-view)
-                .col-sm-2
+            .container-fluid
+                .row
+                    .col-sm-2
+                    .col-sm-8(ng-view)
+                    .col-sm-2
 
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js")
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js")
         script(src="../node_modules/ng-infinite-scroll/build/ng-infinite-scroll.min.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-animate.min.js")
 
         script.
-            var app = angular.module('adminApp', ['ngRoute', 'infinite-scroll']);
+            var app = angular.module('adminApp', ['ngRoute', 'infinite-scroll', 'ngAnimate']);
 
             //SPA Routing
             app.config(['$routeProvider', function($routeProvider) {
@@ -107,6 +110,105 @@ html(ng-app="adminApp" ng-controller="PageViewController")
                     $route.reload();
                 }
             });
+
+            app.controller('ShowHideController', function($scope) {
+                $scope.itemForm = false;
+            });
+
+            app.controller('addInventoryItemFormController', function($scope, $http, $route){
+                //product variables
+                $scope.productObj = {
+                    prodTitle: '',
+                    prodCategory: '',
+                    prodDescription: '',
+                    prodPricing: {
+                        basePrice: '',
+                        discountPercentage: ''
+                    },
+                };
+                
+                var productHasVariations = false;
+
+                //variation variables
+                $scope.variationObj = {};
+                $scope.variationObj.variations = [];
+                $scope.addVar = newVariation;
+                $scope.removeVar = removeVariation;
+
+                //sub-variation variables
+                $scope.addSize = newSizeInput;
+                $scope.removeSize = removeSizeInput;
+
+                function init() {
+                    newVariation();
+                }
+
+                $scope.$watch('productObj.prodHasVariations', function(value) {
+                    productHasVariations = value;
+                });
+
+                //variation functions
+                function newVariation() {
+                    $scope.variationObj.variations.push({
+                        color: '',
+                        filename: '',
+                        subVariationsObj: []
+                    });
+                    newSizeInput($scope.variationObj.variations.length - 1);
+                }
+
+                function removeVariation() {
+                    $scope.variationObj.variations.pop();
+                }
+
+                //sub-variation functions
+                function newSizeInput(index) {
+                    $scope.variationObj.variations[index || 0].subVariationsObj.push({});
+                }
+
+                function removeSizeInput(index) {
+                    $scope.variationObj.variations[index || 0].subVariationsObj.pop()
+                }
+
+                //submit function
+                $scope.submitProduct = function() {
+                    if (productHasVariations) {
+                        //include variations
+                        $scope.productObj.variations = $scope.variationObj.variations;
+                        $http.post('/admin/submitproduct', $scope.productObj).
+                        success(function(data) {
+                            console.log(data);
+                            }).error(function(data) {
+                                console.log(data);
+                            })
+                    }
+                    else {
+                        //one off object
+                        $http.post('/admin/submitproduct', $scope.productObj).
+                        success(function(data) {
+                            console.log(data);
+                            }).error(function(data) {
+                                console.log(data);
+                            })
+                    }
+                }
+
+                init();
+            });
+
+            //Directives
+            app.directive('customFileInput', [function () {
+                return {
+                    require: "ngModel",
+                    link: function (scope, element, attrs, ngModel) {
+                        element.on('change', function  (evt) {
+                            var files = evt.target.files;
+                            filename = files[0].name;
+                            ngModel.$setViewValue(filename)
+                        });
+                    }
+                }
+            }]);
 
             //Filter
             app.filter("trustUrl", ['$sce', function ($sce) {
