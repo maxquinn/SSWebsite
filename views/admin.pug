@@ -115,7 +115,7 @@ html(ng-app="adminApp" ng-controller="PageViewController")
                 $scope.itemForm = false;
             });
 
-            app.controller('addInventoryItemFormController', function($scope, $http, $route){
+            app.controller('addInventoryItemFormController', function($scope, $http, $route, $timeout){
                 //product variables
                 $scope.productObj = {
                     prodTitle: '',
@@ -172,26 +172,102 @@ html(ng-app="adminApp" ng-controller="PageViewController")
 
                 //submit function
                 $scope.submitProduct = function() {
+                    var formData = new FormData();
+
                     if (productHasVariations) {
                         //include variations
                         $scope.productObj.variations = $scope.variationObj.variations;
-                        $http.post('/admin/submitproduct', $scope.productObj).
+                        $scope.productObj.variations.forEach(function(element) {
+                            formData.append('file', element.photoFile);
+                            element.photoFile = undefined;
+                        });
+                        $http.post('/admin/submitproductphotos', formData, {
+                            transformRequest: angular.identity,
+                            headers: {'Content-Type': undefined}
+                        }).
                         success(function(data) {
-                            console.log(data);
+                            $http.post('/admin/submitproduct', $scope.productObj).
+                            success(function(data) {
+                                console.log(data.message);
                             }).error(function(data) {
-                                console.log(data);
-                            })
+                                console.log(data.message);
+                            });
+                            console.log(data.message);
+                            $scope.addInventoryForm.$setPristine();
+                            $scope.addInventoryForm.$setUntouched();
+                            $route.reload();
+                            }).error(function(data) {
+                                console.log(data.message);
+                            });
                     }
                     else {
                         //one off object
-                        $http.post('/admin/submitproduct', $scope.productObj).
+                        formData.append('file', $scope.photoFile);
+                        $http.post('/admin/submitproductphotos', formData, {
+                            transformRequest: angular.identity,
+                            headers: {'Content-Type': undefined}
+                        }).
                         success(function(data) {
-                            console.log(data);
+                            $http.post('/admin/submitproduct', $scope.productObj).
+                            success(function(data) {
+                                console.log(data.message);
                             }).error(function(data) {
-                                console.log(data);
-                            })
+                                console.log(data.message);
+                            });
+                            console.log(data.message);
+                            $scope.addInventoryForm.$setPristine();
+                            $scope.addInventoryForm.$setUntouched();
+                            $route.reload();
+                            }).error(function(data) {
+                                console.log(data.message);
+                            });
                     }
                 }
+
+                function isObject (value) {
+                    return value === Object(value)
+                };
+                
+                function isArray (value) {
+                    return Array.isArray(value)
+                };
+                
+                function isFile (value) {
+                    return value instanceof File
+                };
+                
+                function makeArrayKey (key) {
+                    if (key.length > 2 && key.lastIndexOf('[]') === key.length - 2) {
+                        return key
+                    } else {
+                        return key + '[]'
+                    }
+                };
+                
+                function objectToFormData (obj, fd, pre) {
+                    fd = fd || new FormData();
+
+                    Object.keys(obj).forEach(function (prop) {
+                        var key = pre ? (pre + '[' + prop + ']') : prop
+                        
+                        if (isObject(obj[prop]) && !isArray(obj[prop]) && !isFile(obj[prop])) {
+                            objectToFormData(obj[prop], fd, key)
+                        } else if (isArray(obj[prop])) {
+                            obj[prop].forEach(function (value) {
+                                var arrayKey = makeArrayKey(key)
+                                
+                                if (isObject(value) && !isFile(value)) {
+                                    objectToFormData(value, fd, arrayKey)
+                                } else {
+                                    fd.append(arrayKey, value)
+                                }
+                            })
+                        } else {
+                            fd.append(key, obj[prop])
+                        }
+                    })  
+                    return fd
+                };
 
                 init();
             });
@@ -202,12 +278,31 @@ html(ng-app="adminApp" ng-controller="PageViewController")
                     require: "ngModel",
                     link: function (scope, element, attrs, ngModel) {
                         element.on('change', function  (evt) {
+                            if (evt.target.files[0] === undefined) {
+                                ngModel.$setViewValue('');
+                                return;
+                            }
                             var files = evt.target.files;
                             filename = files[0].name;
-                            ngModel.$setViewValue(filename)
+                            ngModel.$setViewValue(filename);
                         });
                     }
                 }
+            }]);
+
+            app.directive('fileModel', ['$parse', function($parse) {
+               return {
+                   restrict: 'A',
+                   link: function(scope, element, attrs) {
+                       var model = $parse(attrs.fileModel);
+                       var modelSetter = model.assign;
+                       element.bind('change', function(){
+                           scope.$apply(function(){
+                               modelSetter(scope, element[0].files[0]);
+                            });
+                        });
+                    }
+                };
             }]);
 
             //Filter

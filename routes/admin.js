@@ -1,5 +1,15 @@
 var express = require('express');
 var router = express.Router();
+var multer = require('multer');
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/images/products/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+var upload = multer({ storage: storage });
 var mediaPost = require('../models/media.js');
 var baseProduct = require('../models/product.js');
 var productVariation = require('../models/variation.js');
@@ -42,29 +52,26 @@ router.post('/submitproduct', function (req, res) {
         if (req.body.secretID) {
             newBaseProduct.secretID = req.body.secretID;
         }
-        newBaseProduct.save(function (err) {
-            if (err)
-                res.send(err);
-            res.json({ message: 'Base item created' });
-        });
+        newBaseProduct.save().then(function () {
 
-        //create placeholder array of variations and push to DB 
-        var variationsPlaceholder = [];
-        for (var i = 0; i < req.body.variations.length; i++) {
-            var newProductVariation = new productVariation({
-                _creator: newBaseProduct._id,
-                variatonColor: req.body.variations[i].color,
-                variationImage: req.body.variations[i].filename,
-            });
-            for (var j = 0; j < req.body.variations[i].subVariationsObj.length; j++) {
-                newProductVariation.stockLevels.push({ size: req.body.variations[i].subVariationsObj[j].varSize, stock: req.body.variations[i].subVariationsObj[j].varStockLevel });
+            //create placeholder array of variations and push to DB 
+            var variationsPlaceholder = [];
+            for (var i = 0; i < req.body.variations.length; i++) {
+                var newProductVariation = new productVariation({
+                    _creator: newBaseProduct._id,
+                    variatonColor: req.body.variations[i].color,
+                    variationImage: req.body.variations[i].filename,
+                });
+                for (var j = 0; j < req.body.variations[i].subVariationsObj.length; j++) {
+                    newProductVariation.stockLevels.push({ size: req.body.variations[i].subVariationsObj[j].varSize, stock: req.body.variations[i].subVariationsObj[j].varStockLevel });
+                }
+                variationsPlaceholder.push(newProductVariation);
             }
-            variationsPlaceholder.push(newProductVariation);
-        }
-        productVariation.create(variationsPlaceholder, function (err) {
-            if (err)
-                console.log(err);
-            res.json({ message: 'Variations added' });
+            productVariation.create(variationsPlaceholder, function (err) {
+                if (err)
+                    return res.send(err);
+                res.json({ message: 'Base product and variations added' });
+            });
         });
     }
     else if (req.body.prodHasVariations === false) {
@@ -86,11 +93,14 @@ router.post('/submitproduct', function (req, res) {
         }
         newProduct.save(function (err) {
             if (err)
-                res.send(err);
+                return res.send(err);
             res.json({ message: 'Standalone product created' });
         });
     }
+});
 
+router.post('/submitproductphotos', upload.any('file'), function (req, res) {
+    res.json({ message: 'uploaded image(s) successfully' });
 });
 
 router.delete('/delete/:id', function (req, res) {
