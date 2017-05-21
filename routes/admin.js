@@ -48,26 +48,35 @@ router.post('/submitproduct', function (req, res) {
                 discountPercentage: req.body.prodPricing.discountPercentage
             },
             hasVariation: true,
+            image: req.body.variations[0].filename,
         });
         if (req.body.secretID) {
             newBaseProduct.secretID = req.body.secretID;
         }
-        newBaseProduct.save().then(function () {
 
-            //create placeholder array of variations and push to DB 
-            var variationsPlaceholder = [];
-            for (var i = 0; i < req.body.variations.length; i++) {
-                var newProductVariation = new productVariation({
-                    _creator: newBaseProduct._id,
-                    variatonColor: req.body.variations[i].color,
-                    variationImage: req.body.variations[i].filename,
-                });
-                for (var j = 0; j < req.body.variations[i].subVariationsObj.length; j++) {
-                    newProductVariation.stockLevels.push({ size: req.body.variations[i].subVariationsObj[j].varSize, stock: req.body.variations[i].subVariationsObj[j].varStockLevel });
-                }
-                variationsPlaceholder.push(newProductVariation);
+        //create placeholder array of variations and push to DB 
+        var variationsPlaceholder = [];
+        for (var i = 0; i < req.body.variations.length; i++) {
+            var newProductVariation = new productVariation({
+                _creator: newBaseProduct._id,
+                variatonColor: req.body.variations[i].color,
+                variationImage: req.body.variations[i].filename,
+            });
+            for (var j = 0; j < req.body.variations[i].subVariationsObj.length; j++) {
+                newProductVariation.stockLevels.push({ size: req.body.variations[i].subVariationsObj[j].varSize, stock: req.body.variations[i].subVariationsObj[j].varStockLevel });
             }
-            productVariation.create(variationsPlaceholder, function (err) {
+            variationsPlaceholder.push(newProductVariation);
+        }
+        productVariation.create(variationsPlaceholder).then(function () {
+            var childrenIDArray = [];
+            variationsPlaceholder.forEach(function (element) {
+                childrenIDArray.push(element._id);
+            });
+            newBaseProduct.variations = childrenIDArray;
+            if (req.body.secretID) {
+                newBaseProduct.secretID = req.body.secretID;
+            }
+            newBaseProduct.save(function (err) {
                 if (err)
                     return res.send(err);
                 res.json({ message: 'Base product and variations added' });
