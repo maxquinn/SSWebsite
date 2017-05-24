@@ -64,21 +64,36 @@ router.get('/shop/products/:productid', function (req, res) {
         }
         else {
             if (product.hasVariation) {
-                //populate the variations array
-                storeItems.findOne({ _id: req.params.productid })
-                .populate('variations')
-                .exec(function (err, popProduct) {
-                    if (err) {
-                        console.log(err);
-                    }
-                    else {
-                        //res.render('./productvariations', { item: product });
-                        console.log(popProduct.variations[1]);
-                    }
-                });
+                res.render('./productvariations');
             }
             else {
-                res.render('./product', { item: product });
+                res.render('./product');
+            }
+        }
+    });
+});
+
+router.get('/shop/products/:productid/getjson', function (req, res) {
+    storeItems.findOne({ _id: req.params.productid }, function (err, product) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            if (product.hasVariation) {
+                //populate the variations array
+                storeItems.findOne({ _id: req.params.productid })
+                    .populate('variations')
+                    .exec(function (err, populatedProduct) {
+                        if (err) {
+                            console.log(err);
+                        }
+                        else {
+                            res.json(populatedProduct);
+                        }
+                    });
+            }
+            else {
+                res.json(product);
             }
         }
     });

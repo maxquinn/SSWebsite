@@ -3,7 +3,7 @@ Schema = mongoose.Schema;
 
 var productVariationSchema = new Schema({
     _creator: { type: Schema.ObjectId, ref: 'Products' },
-    variatonColor: String,
+    variationColor: String,
 
     variationImage: String,
 

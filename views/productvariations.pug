@@ -3,7 +3,7 @@ html(lang='en', ng-app="itemApp", ng-controller="ItemController")
     head
         meta(charset='UTF-8')
         meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0')
-        title STAY SAVAGE - {{item.title}}
+        title STAY SAVAGE - {{item.title | uppercase}}
         link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
         link(rel ='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
         link(rel ='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:300,400')
@@ -14,12 +14,6 @@ html(lang='en', ng-app="itemApp", ng-controller="ItemController")
         script(src='../../public/lib/bootstrap.min.js')
     body.store.product-page-body
         #cart-drawer(tabindex="-1")
-            .cart-drawer-top
-                a(onclick="closeCartDrawer()").cart-drawer-close
-                    i.fa.fa-long-arrow-right
-                .cart-drawer-header
-                    h1 Your Shopping Cart
-                hr
         #page-container
             .container-fluid
                 .store-top-bar.row
@@ -42,21 +36,29 @@ html(lang='en', ng-app="itemApp", ng-controller="ItemController")
                     .row
                         .col-sm-7
                             .item-photo-pane
-                                img(ng-src='../../public/images/products/{{item.image}}')#item-showcase-photo
+                                img(ng-src='../../public/images/products/{{selectedVariation.variationImage}}')#item-showcase-photo
                         .col-sm-5
                             .item-text-pane
                                 .item-title
-                                    h1#item-showcase-title {{item.title}}
+                                    h1#item-showcase-title {{item.title | uppercase}}
                                 .item-text-body
                                     .item-price
                                         span#item-showcase-price ${{item.pricing.price | number:2}}
                                             hr#price-rule
+                                    .select-color
+                                        select(ng-model="selectedVariation" ng-options="variation as (variation.variationColor | uppercase) for variation in item.variations")
+                                    .size-picker-label
+                                        span Size
+                                    .select-size
+                                        .size-input-container(ng-repeat="sizeOption in selectedVariation.stockLevels")
+                                            input.size-radio(type="radio", name="item-size")
+                                            .size-radio-tile
+                                                label.size-radio-label {{sizeOption.size | uppercase}}
                                     .add-to-cart
                                         button#add-to-cart-button ADD TO CART
                                     .item-description
                                         span(ng-bind-html="item.description | newlineToP")
-
-        
+                                        
         //-----------
         //- Scripts--
         //-----------
