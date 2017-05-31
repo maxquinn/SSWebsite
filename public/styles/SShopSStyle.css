@@ -11,6 +11,32 @@ html {
   box-sizing: inherit;
 }
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: rgba(206, 206, 206, 0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(206, 206, 206, 0.4); 
+}
+
 /*----------------------*/
 /*--Cart Drawer Styles--*/
 /*----------------------*/
@@ -24,13 +50,17 @@ html {
 }
 
 #cart-drawer {
+    display: flex;
+    flex-direction: column;
     position: fixed;
     z-index: 100;
     background-color: #1c1d1d;
     color: white;
     border-radius: 2px;
     width: 100%;
+    min-height: 100%;
     height: 100%;
+    margin: 0;
     top: 0;
     right: 0;
     transition: transform 0.3s;
@@ -49,19 +79,20 @@ body.has-active-menu {
     overflow: hidden;
 }
 
-@media all and (min-width: 320px) {
+@media all and (min-width: 420px) {
     #cart-drawer {
-        width: 300px;
-        transform: translateX(300px);
+        width: 400px;
+        transform: translateX(400px);
     }
     #page-container.has-push-right {
-        transform: translateX(-300px);
+        transform: translateX(-400px);
     }
 }
 
 .cart-drawer-top {
-    height: auto;
+    flex: none;
     padding: 20px;
+    border-bottom: 1px solid #3a3c3c;
 }
 
 .cart-drawer-close {
@@ -81,6 +112,138 @@ body.has-active-menu {
     font-size: 24px;
     text-align: center;
 }
+
+.cart-contents {
+    flex: 1;
+    width: 100%;
+    overflow-y: auto;
+    padding: 20px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+}
+
+#cart-alert {
+    z-index: 99999;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 250px;
+    outline: none;
+}
+
+.cart-item {
+    height: auto;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #3a3c3c;
+    padding: 20px 0;
+}
+
+.cart-item > div {
+    height: 70px;
+}
+
+#cart-img {
+    max-width: 100%;
+}
+
+#cart-item-title {
+    text-decoration: none;
+    color: white;
+    font-style: italic;
+}
+
+.cart-item-variation-data {
+    display: block;
+    padding: 3px 10px;
+}
+
+.cart-item-footer {
+    width: 100%;
+    display: flex;
+    margin-top: 15px;
+}
+
+
+.cart-item-qty,
+.cart-item-price {
+    flex: 1;
+}
+
+.cart-item-qty > span {
+    padding-right: 20px;
+}
+
+#minus-qty {
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+}
+
+#minus-qty:hover {
+    color: #cecece;
+}
+
+.cart-item-price {
+    text-align: right;
+}
+
+.cart-drawer-footer {
+    flex: none;
+    padding: 20px;
+    border-top: 1px solid #3a3c3c;
+    width: 100%;
+    height: auto;
+}
+
+.footer-sub {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    width: 100%;
+    height: auto;
+    padding: 0;
+}
+
+.footer-sub > div {
+    padding: 0;
+}
+
+#total-cart-price {
+    text-align: right;
+}
+
+#checkout-button-container {
+    width: 100%;
+    padding-top: 20px;
+}
+
+#checkout-button-container > a {
+    text-decoration: none;
+}
+
+#checkout-button {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    border: none;
+    background-color: white;
+    color: #1c1d1d;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    margin: 0 auto;
+    height: 50px;
+    width: 100%;
+    border-radius: 2px;
+    transition: background-color 0.15s ease-out;
+}
+#checkout-button:hover {
+    background-color: #cecece;
+}
+
+#nothing-message {
+    text-align: center;
+}
+
 
 /*----------------------*/
 /*----Top Bar Styles----*/
@@ -397,4 +560,8 @@ select option {
 
 .item-description {
     padding: 50px 20px;
+}
+
+#out-of-stock-warning {
+    color: #e60722;
 }

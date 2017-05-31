@@ -9,6 +9,7 @@ var flash = require('connect-flash');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var MongoStore = require('connect-mongo')(session);
 
 var port = process.env.port || 3000;
 const mongoose = require('mongoose');
@@ -51,6 +52,8 @@ app.use(require('express-session')({
     secret: 'staysavagesecret',
     resave: false,
     saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    cookie: { maxAge: 180 * 60 * 1000 }
 }));
 app.use(flash());
 
@@ -63,6 +66,12 @@ var Account = require('./models/account.js');
 passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
+
+//make session available to views
+app.use(function (req, res, next) {
+    res.locals.session = req.session;
+    next();
+});
 
 //Get routes requests
 app.use('/', indexRoute);

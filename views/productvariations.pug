@@ -1,5 +1,5 @@
 doctype html
-html(lang='en', ng-app="itemApp", ng-controller="ItemController")
+html(lang='en', ng-app="shopApp", ng-controller="ItemController")
     head
         meta(charset='UTF-8')
         meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0')
@@ -12,8 +12,44 @@ html(lang='en', ng-app="itemApp", ng-controller="ItemController")
         link(rel='icon', href='../../public/images/icons/SSfaviconAltBlack.ico')
         script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
         script(src='../../public/lib/bootstrap.min.js')
-    body.store.product-page-body
+    body.store.product-page-body.ng-cloak(ng-controller="CartController" ng-cloak)
         #cart-drawer(tabindex="-1")
+            header.cart-drawer-top
+                a(onclick="closeCartDrawer()").cart-drawer-close
+                    i.fa.fa-long-arrow-right
+                .cart-drawer-header
+                    h1 Your Shopping Cart
+            .cart-contents.container(ng-if="!cart_items || cart_items.length <= 0")
+                #nothing-message
+                    span Nothing in your cart
+            .cart-contents.container(ng-if="cart_items && cart_items.length > 0" ng-cloak)
+                .cart-item.row(ng-repeat="cart_item in cart_items")
+                    .col-xs-3
+                        img(ng-src="../../public/images/products/{{cart_item.item.variations[0].variationImage || cart_item.item.image}}")#cart-img
+                    .col-xs-9
+                        a(href="/shop/products/{{cart_item.item._id}}")#cart-item-title {{cart_item.item.title}}
+                        .cart-item-variation-data(ng-if="cart_item.item.hasVariation")
+                            span#cart-item-size {{cart_item.item.variations[0].stockLevels[0].size}}
+                            span  - 
+                            span#cart-item-color {{cart_item.item.variations[0].variationColor}}
+                        .cart-item-footer
+                            .cart-item-qty
+                                span QTY: {{cart_item.qty}}
+                                a#minus-qty(ng-click="removeItemFromCart(cart_item.uniqueid)")
+                                    span.fa.fa-minus-square-o
+                            .cart-item-price
+                                span ${{cart_item.price | number:2}}
+            .cart-drawer-footer(ng-if="cart_items && cart_items.length > 0")
+                .footer-sub.container-fluid
+                    .col-xs-9
+                        span SUBTOTAL:
+                    .col-xs-3#total-cart-price
+                        span $
+                        span {{cart_session_price | number:2}}
+                #checkout-button-container
+                    a(href="/shop/checkout")
+                        button#checkout-button CHECK OUT
+
         #page-container
             .container-fluid
                 .store-top-bar.row
@@ -27,7 +63,7 @@ html(lang='en', ng-app="itemApp", ng-controller="ItemController")
                         a#cart-button(onclick="openCartDrawer()")
                             svg(xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24")#cart-icon.pull-left
                                 path(d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm-10.563-5l-2.937-7h16.812l-1.977 7h-11.898zm11.233-5h-11.162l1.259 3h9.056l.847-3zm5.635-5l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z")
-                            span#cart-notification SS
+                            span#cart-notification(ng-if="cart_items.length > 0") SS
             .logo-hormid.top-row-buffer-50
                 img.logo-img(src='../../public/images/SSSTIy-Red.png', alt='Stay Savage Logo')
             
@@ -46,16 +82,19 @@ html(lang='en', ng-app="itemApp", ng-controller="ItemController")
                                         span#item-showcase-price ${{item.pricing.price | number:2}}
                                             hr#price-rule
                                     .select-color
-                                        select(ng-model="selectedVariation" ng-options="variation as (variation.variationColor | uppercase) for variation in item.variations")
+                                        select(ng-model="selectedVariation" ng-options="variation as (variation.variationColor | uppercase) for variation in item.variations" ng-change="selectedSize = selectedVariation.stockLevels[0]")
                                     .size-picker-label
                                         span Size
                                     .select-size
                                         .size-input-container(ng-repeat="sizeOption in selectedVariation.stockLevels")
-                                            input.size-radio(type="radio", name="item-size")
+                                            input.size-radio(type="radio", name="item-size" ng-model="$parent.selectedSize" ng-value="sizeOption")
                                             .size-radio-tile
                                                 label.size-radio-label {{sizeOption.size | uppercase}}
-                                    .add-to-cart
-                                        button#add-to-cart-button ADD TO CART
+                                    .add-to-cart(ng-if="selectedVariation.stockLevels.length > 0")
+                                        a(href="/addvariationtocart/{{item._id}}/{{selectedVariation._id}}/{{selectedSize._id}}")
+                                            button#add-to-cart-button ADD TO CART
+                                    .add-to-cart(ng-if="selectedVariation.stockLevels.length <= 0")
+                                        h1#out-of-stock-warning Sorry! Out of Stock
                                     .item-description
                                         span(ng-bind-html="item.description | newlineToP")
                                         
