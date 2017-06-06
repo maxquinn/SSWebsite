@@ -3,6 +3,7 @@ html(lang='en', ng-app="shopApp")
     head
         meta(charset='UTF-8')
         meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0')
+        meta(name="theme-color" content="#e60722")
         title STAY SAVAGE - Shop
         link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
         link(rel ='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
@@ -12,8 +13,9 @@ html(lang='en', ng-app="shopApp")
         link(rel='icon', href='../public/images/icons/SSfaviconAltBlack.ico')
         script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
         script(src='../public/lib/bootstrap.min.js')
+        script(src="https://js.stripe.com/v3/")
     body.store.ng-cloak(ng-controller="CartController" ng-cloak)
-        - if (message!='')
+        - if (message && message!='')
             .alert.alert-success.fade.in#cart-alert(tabindex="-1")
                 a.close(href='#' data-dismiss='alert') &times;
                 span= message

@@ -12,6 +12,7 @@ html(lang='en', ng-app="shopApp", ng-controller="ItemController")
         link(rel='icon', href='../../public/images/icons/SSfaviconAltBlack.ico')
         script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
         script(src='../../public/lib/bootstrap.min.js')
+        script(src="https://js.stripe.com/v3/")
     body.store.product-page-body.ng-cloak(ng-controller="CartController" ng-cloak)
         #cart-drawer(tabindex="-1")
             header.cart-drawer-top
@@ -72,7 +73,8 @@ html(lang='en', ng-app="shopApp", ng-controller="ItemController")
                     .row
                         .col-sm-7
                             .item-photo-pane
-                                img(ng-src='../../public/images/products/{{selectedVariation.variationImage}}')#item-showcase-photo
+                                a(href="")
+                                    img(ng-src='../../public/images/products/{{selectedVariation.variationImage}}')#item-showcase-photo
                         .col-sm-5
                             .item-text-pane
                                 .item-title
@@ -95,9 +97,12 @@ html(lang='en', ng-app="shopApp", ng-controller="ItemController")
                                             button#add-to-cart-button ADD TO CART
                                     .add-to-cart(ng-if="selectedVariation.stockLevels.length <= 0")
                                         h1#out-of-stock-warning Sorry! Out of Stock
-                                    .item-description
+                                    .item-description(ng-if="item.description")
                                         span(ng-bind-html="item.description | newlineToP")
                                         
+        .image-zoom
+            img(src='')
+
         //-----------
         //- Scripts--
         //-----------

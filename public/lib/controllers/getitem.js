@@ -62,11 +62,32 @@ angular.module('shopApp').controller('CartController', ['$http', '$scope', funct
 
     $scope.updateCartStats = function () {
         $http.get('/session-cart-to-scope').then(function (res) {
-            $scope.cart_session_qty = res.data.totalQty;
-            $scope.cart_session_price = res.data.totalPrice;
+            if (res.data === null) {
+                $scope.cart_session_qty = 0;
+                $scope.cart_session_price = 0;
+            }
+            else {
+                $scope.cart_session_qty = res.data.totalQty;
+                $scope.cart_session_price = res.data.totalPrice;
+            }
         });
+    };
+
+    $scope.getShippingCost = function () {
+        if ($scope.selectedCoutry == 'NZL') {
+            $scope.shippingCost = 6.5;
+        }
+        else {
+            $scope.shippingCost = 18;
+        }
+
     };
 
     $scope.updateCart();
     $scope.updateCartStats();
+
+    if ($('#payments-page')) {
+        $scope.selectedCoutry = 'NZL';
+        $scope.getShippingCost();
+    }
 }]);
