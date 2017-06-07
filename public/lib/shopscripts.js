@@ -32,11 +32,11 @@ $("#page-container").on("mousedown touchstart", function (e) {
     }
 });
 
-$("#cart-alert").focus();
-
-$("#cart-alert").blur(function () {
-    $(".alert").alert('close');
-});
+window.setTimeout(function() {
+  $(".flash").fadeTo(500, 0).slideUp(500, function(){
+      $(this).remove();
+  });
+}, 5000);
 
 if (!isMobile()) {
     $(function () {

@@ -227,8 +227,3 @@ if ($(".artist-page").length > 0) {
     //sticky social module END ------------------------------------------
 }
 
-
-// if ($("#kvka").length > 0) {
-// //artist showcase photo container adjustment (desktop only)
-//     adjustDoublePhotos($('.dblphoto1'), $('.dblphoto2'));
-// }

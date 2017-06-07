@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto" );
+
 @font-face {
     font-family: LAMEBRAINS;
     src: url(../fonts/LAMEBRAINS.ttf);
@@ -1068,4 +1070,174 @@ h1 {
 .ng-hide-remove      { 
   -webkit-animation:0.5s fadeInLeft ease; 
   animation:0.5s fadeInLeft ease; 
+}
+
+/*-----------------------*/
+/*---Admin Shop Page----*/
+/*-----------------------*/
+
+.inventory-form {
+    font-family: 'roboto';
+}
+
+/*-----------------------*/
+/*---Admin Order Page----*/
+/*-----------------------*/
+
+.order-sheet {
+    font-family: 'roboto';
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+/* when hiding the thing */
+.order-more-details.ng-hide-add         { 
+  -webkit-animation:0.5s fadeOutUp ease; 
+  animation:0.5s fadeOutUp ease; 
+}
+
+/* when showing the thing */
+.order-more-details.ng-hide-remove      { 
+  -webkit-animation:0.5s fadeInDown ease; 
+  animation:0.5s fadeInDown ease; 
+}
+
+.order-click {
+    color: black;
+}
+
+.order-click:hover {
+    text-decoration: none;
+    color: #4662AA;
+}
+
+.order-click:hover>.order-header {
+    background-color: #e2e2e2;
+}
+
+@media (max-width: 900px) {
+    .order-header {
+        flex-direction: column;
+    }
+    .order-header > span {
+        text-align: left!important;
+    }
+}
+
+.order-header {
+    width: 100%;
+    min-height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    background-color: lightgray;
+    border-radius: 2px;
+    display: flex;
+}
+
+.order-header > span:last-child {
+    text-align: right;
+}
+
+.order-header > span {
+    flex: 1;
+}
+
+.order-more-details {
+    background-color: lightgray;
+    padding: 20px 20px;
+}
+
+.customer-details-table,
+.customer-cart-table {
+    width: 100%;
+}
+
+.customer-cart-table th,
+.customer-cart-table td {
+    border: 1px solid black;
+    padding: 0.5rem;
+    text-align: left;
+}
+
+.complete-order {
+    overflow: hidden;
+}
+
+.complete-order-button {
+    float: right;
+}
+
+.payment-id {
+    font-size: 12px;
+}
+
+/*-----------------------*/
+/*---Admin Stock Page----*/
+/*-----------------------*/
+
+.stock-image-thumbnail {
+    max-height: 100px;
+}
+
+.more-stock-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.more-stock-details-base {
+    display: flex;
+    flex-direction: row;
+}
+
+.more-stock-details *,
+.more-stock-details-base * {
+    flex: 1;
+}
+
+.variation-stock-details {
+    margin: 0 25px;
+    display: flex;
+    border-bottom: 1px solid black;
+}
+
+.variation-stock-details * {
+    flex: 1;
+}
+
+.stock-footer {
+    padding: 20px 25px;
+    display: flex;
+}
+
+.stock-footer * {
+    flex: 1;
+}
+
+.delete-button-container {
+    overflow: hidden;
+}
+
+.delete-button {
+    float: right;
+}
+
+#admin-alert {
+    z-index: 99999;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    min-width: 250px;
+    max-width: 400px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    border: none;
+    outline: none;
+    background-color: #f2f2f2;
+    color: black;
+    opacity: 0.8;
+    transition: all .5s ease;
+}
+
+#admin-alert:hover {
+    opacity: 1;
 }

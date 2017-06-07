@@ -5,7 +5,7 @@
                 <u>ADD AN ITEM TO THE SHOP</u>
             </h1>
         </a>
-        <form name="addInventoryForm" id="inventory-form form-horizontal" ng-show="itemForm">
+        <form class="inventory-form" name="addInventoryForm" id="inventory-form form-horizontal" ng-show="itemForm">
 
             <div class="form-group">
                 <label for="generalInfo">General Information</label>
@@ -16,18 +16,18 @@
                 <textarea class="form-control" ng-model="productObj.prodDescription" rows="5" form="inventory-form" name="productDescription"
                     placeholder="Product Description (Max 500 char.)" maxlength="500" autocomplete="off" />
                 <br>
-                <input class="form-control" ng-model="productObj.secretID" type="text" name="productTitle" placeholder="Secret ID (Leave blank normally)" autocomplete="off"
-                />
+                <input class="form-control" ng-model="productObj.secretID" type="text" name="productTitle" placeholder="Secret ID (Leave blank normally)"
+                    autocomplete="off" />
             </div>
 
             <div class="form-group">
                 <label for="pricingInfo">Pricing Information</label>
-                <div class="input-group col-sm-2">
+                <div class="input-group col-sm-3">
                     <span class="input-group-addon">$</span>
                     <input class="form-control" ng-model="productObj.prodPricing.basePrice" type="number" name="productBasePrice" placeholder="Base Price"
                         autocomplete="off" />
                 </div>
-                <div class="input-group col-sm-2">
+                <div class="input-group col-sm-3">
                     <span class="input-group-addon">%</span>
                     <input class="form-control" ng-model="productObj.prodPricing.discountPercentage" type="number" name="productDiscountPrice"
                         placeholder="Discount Percentage" autocomplete="off" />
@@ -42,7 +42,8 @@
 
             <div class="form-group" ng-show="productObj.prodHasVariations == false">
                 <label>Add a product image</label>
-                <input type="file" ng-model="productObj.filename" hidden accept="image/x-png,image/gif,image/jpeg" file-model="photoFile" custom-file-input></label>
+                <input type="file" ng-model="productObj.filename" hidden accept="image/x-png,image/gif,image/jpeg" file-model="photoFile"
+                    custom-file-input></label>
             </div>
 
             <div class="form-group" ng-show="productObj.prodHasVariations == false">
@@ -93,8 +94,46 @@
             <input type="submit" id="submit" value="Submit" ng-click="submitProduct()" />
         </form>
     </div>
-
-    <h1>
-        <u>CURRENT SHOP OVERVIEW</u>
-    </h1>
+    <div class="manage-stock" ng-controller="ManageStockController">
+        <div class="alert alert-success fade in" id="admin-alert" ng-show="notification">
+            <a ng-click="notification = !notification" class="close">&times;</a>
+            <span>{{message}}</span>
+        </div>
+        <h1>
+            <u>CURRENT SHOP OVERVIEW</u>
+        </h1>
+        <div class="order-sheet" ng-repeat="product in stockArray">
+            <a class="order-click" ng-click="details = !details">
+                <div class="order-header">
+                    <span><img class="stock-image-thumbnail" ng-src="../public/images/products/{{product.image}}"></span>
+                    <span>{{product.title}}</span>
+                    <span>${{product.pricing.price | number:2}}</span>
+                </div>
+            </a>
+            <div class="order-more-details" ng-show="details">
+                <h3>
+                    Product Details
+                </h3>
+                <div class="more-stock-details-base" ng-if="!product.hasVariation">
+                    <span>Unique</span>
+                    <span>Stock: <input type="number" ng-model="product.stock"></span>
+                </div>
+                <div class="more-stock-details" ng-if="product.hasVariation" ng-repeat="variation in product.variations">
+                    <h4>{{variation.variationColor}}</h4>
+                    <div class="variation-stock-details" ng-repeat="sizing in variation.stockLevels">
+                        <span>Size: {{sizing.size}}</span>
+                        <span>Stock: <input type="number" ng-model="sizing.stock"></span>
+                    </div>
+                </div>
+                <div class="stock-footer">
+                    <div>
+                        <button ng-click="updateStock(product)">Save Changes</button>
+                    </div>
+                    <div class="delete-button-container">
+                        <button class="delete-button" ng-confirm-click="Are you sure to delete this item?" confirmed-click="deleteShopItem(product._id)">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

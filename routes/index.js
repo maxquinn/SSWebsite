@@ -297,7 +297,7 @@ router.post('/shop/checkout', function (req, res) {
     var cart = new Cart(req.session.cart);
     // Set your secret key: remember to change this to your live secret key in production
     // See your keys here: https://dashboard.stripe.com/account/apikeys
-    var stripe = require("stripe")("sk_test_mL1X4dhAyGNhJ1bOLWxPW5A5");
+    var stripe = require("stripe")("sk_test_FF15LDRffzdXem3srpqXMy9Z");
 
     // Token is created using Stripe.js or Checkout!
     // Get the payment token submitted by the form:

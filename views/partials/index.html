@@ -1,3 +1,57 @@
-<div>
-    <h1>{{title}}</h1>
+<div id="manage-media" ng-controller="ManageOrders">
+    <h1>
+        <u>ADMIN HOME</u>
+    </h1>
+    <h2>
+        Current Orders:
+    </h2>
+    <div class="order-sheet" ng-repeat="order in ordersArray">
+        <a class="order-click" ng-click="details = !details">
+            <div class="order-header">
+                <span>Ordered at: {{order.createdAt | date : 'hh:mma, d MMM' }}</span>
+                <span>Customer Name: {{order.name}}</span>
+                <span>Order item Quantity: {{order.cart.totalQty}}</span>
+            </div>
+        </a>
+        <div class="order-more-details" ng-show="details">
+            <h3>
+                Customer Details
+            </h3>
+            <table class="customer-details-table">
+                <tr>
+                    <td>Name: {{order.name}}</td>
+                </tr>
+                <tr>
+                    <td>Email: {{order.email}}</td>
+                </tr>
+                <tr>
+                    <td>Address: {{order.address}}</td>
+                </tr>
+            </table>
+            <hr>
+            <h3>
+                Order Details
+            </h3>
+            <table class="customer-cart-table">
+                <tr>
+                    <th>Item</th>
+                    <th>Qty</th>
+                </tr>
+                <tr ng-repeat="(key, value) in order.cart.items">
+                    <td>{{value.item.title}}<span ng-if="value.item.hasVariation"> - {{value.item.variations[0].variationColor}}, Size {{value.item.variations[0].stockLevels[0].size}}</span></td>
+                    <td>{{value.qty}}</td>
+                </tr>
+            </table>
+            <hr>
+            <h3>
+                Payment Details
+            </h3>
+            <p>Total amount paid: ${{order.totalPaid | number:2}}</p>
+            <p>Payment ID reference: <span class="payment-id">{{order.paymentId}}</span></p>
+            <div class="complete-order">
+                <button class="complete-order-button" ng-click="completeOrder(order._id); reloadRoute()">Order Complete</button>
+            </div>
+        </div>
+    </div>
+
 </div>

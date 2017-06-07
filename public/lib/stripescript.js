@@ -41,6 +41,7 @@ function setOutcome(result) {
             errorElement.textContent = "Sorry there was a stock discrepancy! Your cart has been updated to reflect current stock levels. Payment has not been processed - Please try again...";
             errorElement.classList.add('visible');
             submitButton.prop('disabled', false);
+            buttonActive();
           }
           else if (xhr.status === 202) {
             stockTaken = true;
@@ -52,6 +53,7 @@ function setOutcome(result) {
             errorElement.textContent = "There was an unknown error, please refresh the page - You have not been charged.";
             errorElement.classList.add('visible');
             submitButton.prop('disabled', false);
+            buttonActive();
           }
         });
     }
@@ -64,6 +66,7 @@ function setOutcome(result) {
     errorElement.textContent = result.error.message;
     errorElement.classList.add('visible');
     submitButton.prop('disabled', false);
+    buttonActive();
   }
 }
 
@@ -76,6 +79,7 @@ document.querySelector('#payment-form').addEventListener('submit', function (e) 
   var form = document.querySelector('form');
   var submitButton = $('#pay-button');
   submitButton.prop('disabled', true);
+  buttonProcessing();
   var extraDetails = {
     name: form.querySelector('input[name=cardholder_name]').value,
     email: form.querySelector('input[name=cardholder_email]').value,
@@ -87,3 +91,13 @@ document.querySelector('#payment-form').addEventListener('submit', function (e) 
   };
   stripe.createToken(card, extraDetails).then(setOutcome);
 });
+
+function buttonProcessing() {
+  $('#show-price').hide();
+  $('#show-processing').show();
+}
+
+function buttonActive() {
+  $('#show-processing').hide();
+  $('#show-price').show();
+}

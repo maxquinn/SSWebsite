@@ -18,6 +18,12 @@ html(lang='en', ng-app="shopApp")
             .alert.alert-success.fade.in#cart-alert(tabindex="-1")
                 a.close(href='#' data-dismiss='alert') &times;
                 span= message
+        .container-fluid
+                .store-top-bar.row
+                    .col-xs-3.home-button
+                        a(href="/shop")
+                            span.fa.fa-long-arrow-left
+                            span.hidden-xs   Shop
         .logo-hormid.top-row-buffer-50
                 img.logo-img(src='../../public/images/SSSTIy-Red.png', alt='Stay Savage Logo')
         .container-fluid
@@ -59,7 +65,7 @@ html(lang='en', ng-app="shopApp")
                                     td {{cart_session_price + shippingCost | number:2}}
 
                 .col-md-8.col-md-pull-4
-                    #payment-form-container
+                    #payment-form-container(ng-controller="PaymentController")
                         form#payment-form(action='/shop/checkout', method="post")
                             h1 Personal
                             .payment-form-group
@@ -334,7 +340,9 @@ html(lang='en', ng-app="shopApp")
                                 label
                                     span Card
                                     #card-element.field
-                            button#pay-button(type='submit') Pay ${{cart_session_price + shippingCost| number:2}}
+                            button#pay-button(type='submit') 
+                                span#show-price Pay ${{cart_session_price + shippingCost| number:2}}
+                                span#show-processing(hidden) Processing
                             .payment-outcome
                                 .payment-error(role='alert')
                                     span.token

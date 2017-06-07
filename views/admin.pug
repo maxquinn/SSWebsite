@@ -272,7 +272,70 @@ html(ng-app="adminApp" ng-controller="PageViewController")
                 init();
             });
 
+            app.controller('ManageOrders', function($scope, $http, $route) {
+                $http.get('/admin/orders.json').then(function (res) {
+                    $scope.ordersArray = res.data;
+                });
+
+                $scope.completeOrder = function(id) {
+                    $http.delete('/admin/completeorder/' + id)
+                    .success(function(response) {
+                        console.log(response);
+                    }).error(function(response) {
+                        console.log(response);
+                    })
+                }
+
+                $scope.reloadRoute = function() {
+                    $route.reload();
+                }
+            });
+
+            app.controller('ManageStockController', function($scope, $http, $route) {
+                $scope.notification = false;
+                $http.get('/admin/stock.json').then(function (res) {
+                    $scope.stockArray = res.data
+                });
+
+                $scope.updateStock = function(productToUpdate) {
+                    $scope.notification = false;
+                    $http.put('/admin/updatestock', {product: productToUpdate})
+                    .success(function(response) {
+                        $scope.notification = true;
+                        $scope.message = response.message;
+                    }).error(function(response) {
+                        $scope.notification = true;
+                        $scope.message = response.message;
+                    })
+                };
+
+                $scope.deleteShopItem = function(idToDelete) {
+                    $http.delete('/admin/deleteitem/' + idToDelete)
+                    .success(function(response) {
+                        $scope.notification = true;
+                        $scope.message = response.message;
+                    }).error(function(response) {
+                        $scope.notification = true;
+                        $scope.message = response.message;
+                    })
+                };
+            });
+
             //Directives
+            app.directive('ngConfirmClick', [function () {
+                return {
+                    link: function (scope, element, attr) {
+                        var msg = attr.ngConfirmClick || "Are you sure?";
+                        var clickAction = attr.confirmedClick;
+                        element.bind('click',function (event) {
+                            if ( window.confirm(msg) ) {
+                                scope.$eval(clickAction)
+                            }
+                        });
+                    }
+                };
+            }]);
+
             app.directive('customFileInput', [function () {
                 return {
                     require: "ngModel",

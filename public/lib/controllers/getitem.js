@@ -17,6 +17,12 @@ angular.module('shopApp').controller('ProductsController', ['$http', '$scope', f
     $http.get('./shop.json').then(function (res) {
         $scope.productsArr = res.data;
     });
+
+    $scope.search = function (item) {
+        return (angular.lowercase(item.description).indexOf(angular.lowercase($scope.query) || '') !== -1 ||
+                angular.lowercase(item.title).indexOf(angular.lowercase($scope.query) || '') !== -1 ||
+                angular.lowercase(item.category).indexOf(angular.lowercase($scope.query) || '') !== -1);
+    };
 }]);
 
 angular.module('shopApp').controller('ItemController', ['$http', '$scope', '$location', function ($http, $scope, $location) {
@@ -90,4 +96,8 @@ angular.module('shopApp').controller('CartController', ['$http', '$scope', funct
         $scope.selectedCoutry = 'NZL';
         $scope.getShippingCost();
     }
+}]);
+
+angular.module('shopApp').controller('PaymentController', ['$scope', function ($scope) {
+    
 }]);

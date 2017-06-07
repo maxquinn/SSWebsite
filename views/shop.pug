@@ -16,7 +16,7 @@ html(lang='en', ng-app="shopApp")
         script(src="https://js.stripe.com/v3/")
     body.store.ng-cloak(ng-controller="CartController" ng-cloak)
         - if (message && message!='')
-            .alert.alert-success.fade.in#cart-alert(tabindex="-1")
+            .alert.alert-success.fade.in.flash#cart-alert(tabindex="-1")
                 a.close(href='#' data-dismiss='alert') &times;
                 span= message
         #cart-drawer(tabindex="-1")
@@ -66,7 +66,7 @@ html(lang='en', ng-app="shopApp")
                     .col-xs-5.hidden-xs
                     .search-bar.col-xs-3
                         i#search-label.fa.fa-search.pull-right
-                        input(type="search", placeholder="Search...", onfocus="this.placeholder = ''", onblur="this.placeholder = 'Search...'")#search-box.pull-right
+                        input(ng-model="query" type="search", placeholder="Search...", onfocus="this.placeholder = ''", onblur="this.placeholder = 'Search...'")#search-box.pull-right
                     .cart-icon.col-xs-1
                         a#cart-button(onclick="openCartDrawer()")
                             svg(xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24")#cart-icon.pull-left
@@ -77,7 +77,7 @@ html(lang='en', ng-app="shopApp")
             .products-showcase.top-row-buffer-50(ng-controller="ProductsController")
                 .container-fluid
                     .row
-                        div(ng-repeat="product in productsArr")
+                        div(ng-repeat="product in productsArr | filter: search")
                             a(href="/shop/products/{{product._id}}").product-tile
                                 .col-xs-12.col-sm-6.col-md-6.col-lg-4.bot-row-buffer-50
                                     .product-thumbnail
@@ -86,7 +86,6 @@ html(lang='en', ng-app="shopApp")
                                     .product-thumbnail-price ${{product.pricing.price | number:2}}
                                 .clearfix.visible-lg(ng-if="($index + 1) % 6 == 0")
                                 .clearfix.visible-md(ng-if="($index + 1) % 4 == 0")
-                                .clearfix.visible-sm(ng-if="($index + 1) % 3 == 0")
                                 .clearfix.visible-xs(ng-if="($index + 1) % 2 == 0")
 
         

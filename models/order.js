@@ -8,6 +8,7 @@ var orderSchema = new mongoose.Schema({
     paymentId: {type: String, required: true},
     totalPaid: {type: Number, required: true}
 },
+    {timestamps: true},
     {collection : 'orders'});
 
 module.exports = mongoose.model('Order', orderSchema);
