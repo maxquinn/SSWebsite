@@ -4,24 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000000">
     <title>Stay Savage</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../public/styles/SStyle.css">
-    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="icon" href="../public/images/icons/SSfaviconAltBlack.ico">
+    <link rel="stylesheet" href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="../public/lib/contentscript.js"></script>
     <script src="../public/lib/bootstrap.min.js"></script>
     <script src="../public/lib/fades.js"></script>
 </head>
 
-<body>
-    <div class="se-pre-con"></div>
-    <div class="ultimate">
-        <div class="topshit js-list-item js-current-panel">
+<body id="home">
+    <div id="home-ultimate" class="ultimate">
+        <div class="topshit rellax" data-rellax-speed="3">
             <a href="/">
-                <img src=../public/images/SSSTIy.png alt="Stay Savage Logo">
-            </a>
+                    <img src=../public/images/SSSTIy.png alt="Stay Savage Logo">
+                </a>
 
             <!--Top logo bar-->
 
@@ -30,91 +29,44 @@
                     <button type="button" class="navbar-toggle collapsed pull-left" data-toggle="collapse" data-target="#nav-names"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                     <div class="collapse navbar-collapse container" id="nav-names">
                         <ul class="nav navbar-nav navbar-custom">
-                            <li class="active"><a class="nav-link-a nav-media" href="#media">Media</a></li>
-                            <li><a id="shopID" class="nav-link-a nav-shop" href="#shop">Shop</a></li>
-                            <li><a href="/kvka">KVKA</a></li>
-                            <li><a href="#">Denz1</a></li>
-                            <li><a href="/samgat">Samuel Gatara</a></li>
-                            <li><a href="#">D Argue</a></li>
+                            <li><a href="/shop">Shop</a></li>
+                            <li><a href="/KVKA">KVKA</a></li>
+                            <li><a href="/DENZ1">Denz1</a></li>
+                            <li><a href="/Samuel-Gatara">Samuel Gatara</a></li>
+                            <li><a href="/David-Argue">D Argue</a></li>
+                            <li><a href="/Contact">Contact</a></li>
                         </ul>
                     </div>
                 </nav>
             </div>
             <!--Navigation bar-->
-
-            <div class="anchor-navigation">
-                <a class="ion-chevron-up js-prev" href="#"></a>
-                <a class="ion-chevron-down js-next" href="#"></a>
-            </div>
-            <!--Jump to anchor controls-->
+            <video class="video" id="video-unawareglossybullfrog" autoplay="" loop="" muted="" playsinline="" preload="true" poster="https://thumbs.gfycat.com/UnawareGlossyBullfrog-mobile.jpg"
+                data-reactid="106">
+                <source src="https://thumbs.gfycat.com/UnawareGlossyBullfrog-mobile.mp4" type="video/mp4" data-reactid="107">
+                <source src="https://fat.gfycat.com/UnawareGlossyBullfrog.webm" type="video/webm" data-reactid="108">
+                <source src="https://giant.gfycat.com/UnawareGlossyBullfrog.mp4" type="video/mp4" data-reactid="109">
+            </video>
         </div>
 
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div class="top-content-block container">
-            <div class="row">
-                <div class="col-sm-3"></div>
-                <div class="col-sm-6">
-                    <div class="feature-container">
-                        <div class="imagecontainer">
-                            <img src="../public/images/outlierz.jpg" alt="Outliers Album Cover">
-                            <div class="imgoverlay">
-                                <div class="textoverlay">
-                                    Outliers EP Out Now
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                        <br>
-                        <iframe src="https://embed.spotify.com/?uri=spotify%3Aalbum%3A1MuKD09XIgsn2ZHFIgRgth" frameborder="0" allowtransparency="true"></iframe>
-                    </div>
-                </div>
-                <div class="col-sm-3"></div>
+        <div class="contact-body">
+            <div>
+                A savage collective of music producers, designers, MC's, photographers and videographers.
             </div>
-        </div>
-        <!--This is the first content block under the nav bar-->
-
-        <div id="media" class="content-block-1 js-list-item">
-            <div id="media-feature" class="container">
-                <h1 class="main-headers">Bad Angel</h1>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="inner-content-container">
-                            <iframe src="https://www.youtube.com/embed/fsunK9O1Eeg?dark" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div id="media-writeup" class="col-sm-6">
-                        <p>
-                            KVKA & DENZ1 <br> Starring.. <br>KVKA <br> Isabella Garraway <br> DENZ1 <br> Directed by Samuel
-                            Gatara
-                            <br> Asst Direction by David Argue <br>
-                        </p>
-                    </div>
-                </div>
+            <div>
+                Together we are STAY SAVAGE
             </div>
 
-            <div class="row">
-                <div id="media-footer" class="col-sm-12">
-                    <a href="/media">More Media</a>
-                </div>
-            </div>
         </div>
-        <!--Feature.html-->
-        <div id="shop" class="shop-block js-list-item">
-            <a href="http://www.stay-savage.com/products">SHOP</a>
 
+        <div id="home-ss-logo" class="col-sm-12">
+            <img src="../public/images/backgrounds/whitess.png" alt="Stay Savage">
         </div>
-        <!--Shop.html-->
 
-        <div class="crew-block js-list-item">
-            <h1 class="main-headers">SQUAD</h1>
+        <div id="media-footer" class="col-sm-12">
+            <a href="/media">More Media</a>
         </div>
-        <!--Crew.html-->
+
     </div>
-    <!--Page Container Div-->
 </body>
 
 </html>

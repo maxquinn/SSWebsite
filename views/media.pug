@@ -7,13 +7,13 @@ block pageContent
 		br
 		br
 		br
-	.fluid-container
+	.container-fluid
 		.row
 			.col-sm-2
 			.col-sm-8#midColMedia(ng-controller="MediaController")
 				ul.data#scroller(infinite-scroll="mediaPostsArr.loadMore()" infinite-scroll-disabled="mediaPostsArr.busy")
 					.post-block
-						.datacontainer.row.not-visible(ng-repeat="post in mediaPostsArr.items" when-visible="animateElementIn"  when-not-visible="animateElementOut" delay-percent="0.50")
+						.datacontainer.row(ng-repeat="post in mediaPostsArr.items")
 							li.datafiles
 								span.main-headers#media-title {{post.title | uppercase}}
 								br

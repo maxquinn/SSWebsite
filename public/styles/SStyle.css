@@ -66,6 +66,7 @@ html {
     padding-top: 20px;
     padding-left: 20px;
     position: relative!important;
+    height: auto;
 }
 
 @media (max-width: 440px) {
@@ -77,10 +78,6 @@ html {
 
 #adminNav>li {
     width: 33%;
-}
-
-.navigation {
-    height: 100px;
 }
 
 .navbar {
@@ -160,47 +157,21 @@ html {
     font-size: 400%;
 }
 
+.navigation {
+    overflow: hidden;
+    height: auto;
+}
+
 .top-content-block {
     height: auto;
     width: 100%;
     margin-bottom: 30px;
 }
 
-.content-block-1 {
-    width: 100%;
-    height: auto;
-    overflow: hidden;
-}
-
-.main-headers {
-    font-family: LAMEBRAINS;
-    text-align: center;
-    color: white;
-    font-size: 900%;
-    text-shadow: -2px 2px 0px rgb(68, 68, 68);
-    padding-bottom: 50px;
-}
-
-@media (max-width: 700px) {
-    .main-headers {
-        font-size: 500%;
-    }
-
-    #media-writeup>p {
-        font-size: 5vw!important;
-    }
-}
-
-#media-writeup>p {
-    line-height: 85%;
-    display: inline-block;
-    color: white;
-    font-family: BebasNeue;
-    font-size: 50px;
-}
-
 #media-footer {
-    float: right;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
 }
 
 #media-footer>a {
@@ -211,14 +182,23 @@ html {
     float: right;
 }
 
-.shop-block {
-    clear: both;
-    width: 100%;
-    height: 100vh!important;
-    background: url("../images/backgrounds/SHOP-BACKGROUND-IMAGE.jpg") no-repeat center center fixed;
-    background-size: cover;
-    text-align: center;
-    overflow: hidden;
+#home-ss-logo {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+
+#home-ss-logo > img {
+    max-width: 200px;
+}
+
+@media (max-width: 700px) {
+    #media-footer>a {
+        font-size: 20px;
+    }
+    #home-ss-logo > img {
+        max-width: 100px;
+    }
 }
 
 .shop-block>a {
@@ -231,21 +211,12 @@ html {
     text-shadow: -2px 2px 0px rgb(0, 0, 0);
 }
 
-.shop-block>a:hover {
-    color: #4662AA;
-    font-size: 1500%;
-}
-
-.crew-block {
-    clear: both;
-    width: 100%;
-    height: 100vh;
-}
 
 #media-title {
     font-family: TrumpGothicEastBoldItalic;
     font-size: 400%;
     letter-spacing: 2px;
+    color: white;
 }
 
 .datacontainer {
@@ -262,49 +233,6 @@ html {
 .media-dateTime {
     float: left;
     color: lightgray;
-}
-
-.anchor-navigation {
-    position: fixed;
-    z-index: 999;
-    top: 50%;
-    bottom: 50%;
-    right: 0px;
-    height: 100px;
-    width: 40px;
-}
-
-.ion-chevron-up {
-    color: darkgray;
-    font-size: 32px;
-    position: absolute;
-    top: 0px;
-}
-.ion-chevron-up:hover {
-    color: white;
-}
-
-.ion-chevron-up:focus {
-    color: darkgrey;
-}
-
-.ion-chevron-down {
-    color: darkgray;
-    font-size: 32px;
-    position: absolute;
-    bottom: 0px;
-}
-
-.ion-chevron-down:hover {
-    color: white;
-}
-
-.ion-chevron-down:focus {
-    color: darkgray;
-}
-
-#html-kvka {
-    font-size: 62.5%;
 }
 
 @media (max-width: 500px) {
@@ -341,27 +269,10 @@ html {
     size: cover;
 }
 
-
-
 .kvka-logo {
     width: 100%;
     padding-top: 500px; 
-}
-
-.logo-fadein {
-    -webkit-animation: animat_show 2s;
-    animation: animat_show 2s;
-    visibility: visible !important;
-}
-
-@keyframes animat_show{
-    0%{opacity:0}
-    100%{opacity:1}
-}
-
-@-webkit-keyframes animat_show{
-    0%{opacity:0}
-    100%{opacity:1}
+    z-index: 1000;
 }
 
 #kvka-writeup-block {
@@ -387,28 +298,6 @@ html {
     .kvka-text {
         font-size: 170%;
     }
-}
-
-.hvr-sink {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  /*-webkit-backface-visibility: hidden;*/
-  /*backface-visibility: hidden;*/
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-property: transform;
-  transition-property: transform;
-  -webkit-transition-timing-function: ease-out;
-  transition-timing-function: ease-out;
-}
-
-.hvr-sink:hover, .hvr-sink:focus, .hvr-sink:active {
-  -webkit-transform: translateY(8px);
-  transform: translateY(8px);
 }
 
 h1 {
@@ -440,54 +329,52 @@ h1 {
   vertical-align: middle;
 }
 
- .modal-header {
+.modal-header {
   border-bottom: none;
   background-color: black;
-  }
+}
 
-  .modal-content {
-      background-color: black;
-  }
+.modal-content {
+    background-color: black;
+}
 
-  .post-description {
-      text-align: left;
-      font-family: BebasNeue;
-      letter-spacing: 2px;
-      font-size: 15px;
-      color: lightgray;
-  }
+.post-description {
+    text-align: left;
+    font-family: 'roboto';
+    letter-spacing: 2px;
+    font-size: 15px;
+    color: lightgray;
+}
+.collapse.in {
+    display: inline;
+}
 
-  .collapse.in {
-      display: inline;
-  }
+.post-block {
+    width: 100%;
+}
 
-  .post-block {
-      width: 100%;
-  }
-  
-  .inner-content-container {
-      position: relative;
-      width: 100%;
-      height: 0;
-      padding-bottom: 61%;
-  }
+.collapse-text-toggle {
+    color: #4662AA;
+}
+.collapse-text-toggle:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
 
-  .inner-content-container>iframe {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      left: 0;
-      top: 0;
-  }
+.inner-content-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 61%;
+}
 
-  .collapse-text-toggle {
-      color: #4662AA;
-  }
-
-  .collapse-text-toggle:hover {
-      text-decoration: underline;
-      cursor: pointer;
-  }
+.inner-content-container>iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
 
 @media (max-width: 700px) {
     #media-title {
@@ -597,20 +484,6 @@ h1 {
     background-color: #d65a57;
 }
 
-.imagecontainer {
-    cursor: pointer;
-}
-
-.feature-container>.imagecontainer>img {
-    width: 100%;
-    vertical-align: top;
-}
-
-.feature-container>iframe {
-    width: 100%; 
-    height: 400px;
-}
-
 .imgoverlay {
     opacity: 0;
     height: auto;
@@ -631,17 +504,10 @@ h1 {
     transition: all .8s ease;
 }
 
-.imagecontainer {
-    position: relative;
-}
-
-.imagecontainer:hover .imgoverlay {
-    opacity: 1;
-}
-
-.textoverlay {
-    font-family: TrumpGothicEastBoldItalic;
-    font-size: 26px;
+.main-headers {
+    font-family: 'LAMEBRAINS';
+    color: white;
+    font-size: 60px;
 }
 
 .not-visible {
@@ -811,6 +677,7 @@ h1 {
     animation-name: socialFadeIn;
     animation-duration: 0.5s;
     animation-fill-mode: both;
+    height: auto;
 }
 
 @media only screen and (max-width: 500px) {
@@ -1052,11 +919,11 @@ h1 {
     }
 
     #kvka-sc-1 {
-        top: 0;
+        top: 0!important;
     }
 
     #kvka-sc-2 {
-        top: 0;
+        top: 0!important;
     }
 }
 
@@ -1240,4 +1107,319 @@ h1 {
 
 #admin-alert:hover {
     opacity: 1;
+}
+
+/*-----------------------*/
+/*---David Artist Page---*/
+/*-----------------------*/
+
+#david .navbar-default .nav>li>a {
+    color: #8e8a8d;
+}
+
+#david .navbar-default .nav>li>a:hover {
+    color: pink;
+}
+
+#david .navbar-default .navbar-toggle:hover .icon-bar {
+    background-color: pink;
+}
+
+.instafeed-container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    width: 100%;
+    height: 1500px;
+    padding: 0px;
+    border: none;
+    max-width: 100%;
+    min-width: 180px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    min-height: 200px;
+}
+
+.instafeed-container * {
+    font-family: 'roboto';
+    color: #8e8a8d;
+}
+
+.instafeed-photo {
+    padding: 15px;
+}
+
+.instafeed-photo:hover * {
+    color: pink;
+    text-decoration: none;
+}
+
+.instafeed-photo img{
+    flex: 1;
+    width: 100%;
+}
+
+.instafeed-container::-webkit-scrollbar {
+    width: 0 !important;
+}
+
+#instagram-feed-header {
+    text-align: center;
+}
+
+#instagram-feed-header * {
+    font-family: 'roboto';
+    color: #8e8a8d;
+}
+
+#instagram-feed-header span:first-child {
+    font-size: 18px;
+}
+
+.insta-photo-footer {
+    overflow: hidden;
+}
+
+.insta-photo-footer > span:last-child {
+    float: right;
+}
+
+.insta-photo-footer > span {
+    padding-right: 20px;
+}
+
+#instagram-feed-header span {
+    font-size: 12px;
+}
+
+#ig-hr {
+    margin-bottom: 0;
+}
+
+#david #artist-social-module.fixed {
+    background-image: none;
+}
+
+#david #artist-social-module.mobile-fixed {
+    background-image: linear-gradient(
+        rgba(0,0,0,0.6) 5%, rgba(0,0,0,0.4) 45%, rgba(1,1,1,0)
+    );
+}
+
+#david .svg-icon,
+#david .circle-path,
+#david .arrow-path {
+  color: #8e8a8d;
+  stroke: #8e8a8d;
+}
+
+#david .svg-icon:hover .circle-path{
+  stroke: pink;
+}
+
+#david .svg-icon:hover .arrow-path{
+    stroke: pink;
+}
+
+#david .svg-icon:hover{
+    animation: david-colorwash 450ms linear forwards;
+}
+
+@keyframes david-colorwash {
+  to {
+      color: pink;
+  }
+}
+
+#html-david ::-webkit-scrollbar {
+    width: 7px;
+}
+
+#html-david ::-webkit-scrollbar-track {
+    background-color: ghostwhite;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+#html-david ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    background: rgba(255, 209, 193, 0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+#html-david ::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(255, 209, 193, 0.4); 
+}
+
+/*-----------------------*/
+/*---DENZ1 Artist Page---*/
+/*-----------------------*/
+
+#html-denz1 ::-webkit-scrollbar-track {
+    background-color: #1f150d;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+#html-denz1 ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    background: rgba(252, 133, 2, 0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+#html-denz1 ::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(252, 133, 2, 0.4); 
+}
+
+/*-----------------------*/
+/*----Sam Artist Page----*/
+/*-----------------------*/
+
+#sam .navbar-default .nav>li>a {
+    color: #8e8a8d;
+}
+
+#sam .navbar-default .nav>li>a:hover {
+    color: #c53324;
+}
+
+#sam .navbar-default .navbar-toggle:hover .icon-bar {
+    background-color: #c53324;
+}
+
+#sam #artist-social-module.fixed {
+    background-image: none;
+}
+
+#sam #artist-social-module.mobile-fixed {
+    background-image: linear-gradient(
+        rgba(0,0,0,0.6) 5%, rgba(0,0,0,0.4) 45%, rgba(1,1,1,0)
+    );
+}
+
+#sam .svg-icon,
+#sam .circle-path,
+#sam .arrow-path {
+  color: #8e8a8d;
+  stroke: #8e8a8d;
+}
+
+#sam .svg-icon:hover .circle-path{
+  stroke: #c53324;
+}
+
+#sam .svg-icon:hover .arrow-path{
+    stroke: #c53324;
+}
+
+#sam .svg-icon:hover{
+    animation: sam-colorwash 450ms linear forwards;
+}
+
+@keyframes sam-colorwash {
+  to {
+      color: #c53324;
+  }
+}
+
+#sam #kvka-sc-1 {
+    top: 200px;
+}
+
+#sam #kvka-sc-2 {
+    top: 0px;
+}
+
+#sam .instafeed-photo:hover * {
+    color: #c53324;
+    text-decoration: none;
+}
+
+#html-sam ::-webkit-scrollbar {
+    width: 7px;
+}
+
+#html-sam ::-webkit-scrollbar-track {
+    background-color: ghostwhite;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+#html-sam ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    background: rgba(197, 51, 36, 0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+#html-sam ::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(197, 51, 36, 0.4); 
+}
+
+/*-----------------------*/
+/*------Contact Page-----*/
+/*-----------------------*/
+
+#contact {
+    height: 1vh;
+    overflow: hidden;
+}
+
+.contact-body {
+    text-align: center;
+    padding-top: 100px;
+    color: ghostwhite;
+}
+
+.contact-body * {
+    font-family: 'roboto';
+    font-size: 18px;
+}
+
+.contact-body > div {
+    padding-bottom: 25px;
+}
+
+#home video { 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+    background: url('https://thumbs.gfycat.com/UnawareGlossyBullfrog-mobile.jpg') no-repeat;
+    background-size: cover;
+    transition: 1s opacity;
+}
+
+#home .contact-body {
+    text-align: center;
+    padding-top: 150px;
+    padding-bottom: 200px;
+    color: ghostwhite;
+}
+
+#home .contact-body * {
+    font-family: 'BebasNeue';
+    padding: 15px 32%;
+    font-size: 18px;
+}
+
+@media (max-width: 700px) {
+    #home .contact-body {
+        padding-top: 30px;
+    }
+
+    #home .contact-body * {
+        padding: 15px 5%;
+    }
+}
+
+#home-ultimate {
+    position: relative;
 }

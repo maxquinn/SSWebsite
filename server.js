@@ -1,8 +1,10 @@
 /*jshint esversion: 6 */
 
 var express = require("express");
+var favicon = require('serve-favicon');
 var path = require('path');
 var app = module.exports = express();
+app.use(favicon(path.join(__dirname, 'public', 'images', 'icons', 'SSfaviconAltBlack.ico')));
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var flash = require('connect-flash');

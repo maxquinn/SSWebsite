@@ -3,7 +3,7 @@ html(ng-app="app")
   head
     meta(charset='UTF-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    title Stay Savage
+    title Stay Savage - Media
     link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
     link(rel='stylesheet', type='text/css', href='../public/styles/SStyle.css')
     link(rel='stylesheet', type='text/css', href='../public/styles/animate.css')
@@ -13,8 +13,8 @@ html(ng-app="app")
     script(src='../public/lib/fades.js')
     script(src='../public/lib/bootstrap.min.js')
   body
-    .se-pre-con
     .ultimate
+      img.background-img-tag.rellax(data-rellax-speed="0" src="../public/images/backgrounds/BACKGROUND-IMAGE.jpg")
       .topshit.js-list-item.js-current-panel
         a(href='/')
           img(src='../public/images/SSSTIy.png', alt='Stay Savage Logo')
@@ -27,18 +27,18 @@ html(ng-app="app")
               span.icon-bar
             #nav-names.collapse.navbar-collapse.container
               ul.nav.navbar-nav.navbar-custom
-                li.active
-                  a.nav-link-a.nav-media(href='#media') Media
                 li
-                  a#shopID.nav-link-a.nav-shop(href='#shop') Shop
+                  a(href='/shop') Shop
                 li
-                  a(href='/kvka') KVKA
+                  a(href='/KVKA') KVKA
                 li
-                  a(href='#') Denz1
+                  a(href='/DENZ1') Denz1
                 li
-                  a(href='/samgat') Samuel Gatara
+                  a(href='/Samuel-Gatara') Samuel Gatara
                 li
-                  a(href='#') D Argue
+                  a(href='/David-Argue') D Argue
+                li
+                  a(href='/Contact') Contact
 
       block pageContent
   block body

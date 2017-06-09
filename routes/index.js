@@ -11,12 +11,24 @@ router.get('/', function (req, res) {
     return res.sendFile(path.join(__dirname, '../views', 'index.html'));
 });
 
-router.get('/kvka', function (req, res) {
+router.get('/KVKA', function (req, res) {
     return res.sendFile(path.join(__dirname, '../views', 'kvka.html'));
 });
 
-router.get('/samgat', function (req, res) {
-    return res.sendFile(path.join(__dirname, '../views', 'samgat.html'));
+router.get('/DENZ1', function (req, res) {
+    return res.sendFile(path.join(__dirname, '../views', 'denz1.html'));
+});
+
+router.get('/Samuel-Gatara', function (req, res) {
+    return res.sendFile(path.join(__dirname, '../views', 'samuelgatara.html'));
+});
+
+router.get('/David-Argue', function (req, res) {
+    return res.sendFile(path.join(__dirname, '../views', 'davidargue.html'));
+});
+
+router.get('/Contact', function (req, res) {
+    return res.sendFile(path.join(__dirname, '../views', 'contact.html'));
 });
 
 router.get('/login', function (req, res) {

@@ -1,118 +1,5 @@
-$(window).load(function () {
-    $(".se-pre-con").fadeOut("slow");
-});
-
 function isMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
-
-function logoFadeIn(el) {
-    var windowHeight = $(window).height();
-    $(el).each(function () {
-        var thisPos = $(this).offset().top;
-
-        var topOfWindow = $(window).scrollTop();
-        if (topOfWindow + windowHeight - 200 > thisPos) {
-            $(this).addClass("logo-fadein");
-        }
-    });
-}
-
-function isInViewport(element) {
-    var rect = element.getBoundingClientRect();
-    var html = document.documentElement;
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || html.clientHeight) &&
-        rect.right <= (window.innerWidth || html.clientWidth)
-    );
-}
-
-
-if ($("#fadeScroller").length > 0) {
-    $(document).ready(function () {
-        num1 = document.getElementById('p1');
-        num2 = document.getElementById('p2');
-        num3 = document.getElementById('p3');
-        num4 = document.getElementById('p4');
-        num5 = document.getElementById('p5');
-        num6 = document.getElementById('p6');
-        num7 = document.getElementById('p7');
-        num8 = document.getElementById('p8');
-        num9 = document.getElementById('p9');
-        num10 = document.getElementById('p10');
-        num11 = document.getElementById('p11');
-        num12 = document.getElementById('p12');
-        num13 = document.getElementById('p13');
-        num14 = document.getElementById('p14');
-        backGroundSelector();
-        $(window).scroll(function () {
-            backGroundSelector();
-        });
-    });
-}
-
-function backGroundSelector() {
-    if (isInViewport(num1)) {
-        $('#fadeImage').attr("src", '../public/images/SAM GAT WEB IMAGE/1.jpg');
-        $('#faded').stop().fadeIn(300);
-    }
-    else if (isInViewport(num2)) {
-        $('#fadeImage').attr("src", '../public/images/SAM GAT WEB IMAGE/2.jpg');
-        $('#faded').stop().fadeIn(300);
-    }
-    else if (isInViewport(num3)) {
-        $('#fadeImage').attr("src", '../public/images/SAM GAT WEB IMAGE/3.jpg');
-        $('#faded').stop().fadeIn(300);
-    }
-    else if (isInViewport(num4)) {
-        $('#fadeImage').attr("src", '../public/images/SAM GAT WEB IMAGE/4.jpg');
-        $('#faded').stop().fadeIn(300);
-    }
-    else if (isInViewport(num5)) {
-        $('#fadeImage').attr("src", '../public/images/SAM GAT WEB IMAGE/5.jpg');
-        $('#faded').stop().fadeIn(300);
-    }
-    else if (isInViewport(num6)) {
-        $('#fadeImage').attr("src", '../public/images/SAM GAT WEB IMAGE/6.jpg');
-        $('#faded').stop().fadeIn(300);
-    }
-    else if (isInViewport(num7)) {
-        $('#fadeImage').attr("src", '../public/images/SAM GAT WEB IMAGE/7.png');
-        $('#faded').stop().fadeIn(300);
-    }
-    else if (isInViewport(num8)) {
-        $('#fadeImage').attr("src", '../public/images/SAM GAT WEB IMAGE/8.png');
-        $('#faded').stop().fadeIn(300);
-    }
-    else if (isInViewport(num9)) {
-        $('#fadeImage').attr("src", '../public/images/SAM GAT WEB IMAGE/9.png');
-        $('#faded').stop().fadeIn(300);
-    }
-    else if (isInViewport(num10)) {
-        $('#fadeImage').attr("src", '../public/images/SAM GAT WEB IMAGE/10.png');
-        $('#faded').stop().fadeIn(300);
-    }
-    else if (isInViewport(num11)) {
-        $('#fadeImage').attr("src", '../public/images/SAM GAT WEB IMAGE/11.png');
-        $('#faded').stop().fadeIn(300);
-    }
-    else if (isInViewport(num12)) {
-        $('#fadeImage').attr("src", '../public/images/SAM GAT WEB IMAGE/12.png');
-        $('#faded').stop().fadeIn(300);
-    }
-    else if (isInViewport(num13)) {
-        $('#fadeImage').attr("src", '../public/images/SAM GAT WEB IMAGE/13.jpg');
-        $('#faded').stop().fadeIn(300);
-    }
-    else if (isInViewport(num14)) {
-        $('#fadeImage').attr("src", '../public/images/SAM GAT WEB IMAGE/SAM CV.png');
-        $('#faded').stop().fadeIn(300);
-    }
-    else {
-        $('#faded').stop().fadeOut(50);
-    }
 }
 
 $('.pagetopbtn').on('click', function (e) {
@@ -132,6 +19,26 @@ function adjustDoublePhotos(photo1, photo2) {
     }
 }
 
+
+//throttle function
+function debounce(fn, wait) {
+    var timeout = null;
+    var c = function () { clearTimeout(timeout); timeout = null; };
+    var t = function (fn) { timeout = setTimeout(fn, wait); };
+    return function () {
+        var context = this;
+        var args = arguments;
+        var f = function () { fn.apply(context, args); };
+        if (!timeout) {
+            t(c);
+            f();
+        } else {
+            c();
+            t(f);
+        }
+    };
+}
+
 //artist page specific JS
 if ($(".artist-page").length > 0) {
 
@@ -143,47 +50,45 @@ if ($(".artist-page").length > 0) {
                 stickyListItem = $('.social-li'),
                 stickyClone,
                 stickyTop = sticky.offset().top,
-                scrolled = false,
                 offset = $('#artist-social-module').offset(),
                 $window = $(window);
 
             $window.on('scroll', function (e) {
-                scrolled = true;
+                debounce(checkThatShit(), 250);
             });
 
-            var timeout = setInterval(function () {
-                if (scrolled) {
-                    scrolled = false;
-                    if ($window.scrollTop() >= (stickyTop + sticky.height()) && !stickyClone) {
-                        if (sticky.css("position") !== "fixed") {
-                            stickyClone = sticky.clone().prop('id', sticky.prop('id') + '-clone');
-                            stickyClone.insertBefore(sticky);
-                            sticky.remove();
-                            sticky.addClass('fixed');
-                            stickyListItem.addClass('fixed');
-                            stickyBackground.addClass('fixed');
-                            stickyClone.after(sticky);
 
-                        }
-                    } else if ($window.scrollTop() < stickyTop && stickyClone) {
-                        if (sticky.css("position") === "fixed") {
-                            sticky.addClass('fadeOut');
-                            sticky.on('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd',
-                                function () {
-                                    sticky.removeClass('fixed fadeOut');
-                                    stickyListItem.removeClass('fixed');
-                                    stickyBackground.removeClass('fixed');
-                                    sticky.css({
-                                        width: 'auto',
-                                    });
-                                    $('#artist-social-module-clone').remove();
-                                    sticky.animate({ 'opacity': '1' });
+            var checkThatShit = function () {
+                if ($window.scrollTop() >= (stickyTop + sticky.height()) && !stickyClone) {
+                    if (sticky.css("position") !== "fixed") {
+                        stickyClone = sticky.clone().prop('id', sticky.prop('id') + '-clone');
+                        stickyClone.insertBefore(sticky);
+                        sticky.remove();
+                        sticky.addClass('fixed');
+                        stickyListItem.addClass('fixed');
+                        stickyBackground.addClass('fixed');
+                        stickyClone.after(sticky);
+
+                    }
+                } else if ($window.scrollTop() < stickyTop && stickyClone) {
+                    if (sticky.css("position") === "fixed") {
+                        sticky.addClass('fadeOut');
+                        sticky.on('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd',
+                            function () {
+                                sticky.removeClass('fixed fadeOut');
+                                stickyListItem.removeClass('fixed');
+                                stickyBackground.removeClass('fixed');
+                                sticky.css({
+                                    width: 'auto',
                                 });
-                            stickyClone = null;
-                        }
+                                $('#artist-social-module-clone').remove();
+                                sticky.animate({ 'opacity': '1' });
+                            });
+                        stickyClone = null;
                     }
                 }
-            }, 100);
+            };
+
         });
     }
     else if (isMobile()) { //mobile js sticky
@@ -192,38 +97,114 @@ if ($(".artist-page").length > 0) {
                 stickyBackground = $('#social-module-background'),
                 stickyClone,
                 stickyTop = sticky.offset().top,
-                scrolled = false,
                 $window = $(window);
 
             $window.on('scroll', function (e) {
-                scrolled = true;
+                debounce(checkThatShit(), 400);
             });
 
-            var timeout = setInterval(function () {
-                if (scrolled) {
-                    scrolled = false;
-                    if ($window.scrollTop() >= (stickyTop - 10) && !stickyClone) {
-                        if (sticky.css("position") !== "fixed") {
-                            stickyClone = sticky.clone().prop('id', sticky.prop('id') + '-clone');
-                            stickyClone = stickyClone.insertBefore(sticky);
-                            stickyBackground.css({
-                                width: sticky.width(),
-                            });
-                            stickyBackground.addClass('mobile-fixed');
-                            sticky.addClass('mobile-fixed');
-                        }
-                    } else if ($window.scrollTop() < stickyTop && stickyClone) {
-                        if (sticky.css("position") === "fixed") {
-                            stickyClone.remove();
-                            stickyClone = null;
-                            stickyBackground.removeClass('mobile-fixed');
-                            sticky.removeClass('mobile-fixed');
-                        }
+            var checkThatShit = function () {
+                if ($window.scrollTop() >= (stickyTop - 10) && !stickyClone) {
+                    if (sticky.css("position") !== "fixed") {
+                        stickyClone = sticky.clone().prop('id', sticky.prop('id') + '-clone');
+                        stickyClone = stickyClone.insertBefore(sticky);
+                        stickyBackground.css({
+                            width: sticky.width(),
+                        });
+                        stickyBackground.addClass('mobile-fixed');
+                        sticky.addClass('mobile-fixed');
+                    }
+                } else if ($window.scrollTop() < stickyTop && stickyClone) {
+                    if (sticky.css("position") === "fixed") {
+                        stickyClone.remove();
+                        stickyClone = null;
+                        stickyBackground.removeClass('mobile-fixed');
+                        sticky.removeClass('mobile-fixed');
                     }
                 }
-            }, 100);
+            };
         });
     }
     //sticky social module END ------------------------------------------
 }
 
+
+if ($('#david').length > 0) {
+    var feed = new Instafeed({
+        get: 'user',
+        userId: '239485329',
+        accessToken: '239485329.1677ed0.c82d80328e6d4a64a36e3ca604d28b77',
+        resolution: 'standard_resolution',
+        sortBy: 'most-recent',
+        template: '<div class="instafeed-photo"><a href="{{link}}"><img src="{{image}}" /><div><span>{{caption}}</span></div><div class="insta-photo-footer"><span><i class="fa fa-heart"></i> {{likes}}</span><span><i class="fa fa-comment"></i> {{comments}}</span><span>{{model.created_time}}</span></div></a><hr></div>',
+        filter: function (image) {
+
+            var date = new Date(image.created_time * 1000);
+
+            m = date.getMonth();
+            d = date.getDate();
+            y = date.getFullYear();
+
+            var month_names = new Array();
+            month_names[month_names.length] = "Jan";
+            month_names[month_names.length] = "Feb";
+            month_names[month_names.length] = "Mar";
+            month_names[month_names.length] = "Apr";
+            month_names[month_names.length] = "May";
+            month_names[month_names.length] = "Jun";
+            month_names[month_names.length] = "Jul";
+            month_names[month_names.length] = "Aug";
+            month_names[month_names.length] = "Sep";
+            month_names[month_names.length] = "Oct";
+            month_names[month_names.length] = "Nov";
+            month_names[month_names.length] = "Dec";
+
+            var thetime = month_names[m] + ' ' + d + ' ' + y;
+
+            image.created_time = thetime;
+
+            return true;
+        }
+    });
+    feed.run();
+}
+
+if ($('#sam').length > 0) {
+    var feed = new Instafeed({
+        get: 'user',
+        userId: '239485329',
+        accessToken: '239485329.1677ed0.c82d80328e6d4a64a36e3ca604d28b77',
+        resolution: 'standard_resolution',
+        sortBy: 'most-recent',
+        template: '<div class="instafeed-photo"><a href="{{link}}"><img src="{{image}}" /><div><span>{{caption}}</span></div><div class="insta-photo-footer"><span><i class="fa fa-heart"></i> {{likes}}</span><span><i class="fa fa-comment"></i> {{comments}}</span><span>{{model.created_time}}</span></div></a><hr></div>',
+        filter: function (image) {
+
+            var date = new Date(image.created_time * 1000);
+
+            m = date.getMonth();
+            d = date.getDate();
+            y = date.getFullYear();
+
+            var month_names = new Array();
+            month_names[month_names.length] = "Jan";
+            month_names[month_names.length] = "Feb";
+            month_names[month_names.length] = "Mar";
+            month_names[month_names.length] = "Apr";
+            month_names[month_names.length] = "May";
+            month_names[month_names.length] = "Jun";
+            month_names[month_names.length] = "Jul";
+            month_names[month_names.length] = "Aug";
+            month_names[month_names.length] = "Sep";
+            month_names[month_names.length] = "Oct";
+            month_names[month_names.length] = "Nov";
+            month_names[month_names.length] = "Dec";
+
+            var thetime = month_names[m] + ' ' + d + ' ' + y;
+
+            image.created_time = thetime;
+
+            return true;
+        }
+    });
+    feed.run();
+}
