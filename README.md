@@ -3,6 +3,8 @@ In development website for the Stay Savage crew
 
 First build has been deployed to <https://stay-savage.herokuapp.com/>
 
+  Payments system is still in test mode
+
 ### Check out the screenshots below:
 ![Home Page](https://thumbs.gfycat.com/QuaintGrimyBinturong-size_restricted.gif)
 ![Artist Page](https://thumbs.gfycat.com/DigitalEvenCrow-size_restricted.gif)
